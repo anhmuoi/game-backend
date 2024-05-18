@@ -1,0 +1,378 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<root>
+    <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+        <xsd:element name="root" msdata:IsDataSet="true">
+            
+        </xsd:element>
+    </xsd:schema>
+    <resheader name="resmimetype">
+        <value>text/microsoft-resx</value>
+    </resheader>
+    <resheader name="version">
+        <value>1.3</value>
+    </resheader>
+    <resheader name="reader">
+        <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <resheader name="writer">
+        <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <data name="User" xml:space="preserve">
+        <value>사용자</value>
+    </data>
+    <data name="ViewUser" xml:space="preserve">
+        <value>사용자 보기</value>
+    </data>
+    <data name="AddUser" xml:space="preserve">
+        <value>사용자 추가</value>
+    </data>
+    <data name="DeleteUser" xml:space="preserve">
+        <value>사용자 삭제</value>
+    </data>
+    <data name="DescriptionAddUser" xml:space="preserve">
+        <value>이 권한을 통해서 새로운 사용자를 추가할 수 있습니다.</value>
+    </data>
+    <data name="DescriptionEditUser" xml:space="preserve">
+    <value>이 권한을 통해서 사용자 정보를 수정할 수 있습니다.</value>
+  </data>
+    <data name="DescriptionDeleteUser" xml:space="preserve">
+        <value>이 권한을 통해서 사용자를 삭제할 수 있습니다.</value>
+    </data>
+    <data name="DescriptionViewUser" xml:space="preserve">
+        <value>이 권한을 통해서 사용자 목록을 확인할 수 있습니다.</value>
+    </data>
+    <data name="EditUser" xml:space="preserve">
+        <value>사용자 수정</value>
+    </data>
+    <data name="ViewCategory" xml:space="preserve">
+    <value>카테고리 보기</value>
+  </data>
+    <data name="AddCategory" xml:space="preserve">
+    <value>카테고리 추가</value>
+  </data>
+    <data name="EditCategory" xml:space="preserve">
+    <value>카테고리 수정</value>
+  </data>
+    <data name="DeleteCategory" xml:space="preserve">
+    <value>카테고리 삭제</value>
+  </data>
+    <data name="DescriptionViewCategory" xml:space="preserve">
+    <value>이 권한을 통해서 카테고리와 옵션 목록을 확인할 수 있습니다.</value>
+  </data>
+    <data name="DescriptionAddCategory" xml:space="preserve">
+    <value>이 권한을 통해서 새로운 카테고리와 옵션을 추가할 수 있습니다.</value>
+  </data>
+    <data name="DescriptionEditCategory" xml:space="preserve">
+    <value>이 권한을 통해서 카테고리와 옵션 정보를 수정할 수 있습니다.</value>
+  </data>
+    <data name="DescriptionDeleteCategory" xml:space="preserve">
+    <value>이 권한을 통해서 카테고리와 옵션을 삭제할 수 있습니다.</value>
+  </data>
+    <data name="Category" xml:space="preserve">
+    <value>카테고리</value>
+  </data>
+    <data name="ViewDepartment" xml:space="preserve">
+    <value>부서 정보 보기</value>
+  </data>
+    <data name="AddDepartment" xml:space="preserve">
+    <value>부서 추가</value>
+  </data>
+    <data name="EditDepartment" xml:space="preserve">
+    <value>부서 정보 수정</value>
+  </data>
+    <data name="DeleteDepartment" xml:space="preserve">
+    <value>부서 삭제</value>
+  </data>
+    <data name="ExportDepartment" xml:space="preserve">
+    <value>부서 내보내기</value>
+  </data>
+    <data name="DescriptionViewDepartment" xml:space="preserve">
+    <value>이 권한을 통해서 부서 정보를 확인할 수 있습니다.</value>
+  </data>
+    <data name="DescriptionAddDepartment" xml:space="preserve">
+    <value>이 권한을 통해서 새로운 부서를 추가할 수 있습니다.</value>
+  </data>
+    <data name="DescriptionEditDepartment" xml:space="preserve">
+    <value>이 권한을 통해서 부서 정보를 수정할 수 있습니다.</value>
+  </data>
+    <data name="DescriptionDeleteDepartment" xml:space="preserve">
+    <value>이 권한을 통해서 부서를 삭제할 수 있습니다.</value>
+  </data>
+    <data name="DescriptionExportDepartment" xml:space="preserve">
+    <value>이 권한을 통해서 부서 목록을 파일로 내보낼 수 있습니다.</value>
+  </data>
+    <data name="Department" xml:space="preserve">
+    <value>부서</value>
+  </data>
+    <data name="Supplier" xml:space="preserve">
+        <value>Supplier</value>
+    </data>
+    <data name="ViewSupplier" xml:space="preserve">
+        <value>View Supplier</value>
+    </data>
+    <data name="AddSupplier" xml:space="preserve">
+        <value>Add Supplier</value>
+    </data>
+    <data name="EditSupplier" xml:space="preserve">
+        <value>Edit Supplier</value>
+    </data>
+    <data name="DeleteSupplier" xml:space="preserve">
+        <value>Delete Supplier</value>
+    </data>
+    <data name="DescriptionAddSupplier" xml:space="preserve">
+        <value>This permission allows you to add a new supplier.</value>
+    </data>
+    <data name="DescriptionEditSupplier" xml:space="preserve">
+        <value>This permission allows you to edit supplier.</value>
+    </data>
+    <data name="DescriptionDeleteSupplier" xml:space="preserve">
+        <value>This permission allows you to delete suppliers.</value>
+    </data>
+    <data name="DescriptionViewSupplier" xml:space="preserve">
+        <value>This permission allows you to see a list of supplier.</value>
+    </data>
+    <data name="Setting" xml:space="preserve">
+        <value>Setting</value>
+    </data>
+    <data name="ViewSetting" xml:space="preserve">
+        <value>View Setting</value>
+    </data>
+    <data name="AddSetting" xml:space="preserve">
+        <value>Add Setting</value>
+    </data>
+    <data name="EditSetting" xml:space="preserve">
+        <value>Edit Setting</value>
+    </data>
+    <data name="DeleteSetting" xml:space="preserve">
+        <value>Delete Setting</value>
+    </data>
+    <data name="DescriptionAddSetting" xml:space="preserve">
+        <value>This permission allows you to add a new setting.</value>
+    </data>
+    <data name="DescriptionEditSetting" xml:space="preserve">
+        <value>This permission allows you to edit setting.</value>
+    </data>
+    <data name="DescriptionDeleteSetting" xml:space="preserve">
+        <value>This permission allows you to delete settings.</value>
+    </data>
+    <data name="DescriptionViewSetting" xml:space="preserve">
+        <value>This permission allows you to see a list of setting.</value>
+    </data>
+    <data name="PurchaseRecord" xml:space="preserve">
+        <value>Purchase Record</value>
+    </data>
+    <data name="ViewPurchaseRecord" xml:space="preserve">
+        <value>View Purchase Record</value>
+    </data>
+    <data name="AddPurchaseRecord" xml:space="preserve">
+        <value>Add Purchase Record</value>
+    </data>
+    <data name="EditPurchaseRecord" xml:space="preserve">
+        <value>Edit Purchase Record</value>
+    </data>
+    <data name="DeletePurchaseRecord" xml:space="preserve">
+        <value>Delete Purchase Record</value>
+    </data>
+    <data name="DescriptionAddPurchaseRecord" xml:space="preserve">
+        <value>This permission allows you to add a new purchase record.</value>
+    </data>
+    <data name="DescriptionEditPurchaseRecord" xml:space="preserve">
+        <value>This permission allows you to edit purchase record.</value>
+    </data>
+    <data name="DescriptionDeletePurchaseRecord" xml:space="preserve">
+        <value>This permission allows you to delete purchase record.</value>
+    </data>
+    <data name="DescriptionViewPurchaseRecord" xml:space="preserve">
+        <value>This permission allows you to see a list of purchase record.</value>
+    </data>
+    <data name="Role" xml:space="preserve">
+        <value>Role</value>
+    </data>
+    <data name="ViewRole" xml:space="preserve">
+        <value>View Role</value>
+    </data>
+    <data name="AddRole" xml:space="preserve">
+        <value>Add Role</value>
+    </data>
+    <data name="EditRole" xml:space="preserve">
+        <value>Edit Role</value>
+    </data>
+    <data name="DeleteRole" xml:space="preserve">
+        <value>Delete Role</value>
+    </data>
+    <data name="DescriptionAddRole" xml:space="preserve">
+        <value>This permission allows you to add a new role.</value>
+    </data>
+    <data name="DescriptionEditRole" xml:space="preserve">
+        <value>This permission allows you to edit role.</value>
+    </data>
+    <data name="DescriptionDeleteRole" xml:space="preserve">
+        <value>This permission allows you to delete role.</value>
+    </data>
+    <data name="DescriptionViewRole" xml:space="preserve">
+        <value>This permission allows you to see a list of role.</value>
+    </data>
+    <data name="DailyReport" xml:space="preserve">
+        <value>Daily Report</value>
+    </data>
+    <data name="ViewDailyReport" xml:space="preserve">
+        <value>View Daily Report</value>
+    </data>
+    <data name="AddDailyReport" xml:space="preserve">
+        <value>Add Daily Report</value>
+    </data>
+    <data name="EditDailyReport" xml:space="preserve">
+        <value>Edit Daily Report</value>
+    </data>
+    <data name="DeleteDailyReport" xml:space="preserve">
+        <value>Delete Daily Report</value>
+    </data>
+    <data name="DescriptionAddDailyReport" xml:space="preserve">
+        <value>This permission allows you to add a new daily report.</value>
+    </data>
+    <data name="DescriptionEditDailyReport" xml:space="preserve">
+        <value>This permission allows you to edit daily report.</value>
+    </data>
+    <data name="DescriptionDeleteDailyReport" xml:space="preserve">
+        <value>This permission allows you to delete daily report.</value>
+    </data>
+    <data name="DescriptionViewDailyReport" xml:space="preserve">
+        <value>This permission allows you to see a list of daily report.</value>
+    </data>
+    <data name="Folder" xml:space="preserve">
+        <value>Folder</value>
+    </data>
+    <data name="ViewFolder" xml:space="preserve">
+        <value>View Folder</value>
+    </data>
+    <data name="AddFolder" xml:space="preserve">
+        <value>Add Folder</value>
+    </data>
+    <data name="EditFolder" xml:space="preserve">
+        <value>Edit Folder</value>
+    </data>
+    <data name="DeleteFolder" xml:space="preserve">
+        <value>Delete Folder</value>
+    </data>
+    <data name="DescriptionAddFolder" xml:space="preserve">
+        <value>This permission allows you to add a new folder.</value>
+    </data>
+    <data name="DescriptionEditFolder" xml:space="preserve">
+        <value>This permission allows you to edit folder.</value>
+    </data>
+    <data name="DescriptionDeleteFolder" xml:space="preserve">
+        <value>This permission allows you to delete folder.</value>
+    </data>
+    <data name="DescriptionViewFolder" xml:space="preserve">
+        <value>This permission allows you to see a list of folder.</value>
+    </data>
+    <data name="Meeting" xml:space="preserve">
+        <value>Meeting</value>
+    </data>
+    <data name="ViewMeeting" xml:space="preserve">
+        <value>View Meeting</value>
+    </data>
+    <data name="AddMeeting" xml:space="preserve">
+        <value>Add Meeting</value>
+    </data>
+    <data name="EditMeeting" xml:space="preserve">
+        <value>Edit Meeting</value>
+    </data>
+    <data name="DeleteMeeting" xml:space="preserve">
+        <value>Delete Meeting</value>
+    </data>
+    <data name="DescriptionAddMeeting" xml:space="preserve">
+        <value>This permission allows you to add a new meeting.</value>
+    </data>
+    <data name="DescriptionEditMeeting" xml:space="preserve">
+        <value>This permission allows you to edit meeting.</value>
+    </data>
+    <data name="DescriptionDeleteMeeting" xml:space="preserve">
+        <value>This permission allows you to delete meeting.</value>
+    </data>
+    <data name="DescriptionViewMeeting" xml:space="preserve">
+        <value>This permission allows you to see a list of meeting.</value>
+    </data>
+    <data name="Schedule" xml:space="preserve">
+        <value>Schedule</value>
+    </data>
+    <data name="ViewSchedule" xml:space="preserve">
+        <value>View Schedule</value>
+    </data>
+    <data name="AddSchedule" xml:space="preserve">
+        <value>Add Schedule</value>
+    </data>
+    <data name="EditSchedule" xml:space="preserve">
+        <value>Edit Schedule</value>
+    </data>
+    <data name="DeleteSchedule" xml:space="preserve">
+        <value>Delete Schedule</value>
+    </data>
+    <data name="DescriptionAddSchedule" xml:space="preserve">
+        <value>This permission allows you to add a new schedule.</value>
+    </data>
+    <data name="DescriptionEditSchedule" xml:space="preserve">
+        <value>This permission allows you to edit schedule.</value>
+    </data>
+    <data name="DescriptionDeleteSchedule" xml:space="preserve">
+        <value>This permission allows you to delete schedule.</value>
+    </data>
+    <data name="DescriptionViewSchedule" xml:space="preserve">
+        <value>This permission allows you to see a list of schedule.</value>
+    </data>
+    <data name="WorkLog" xml:space="preserve">
+        <value>WorkLog</value>
+    </data>
+    <data name="ViewWorkLog" xml:space="preserve">
+        <value>View WorkLog</value>
+    </data>
+    <data name="AddWorkLog" xml:space="preserve">
+        <value>Add WorkLog</value>
+    </data>
+    <data name="EditWorkLog" xml:space="preserve">
+        <value>Edit WorkLog</value>
+    </data>
+    <data name="DeleteWorkLog" xml:space="preserve">
+        <value>Delete WorkLog</value>
+    </data>
+    <data name="DescriptionAddWorkLog" xml:space="preserve">
+        <value>This permission allows you to add a new workLog.</value>
+    </data>
+    <data name="DescriptionEditWorkLog" xml:space="preserve">
+        <value>This permission allows you to edit workLog.</value>
+    </data>
+    <data name="DescriptionDeleteWorkLog" xml:space="preserve">
+        <value>This permission allows you to delete workLog.</value>
+    </data>
+    <data name="DescriptionViewWorkLog" xml:space="preserve">
+        <value>This permission allows you to see a list of workLog.</value>
+    </data>
+    <data name="ViewBarcode" xml:space="preserve">
+        <value>View Barcode</value>
+    </data>
+    <data name="DescriptionViewBarcode" xml:space="preserve">
+        <value>This permission allows you to see a list of incomming goods, shipment record, return goods and inventory history</value>
+    </data>
+    <data name="AddBarcode" xml:space="preserve">
+        <value>Add Barcode</value>
+    </data>
+    <data name="DescriptionAddBarcode" xml:space="preserve">
+        <value>This permission allows you to add new list of incomming goods, shipment record, return goods</value>
+    </data>
+    <data name="EditBarcode" xml:space="preserve">
+        <value>Edit Barcode</value>
+    </data>
+    <data name="DescriptionEditBarcode" xml:space="preserve">
+        <value>This permission allows you to edit list of incomming goods, shipment record, return goods</value>
+    </data>
+    <data name="DeleteBarcode" xml:space="preserve">
+        <value>Delete Barcode</value>
+    </data>
+    <data name="DescriptionDeleteBarcode" xml:space="preserve">
+        <value>This permission allows you to delete list of incomming goods, shipment record, return goods</value>
+    </data>
+    <data name="Barcode" xml:space="preserve">
+        <value>Barcode</value>
+    </data>
+</root>

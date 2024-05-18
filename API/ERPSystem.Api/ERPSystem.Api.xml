@@ -1,0 +1,995 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ERPSystem.Api</name>
+    </assembly>
+    <members>
+        <member name="M:ERPSystem.Api.Controllers.AccountController.Login(ERPSystem.DataModel.Login.LoginModel)">
+            <summary>
+            Login by account and password
+            </summary>
+            <param name="model">JSON model for login(username, password)</param>
+            <returns></returns>
+            <response code="401">Unauthorized: username or password wrong</response>
+            <response code="422">Unprocessable Entity: Model Body required username and password</response>
+            <response code="429">Too Many Requests: Quota exceeded. Maximum allowed: 10 per 1s, 500 per 1m, 2000 per 1d.</response>
+        </member>
+        <member name="M:ERPSystem.Api.Controllers.AccountController.RefreshToken(ERPSystem.DataModel.API.TokenRefreshModel)">
+            <summary>
+            Refresh token
+            </summary>
+            <param name="refreshToken">String of token refreshed</param>
+            <param name="expiredToken">String timezone by expired of token</param>
+            <returns></returns>
+            <response code="401">Unauthorized: refreshToken or expiredToken not valid</response>
+            <response code="429">Too Many Requests: Quota exceeded. Maximum allowed: 10 per 1s, 500 per 1m, 2000 per 1d.</response>
+        </member>
+        <member name="M:ERPSystem.Api.Controllers.AccountController.ChangePasswordLogin(ERPSystem.DataModel.Login.ChangePasswordModel)">
+            <summary>
+            Change password
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ERPSystem.Api.Controllers.AccountController.IsUnicode(System.String)">
+            <summary>
+            Check string is contains unicode
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ERPSystem.Api.Controllers.AccountController.UnicodeToString(System.String)">
+            <summary>
+            Unicode Decoding
+            </summary>
+            <param name="str"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ERPSystem.Api.Controllers.AccountController.GetFileFromPath(System.String,System.String,System.String,System.String)">
+            <summary>
+            Get image static from link file local
+            </summary>
+            <param name="rootFolder"></param>
+            <param name="companyCode"></param>
+            <param name="date"></param>
+            <param name="fileName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ERPSystem.Api.Controllers.CategoryController.GetInit">
+            <summary>
+            Get init of page
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ERPSystem.Api.Controllers.CategoryController.Gets(System.String,System.Collections.Generic.List{System.Int32},System.Int32,System.Int32,System.String,System.String)">
+            <summary>
+            Get listing category
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ERPSystem.Api.Controllers.CategoryController.Add(ERPSystem.DataModel.Category.CategoryAddModel)">
+            <summary>
+            Add new category
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ERPSystem.Api.Controllers.CategoryController.DeleteMulti(System.Collections.Generic.List{System.Int32})">
+            <summary>
+            Delete multi category
+            </summary>
+            <param name="ids"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ERPSystem.Api.Controllers.CategoryController.GetById(System.Int32)">
+            <summary>
+            Get detail category by id
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ERPSystem.Api.Controllers.CategoryController.Edit(System.Int32,ERPSystem.DataModel.Category.CategoryEditModel)">
+            <summary>
+            Edit category by id
+            </summary>
+            <param name="id"></param>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ERPSystem.Api.Controllers.CategoryController.Delete(System.Int32)">
+            <summary>
+            Delete category by id
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ERPSystem.Api.Controllers.DailyReportController.GetInit">
+            <summary>
+            Get init
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ERPSystem.Api.Controllers.DailyReportController.Gets(System.String,System.Collections.Generic.List{System.Int32},System.Collections.Generic.List{System.Int32},System.Collections.Generic.List{System.Int32},System.Collections.Generic.List{System.Int32},System.DateTime,System.DateTime,System.Int32,System.Int32,System.String,System.String)">
+            <summary>
+            get list daily report
+            </summary>
+            <param name="search"></param>
+            <param name="userIds"></param>
+            <param name="folderLogs"></param>
+            <param name="reporters"></param>
+            <param name="pageNumber"></param>
+            <param name="pageSize"></param>
+            <param name="sortColumn"></param>
+            <param name="sortDirection"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ERPSystem.Api.Controllers.DailyReportController.Add(ERPSystem.DataModel.DailyReport.DailyReportModel)">
+            <summary>
+            Add new daily report
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ERPSystem.Api.Controllers.DailyReportController.DeleteMulti(System.Collections.Generic.List{System.Int32})">
+            <summary>
+            Delete multi daily report
+            </summary>
+            <param name="ids"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ERPSystem.Api.Controllers.DailyReportController.GetById(System.Int32)">
+            <summary>
+            Get detail daily report by id
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ERPSystem.Api.Controllers.DailyReportController.GetByUserIdAndDate(System.Int32,System.String)">
+            <summary>
+            Get detail daily report by userId and date
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ERPSystem.Api.Controllers.DailyReportController.Edit(System.Int32,ERPSystem.DataModel.DailyReport.DailyReportModel)">
+            <summary>
+            Edit daily report by id
+            </summary>
+            <param name="id"></param>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ERPSystem.Api.Controllers.DailyReportController.Delete(System.Int32)">
+            <summary>
+            Delete daily report by id
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ERPSystem.Api.Controllers.DepartmentController.Gets(System.String,System.String,System.Collections.Generic.List{System.Int32},System.Int32,System.Int32,System.String,System.String)">
+            <summary>
+            Get List department
+            </summary>
+            <param name="name"></param>
+            <param name="number"></param>
+            <param name="types"></param>
+            <param name="pageNumber"></param>
+            <param name="pageSize"></param>
+            <param name="sortColumn"></param>
+            <param name="sortDirection"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ERPSystem.Api.Controllers.DepartmentController.Add(ERPSystem.DataModel.Department.DepartmentAddModel)">
+            <summary>
+            Add new department
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ERPSystem.Api.Controllers.DepartmentController.DeleteMulti(System.Collections.Generic.List{System.Int32})">
+            <summary>
+            Delete multi department
+            </summary>
+            <param name="ids"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ERPSystem.Api.Controllers.DepartmentController.GetById(System.Int32)">
+            <summary>
+            Get detail department by id
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ERPSystem.Api.Controllers.DepartmentController.Edit(System.Int32,ERPSystem.DataModel.Department.DepartmentEditModel)">
+            <summary>
+            Edit department by id
+            </summary>
+            <param name="id"></param>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ERPSystem.Api.Controllers.DepartmentController.Delete(System.Int32)">
+            <summary>
+            Delete department by id
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ERPSystem.Api.Controllers.DepartmentController.GetDepartmentTree">
+            <summary>
+            Get department tree
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ERPSystem.Api.Controllers.DepartmentController.GetUsersByDepartment(System.Int32,System.String,System.Int32,System.Int32,System.String,System.String)">
+            <summary>
+            Get users assigned by department id
+            </summary>
+            <param name="id"></param>
+            <param name="name"></param>
+            <param name="pageNumber"></param>
+            <param name="pageSize"></param>
+            <param name="sortColumn"></param>
+            <param name="sortDirection"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ERPSystem.Api.Controllers.DepartmentController.AssignUsersToDepartment(System.Int32,System.Collections.Generic.List{System.Int32})">
+            <summary>
+            Assign users to department
+            </summary>
+            <param name="id"></param>
+            <param name="userIds"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ERPSystem.Api.Controllers.DepartmentController.GetUsersWithoutDepartment(System.Int32,System.String,System.Int32,System.Int32,System.String,System.String)">
+            <summary>
+            Get users un-assign to department
+            </summary>
+            <param name="id"></param>
+            <param name="name"></param>
+            <param name="pageNumber"></param>
+            <param name="pageSize"></param>
+            <param name="sortColumn"></param>
+            <param name="sortDirection"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ERPSystem.Api.Controllers.DriverController.GetInit(System.Nullable{System.Int32})">
+            <summary>
+            Get init page
+            </summary>
+            <param name="rootFolderId">
+            null: my-drive, &lt;br&gt;
+            0: shared-with-me, &lt;br&gt;
+            other: folders &lt;br&gt;
+            </param>
+            <returns></returns>
+        </member>
+        <member name="M:ERPSystem.Api.Controllers.DriverController.AddFolder(ERPSystem.DataModel.Driver.FolderAddModel)">
+            <summary>
+            Add new folder
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ERPSystem.Api.Controllers.DriverController.DeleteMultiFolder(System.Collections.Generic.List{System.Int32})">
+            <summary>
+            Delete folder by ids
+            </summary>
+            <param name="ids"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ERPSystem.Api.Controllers.DriverController.EditFolder(System.Int32,ERPSystem.DataModel.Driver.FolderEditModel)">
+            <summary>
+            Edit folder by id
+            </summary>
+            <param name="id"></param>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ERPSystem.Api.Controllers.DriverController.DeleteFolder(System.Int32)">
+            <summary>
+            Delete folder by id
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ERPSystem.Api.Controllers.DriverController.DownloadFolder(System.Int32)">
+            <summary>
+            Download folder by id (this folder will compress zip file)
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ERPSystem.Api.Controllers.DriverController.ShareFolder(System.Int32,ERPSystem.DataModel.Driver.DriverShareModel)">
+            <summary>
+            Share folder
+            </summary>
+            <param name="id"></param>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ERPSystem.Api.Controllers.DriverController.GetUserShared(System.Int32,System.String,System.Int32,System.Int32,System.String,System.String)">
+            <summary>
+            Get user shared of folder
+            </summary>
+            <param name="id"></param>
+            <param name="name"></param>
+            <param name="pageNumber"></param>
+            <param name="pageSize"></param>
+            <param name="sortColumn"></param>
+            <param name="sortDirection"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ERPSystem.Api.Controllers.DriverController.GetUserNotShared(System.Int32,System.String,System.Int32,System.Int32,System.String,System.String)">
+            <summary>
+            Get user not shared of folder
+            </summary>
+            <param name="id"></param>
+            <param name="name"></param>
+            <param name="pageNumber"></param>
+            <param name="pageSize"></param>
+            <param name="sortColumn"></param>
+            <param name="sortDirection"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ERPSystem.Api.Controllers.DriverController.RemoveShareFolderUser(System.Int32,ERPSystem.DataModel.Driver.DriverShareModel)">
+            <summary>
+            Un share folder of user
+            </summary>
+            <param name="id"></param>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ERPSystem.Api.Controllers.DriverController.AddFile(Microsoft.AspNetCore.Http.IFormFile,System.Nullable{System.Int32})">
+            <summary>
+            Add file in folder
+            </summary>
+            <param name="file"></param>
+            <param name="folderId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ERPSystem.Api.Controllers.DriverController.DeleteMultiFile(System.Collections.Generic.List{System.Int32})">
+            <summary>
+            Delete file by ids
+            </summary>
+            <param name="ids"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ERPSystem.Api.Controllers.DriverController.EditFile(System.Int32,ERPSystem.DataModel.Driver.FileEditModel)">
+            <summary>
+            Edit file by id
+            </summary>
+            <param name="id"></param>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ERPSystem.Api.Controllers.DriverController.DeleteFile(System.Int32)">
+            <summary>
+            Delete file by id
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ERPSystem.Api.Controllers.DriverController.DownloadFile(System.Int32)">
+            <summary>
+            Download file by id
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ERPSystem.Api.Controllers.DriverController.ShareFile(System.Int32,ERPSystem.DataModel.Driver.DriverShareModel)">
+            <summary>
+            Share file
+            </summary>
+            <param name="id"></param>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ERPSystem.Api.Controllers.DriverController.GetUserSharedFile(System.Int32,System.String,System.Int32,System.Int32,System.String,System.String)">
+            <summary>
+            Get user shared of file
+            </summary>
+            <param name="id"></param>
+            <param name="name"></param>
+            <param name="pageNumber"></param>
+            <param name="pageSize"></param>
+            <param name="sortColumn"></param>
+            <param name="sortDirection"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ERPSystem.Api.Controllers.DriverController.GetUserFileNotShared(System.Int32,System.String,System.Int32,System.Int32,System.String,System.String)">
+            <summary>
+            Get user not shared of file
+            </summary>
+            <param name="id"></param>
+            <param name="name"></param>
+            <param name="pageNumber"></param>
+            <param name="pageSize"></param>
+            <param name="sortColumn"></param>
+            <param name="sortDirection"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ERPSystem.Api.Controllers.DriverController.RemoveShareFileUser(System.Int32,ERPSystem.DataModel.Driver.DriverShareModel)">
+            <summary>
+            Un share user of file
+            </summary>
+            <param name="id"></param>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ERPSystem.Api.Controllers.DriverController.GetAllDocumentByFolderId(System.Int32,System.String,System.Int32,System.Int32,System.String,System.String)">
+            <summary>
+            Get all document by folder id
+            </summary>
+            <param name="id"></param>
+            <param name="name"></param>
+            <param name="pageNumber"></param>
+            <param name="pageSize"></param>
+            <param name="sortColumn"></param>
+            <param name="sortDirection"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ERPSystem.Api.Controllers.DriverController.GetAllDocumentShareWithMe(System.String,System.Int32,System.Int32,System.String,System.String)">
+            <summary>
+            Get all document (share with me)
+            </summary>
+            <param name="name"></param>
+            <param name="pageNumber"></param>
+            <param name="pageSize"></param>
+            <param name="sortColumn"></param>
+            <param name="sortDirection"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ERPSystem.Api.Controllers.FolderLogController.GetInit">
+            <summary>
+            Get init
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ERPSystem.Api.Controllers.FolderLogController.Search(System.String)">
+            <summary>
+            Search folder, meeting, and work log
+            </summary>
+            <param name="search"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ERPSystem.Api.Controllers.FolderLogController.Gets(System.String,System.Int32,System.Int32,System.String,System.String)">
+            <summary>
+            get list folder log
+            </summary>
+            <param name="search"></param>
+            <param name="pageNumber"></param>
+            <param name="pageSize"></param>
+            <param name="sortColumn"></param>
+            <param name="sortDirection"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ERPSystem.Api.Controllers.FolderLogController.Add(ERPSystem.DataModel.FolderLog.FolderLogModel)">
+            <summary>
+            Add new folder log
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ERPSystem.Api.Controllers.FolderLogController.DeleteMulti(System.Collections.Generic.List{System.Int32})">
+            <summary>
+            Delete multi folder log
+            </summary>
+            <param name="ids"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ERPSystem.Api.Controllers.FolderLogController.GetById(System.Int32)">
+            <summary>
+            Get detail folder log by id
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ERPSystem.Api.Controllers.FolderLogController.GetByIds(System.Collections.Generic.List{System.Int32})">
+            <summary>
+            get list folder log with ids
+            </summary>
+            <param name="ids"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ERPSystem.Api.Controllers.FolderLogController.Edit(System.Int32,ERPSystem.DataModel.FolderLog.FolderLogModel)">
+            <summary>
+            Edit folder log by id
+            </summary>
+            <param name="id"></param>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ERPSystem.Api.Controllers.FolderLogController.Delete(System.Int32)">
+            <summary>
+            Delete folder log by id
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="T:ERPSystem.Api.Controllers.HomeController">
+            <summary>
+            Home controller
+            </summary>
+        </member>
+        <member name="M:ERPSystem.Api.Controllers.HomeController.Index">
+            <summary>
+            Display data for dashboash
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ERPSystem.Api.Controllers.MeetingRoomController.Gets(System.String,System.Collections.Generic.List{System.Int32},System.Collections.Generic.List{System.Int32},System.Int32,System.Int32,System.String,System.String)">
+            <summary>
+            Get list meeting log
+            </summary>
+            <param name="search"></param>
+            <param name="meetingRoomIds"></param>
+            <param name="folderLogs"></param>
+            <param name="pageNumber"></param>
+            <param name="pageSize"></param>
+            <param name="sortColumn"></param>
+            <param name="sortDirection"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ERPSystem.Api.Controllers.MeetingRoomController.Add(ERPSystem.DataModel.MeetingRoom.MeetingRoomModel)">
+            <summary>
+            Add new meeting log
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ERPSystem.Api.Controllers.MeetingRoomController.DeleteMulti(System.Collections.Generic.List{System.Int32})">
+            <summary>
+            Delete multi meeting log
+            </summary>
+            <param name="ids"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ERPSystem.Api.Controllers.MeetingRoomController.GetById(System.Int32)">
+            <summary>
+            Get detail meeting log by id
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ERPSystem.Api.Controllers.MeetingRoomController.Edit(System.Int32,ERPSystem.DataModel.MeetingRoom.MeetingRoomModel)">
+            <summary>
+            Edit meeting log by id
+            </summary>
+            <param name="id"></param>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ERPSystem.Api.Controllers.MeetingRoomController.Delete(System.Int32)">
+            <summary>
+            Delete meeting log by id
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ERPSystem.Api.Controllers.MeetingLogController.Gets(System.String,System.Collections.Generic.List{System.Int32},System.Collections.Generic.List{System.Int32},System.Int32,System.Int32,System.String,System.String)">
+            <summary>
+            Get list meeting log
+            </summary>
+            <param name="search"></param>
+            <param name="meetingRoomIds"></param>
+            <param name="folderLogs"></param>
+            <param name="pageNumber"></param>
+            <param name="pageSize"></param>
+            <param name="sortColumn"></param>
+            <param name="sortDirection"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ERPSystem.Api.Controllers.MeetingLogController.Add(ERPSystem.DataModel.MeetingLog.MeetingLogModel)">
+            <summary>
+            Add new meeting log
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ERPSystem.Api.Controllers.MeetingLogController.DeleteMulti(System.Collections.Generic.List{System.Int32})">
+            <summary>
+            Delete multi meeting log
+            </summary>
+            <param name="ids"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ERPSystem.Api.Controllers.MeetingLogController.GetById(System.Int32)">
+            <summary>
+            Get detail meeting log by id
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ERPSystem.Api.Controllers.MeetingLogController.Edit(System.Int32,ERPSystem.DataModel.MeetingLog.MeetingLogModel)">
+            <summary>
+            Edit meeting log by id
+            </summary>
+            <param name="id"></param>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ERPSystem.Api.Controllers.MeetingLogController.Delete(System.Int32)">
+            <summary>
+            Delete meeting log by id
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ERPSystem.Api.Controllers.RoleController.Gets(System.String,System.Int32,System.Int32,System.String,System.String)">
+            <summary>
+            Get list of Role from DB
+            </summary>
+            <param name="search">Query string that filter by name</param>
+            <param name="pageNumber">Page number start from 1</param>
+            <param name="pageSize">Number of items per page</param>
+            <param name="sortColumn">Sort Column by string name of the column</param>
+            <param name="sortDirection">Sort direction: ‘desc’ for descending , ‘asc’ for ascending</param>
+            <returns></returns>
+            <response code="401">Unauthorized: Lack of String Token Bearer</response>
+            <response code="403">Forbidden: Login with other account with role higher</response>
+            <response code="429">Too Many Requests: Quota exceeded. Maximum allowed: 10 per 1s, 500 per 1m, 2000 per 1d.</response>
+        </member>
+        <member name="M:ERPSystem.Api.Controllers.RoleController.Get(System.Int32)">
+            <summary>
+            Get role information by id
+            </summary>
+            <param name="id"> identifier of role </param>
+            <returns></returns>
+            <response code="401">Unauthorized: Lack of String Token Bearer</response>
+            <response code="403">Forbidden: Login with other account with role higher</response>
+            <response code="404">Not Found: Role does not exist in DB</response>
+            <response code="429">Too Many Requests: Quota exceeded. Maximum allowed: 10 per 1s, 500 per 1m, 2000 per 1d.</response>
+        </member>
+        <member name="M:ERPSystem.Api.Controllers.RoleController.Add(ERPSystem.DataModel.Role.RoleModel,System.Int32)">
+            <summary>
+            Add a new role to system
+            </summary>
+            <param name="model"> This model has information about the device to be added. </param>
+            <param name="similarId"> identifier of role that is similar-made </param>
+            <returns></returns>
+            <response code="201">Create new a role</response>
+            <response code="400">Bad Request: similar role not null</response>
+            <response code="401">Unauthorized: Lack of String Token Bearer</response>
+            <response code="403">Forbidden: Login with other account with role higher</response>
+            <response code="429">Too Many Requests: Quota exceeded. Maximum allowed: 10 per 1s, 500 per 1m, 2000 per 1d.</response>
+        </member>
+        <member name="M:ERPSystem.Api.Controllers.RoleController.Edit(System.Int32,ERPSystem.DataModel.Role.RoleModel,System.Int32)">
+            <summary>
+            Update permission list of spectific role
+            </summary>
+            <param name="id"> identifier of this role </param>
+            <param name="model"> data model that include information </param>
+            <param name="similarId"> identifier of role that is similar-made </param>
+            <returns></returns>
+            <response code="400">Bad Request: similar role not null</response>
+            <response code="401">Unauthorized: Lack of String Token Bearer</response>
+            <response code="403">Forbidden: Login with other account with role higher</response>
+            <response code="429">Too Many Requests: Quota exceeded. Maximum allowed: 10 per 1s, 500 per 1m, 2000 per 1d.</response>
+        </member>
+        <member name="M:ERPSystem.Api.Controllers.RoleController.Delete(System.Int32)">
+            <summary>
+            Delete a role
+            </summary>
+            <param name="id"> identifier of dynamic role </param>
+            <returns></returns>
+            <response code="400">Bad Request: type role in role not null</response>
+            <response code="401">Unauthorized: Lack of String Token Bearer</response>
+            <response code="403">Forbidden: Login with other account with role higher</response>
+            <response code="404">Not Found: Role does not exist in DB</response>
+            <response code="429">Too Many Requests: Quota exceeded. Maximum allowed: 10 per 1s, 500 per 1m, 2000 per 1d.</response>
+        </member>
+        <member name="M:ERPSystem.Api.Controllers.RoleController.DeleteMultiple(System.Collections.Generic.List{System.Int32})">
+            <summary>
+            Delete multiple roles
+            </summary>
+            <param name="ids"> list of identifier of dynamic role </param>
+            <returns></returns>
+            <response code="400">Bad Request: type role in role not null</response>
+            <response code="401">Unauthorized: Lack of String Token Bearer</response>
+            <response code="403">Forbidden: Login with other account with role higher</response>
+            <response code="404">Not Found: List of Roles does not exist in DB</response>
+            <response code="429">Too Many Requests: Quota exceeded. Maximum allowed: 10 per 1s, 500 per 1m, 2000 per 1d.</response>
+        </member>
+        <member name="M:ERPSystem.Api.Controllers.RoleController.ChangeDefaultRoleSettingForUser(System.Int32)">
+            <summary>
+            Update role setting default
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ERPSystem.Api.Controllers.RoleController.CheckMyPermission(System.String)">
+            <summary>
+            Check my permission with action name
+            </summary>
+            <param name="actionName">permission name</param>
+            <returns></returns>
+        </member>
+        <member name="M:ERPSystem.Api.Controllers.UserController.GetInit">
+            <summary>
+            Get init
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ERPSystem.Api.Controllers.UserController.Gets(System.String,System.Collections.Generic.List{System.Int32},System.Collections.Generic.List{System.Int32},System.Int32,System.Int32,System.String,System.String)">
+            <summary>
+            Get list of users
+            </summary>
+            <param name="search"></param>
+            <param name="status"></param>
+            <param name="departmentIds"></param>
+            <param name="pageNumber"></param>
+            <param name="pageSize"></param>
+            <param name="sortColumn"></param>
+            <param name="sortDirection"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ERPSystem.Api.Controllers.UserController.GetUserById(System.Int32)">
+            <summary>
+            Get detail user by id
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ERPSystem.Api.Controllers.UserController.AddUser(ERPSystem.DataModel.User.UserAddModel)">
+            <summary>
+            Add new user
+            </summary>
+            <param name="model">
+            CreatedOn: Format MM.DD.YYYY HH:mm:ss
+            </param>
+            <returns></returns>
+        </member>
+        <member name="M:ERPSystem.Api.Controllers.UserController.UpdateUser(System.Int32,ERPSystem.DataModel.User.UserEditModel)">
+            <summary>
+            Update user by id
+            </summary>
+            <param name="id"></param>
+            <param name="model">
+            UpdatedOn: Format MM.DD.YYYY HH:mm:ss
+            </param>
+            <returns></returns>
+        </member>
+        <member name="M:ERPSystem.Api.Controllers.UserController.DeleteUser(System.Int32)">
+            <summary>
+            Delete user by id
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ERPSystem.Api.Controllers.UserController.DeleteMultiUsers(System.Collections.Generic.List{System.Int32})">
+            <summary>
+            Delete multi users
+            </summary>
+            <param name="ids"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ERPSystem.Api.Controllers.UserController.GetProfile">
+            <summary>
+            Get Account profile information
+            </summary>
+            <returns></returns>
+            <response code="401">Unauthorized: Token not invalid</response>
+            <response code="429">Too Many Requests: Quota exceeded. Maximum allowed: 10 per 1s, 500 per 1m, 2000 per 1d.</response>
+        </member>
+        <member name="M:ERPSystem.Api.Controllers.UserController.EditProfile(ERPSystem.DataModel.User.AccountEditModel)">
+            <summary>
+            Edit the account profile information.
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+            <response code="403">Forbidden: Login with other account with role higher</response>
+            <response code="422">Unprocessable Entity: Id or data model wrong</response>
+            <response code="429">Too Many Requests: Quota exceeded. Maximum allowed: 10 per 1s, 500 per 1m, 2000 per 1d.</response>
+        </member>
+        <member name="M:ERPSystem.Api.Controllers.UserController.UploadAvatar(ERPSystem.DataModel.User.UserAvatarModel)">
+            <summary>
+            Update image for user
+            </summary>
+            <param name="model">Object model json include avatar</param>
+            <returns></returns>
+            <response code="401">Unauthorized: Token not invalid</response>
+            <response code="400">Bad Request: Avatar not string.Empty</response>
+            <response code="404">Not Found: Id not exist in DB</response>
+            <response code="429">Too Many Requests: Quota exceeded. Maximum allowed: 10 per 1s, 500 per 1m, 2000 per 1d.</response>
+        </member>
+        <member name="M:ERPSystem.Api.Controllers.UserController.GetAvatar">
+            <summary>
+            Get avatar for user
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ERPSystem.Api.Controllers.UserController.ResetPassword(ERPSystem.DataModel.Login.ResetPasswordModel)">
+            <summary>
+            Reset password
+            </summary>
+            <param name="model">JSON model for object(new password, confirm new password and token string)</param>
+            <returns></returns>
+            <response code="400">Bad Request: Email does not exist or wrong token</response>
+            <response code="429">Too Many Requests: Quota exceeded. Maximum allowed: 10 per 1s, 500 per 1m, 2000 per 1d.</response>
+        </member>
+        <member name="M:ERPSystem.Api.Controllers.UserController.ForgotPassword(ERPSystem.DataModel.Login.ForgotPasswordModel)">
+            <summary>
+            When forgot password
+            </summary>
+            <param name="model">JSON model for string of email login</param>
+            <returns></returns>
+            <response code="400">Bad Request: Email does not exist in DB</response>
+            <response code="429">Too Many Requests: Quota exceeded. Maximum allowed: 10 per 1s, 500 per 1m, 2000 per 1d.</response>
+        </member>
+        <member name="M:ERPSystem.Api.Controllers.WorkLogController.Gets(System.String,System.Collections.Generic.List{System.Int32},System.Collections.Generic.List{System.Int32},System.Int32,System.Int32,System.String,System.String)">
+            <summary>
+            Get list work log
+            </summary>
+            <param name="search"></param>
+            <param name="userIds"></param>
+            <param name="folderLogs"></param>
+            <param name="pageNumber"></param>
+            <param name="pageSize"></param>
+            <param name="sortColumn"></param>
+            <param name="sortDirection"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ERPSystem.Api.Controllers.WorkLogController.Add(ERPSystem.DataModel.WorkLog.WorkLogModel)">
+            <summary>
+            Add new work log
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ERPSystem.Api.Controllers.WorkLogController.DeleteMulti(System.Collections.Generic.List{System.Int32})">
+            <summary>
+            Delete multi work log
+            </summary>
+            <param name="ids"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ERPSystem.Api.Controllers.WorkLogController.GetById(System.Int32)">
+            <summary>
+            Get detail work log by id
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ERPSystem.Api.Controllers.WorkLogController.Edit(System.Int32,ERPSystem.DataModel.WorkLog.WorkLogModel)">
+            <summary>
+            Edit work log by id
+            </summary>
+            <param name="id"></param>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ERPSystem.Api.Controllers.WorkLogController.Delete(System.Int32)">
+            <summary>
+            Delete work log by id
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ERPSystem.Api.Controllers.WorkScheduleController.GetInit">
+            <summary>
+            Get init
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ERPSystem.Api.Controllers.WorkScheduleController.Gets(System.String,System.String,System.DateTime,System.String,System.Collections.Generic.List{System.Int32},System.Collections.Generic.List{System.Int32},System.Collections.Generic.List{System.Int32},System.Int32,System.Int32,System.String,System.String)">
+            <summary>
+            Get list work schedule
+            </summary>
+            <param name="search"></param>
+            <param name="accounts"></param>
+            <param name="date"></param>
+            <param name="categoryTypes"></param>
+            <param name="types"></param>
+            <param name="categories"></param>
+            <param name="folderLogs"></param>
+            <param name="pageNumber"></param>
+            <param name="pageSize"></param>
+            <param name="sortColumn"></param>
+            <param name="sortDirection"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ERPSystem.Api.Controllers.WorkScheduleController.Add(ERPSystem.DataModel.WorkSchedule.WorkScheduleModel)">
+            <summary>
+            Add new schedule
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ERPSystem.Api.Controllers.WorkScheduleController.DeleteMulti(System.Collections.Generic.List{System.Int32})">
+            <summary>
+            Delete multi schedule
+            </summary>
+            <param name="ids"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ERPSystem.Api.Controllers.WorkScheduleController.GetById(System.Int32)">
+            <summary>
+            Get detail schedule by id
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ERPSystem.Api.Controllers.WorkScheduleController.Edit(System.Int32,ERPSystem.DataModel.WorkSchedule.WorkScheduleModel)">
+            <summary>
+            Edit schedule by id
+            </summary>
+            <param name="id"></param>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ERPSystem.Api.Controllers.WorkScheduleController.Delete(System.Int32)">
+            <summary>
+            Delete schedule by id
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ERPSystem.Api.Infrastructure.Mapper.AccountMapping.#ctor">
+            <summary>
+            AccountMapping mapping
+            </summary>
+        </member>
+        <member name="M:ERPSystem.Api.Infrastructure.Mapper.UserMapping.#ctor">
+            <summary>
+            User mapping
+            </summary>
+        </member>
+        <member name="M:ERPSystem.Api.Infrastructure.Validation.DailyReportValidation.#ctor(ERPSystem.Service.Services.IDailyReportService)">
+            <summary>
+            daily report validation
+            </summary>
+            <param name="dailyReportService"></param>
+        </member>
+        <member name="M:ERPSystem.Api.Infrastructure.Validation.MeetingLogValidation.#ctor(ERPSystem.Service.Services.IMeetingLogService)">
+            <summary>
+            Work Log validation
+            </summary>
+            <param name="meetingLogService"></param>
+        </member>
+        <member name="M:ERPSystem.Api.Infrastructure.Validation.WorkLogValidation.#ctor(ERPSystem.Service.Services.IWorkLogService)">
+            <summary>
+            Work Log validation
+            </summary>
+            <param name="workLogService"></param>
+        </member>
+        <member name="M:ERPSystem.Api.Infrastructure.Validation.WorkScheduleValidation.#ctor(ERPSystem.Service.Services.IWorkScheduleService)">
+            <summary>
+            Work Schedule validation
+            </summary>
+            <param name="workScheduleService"></param>
+        </member>
+        <member name="T:ERPSystem.Api.Startup">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:ERPSystem.Api.Startup.#ctor(Microsoft.AspNetCore.Hosting.IHostingEnvironment)">
+            <summary>
+            
+            </summary>
+            <param name="env"></param>
+            <param name="locOptions"></param>
+        </member>
+        <member name="P:ERPSystem.Api.Startup.Configuration">
+            <summary>
+            Configuration
+            </summary>
+        </member>
+        <member name="M:ERPSystem.Api.Startup.ConfigureServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            This method gets called by the runtime. Use this method to add services to the container.
+            </summary>
+            <param name="services"></param>
+        </member>
+        <member name="M:ERPSystem.Api.Startup.Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder,Microsoft.AspNetCore.Hosting.IHostingEnvironment,Microsoft.Extensions.Logging.ILoggerFactory,Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+            </summary>
+            <param name="app"></param>
+            <param name="env"></param>
+            <param name="loggerFactory"></param>
+            <param name="configuration"></param>
+        </member>
+    </members>
+</doc>

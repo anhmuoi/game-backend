@@ -1,0 +1,378 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<root>
+    <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+        <xsd:element name="root" msdata:IsDataSet="true">
+            
+        </xsd:element>
+    </xsd:schema>
+    <resheader name="resmimetype">
+        <value>text/microsoft-resx</value>
+    </resheader>
+    <resheader name="version">
+        <value>1.3</value>
+    </resheader>
+    <resheader name="reader">
+        <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <resheader name="writer">
+        <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <data name="User" xml:space="preserve">
+        <value>Người dùng</value>
+    </data>
+    <data name="ViewUser" xml:space="preserve">
+        <value>Xem người dùng</value>
+    </data>
+    <data name="AddUser" xml:space="preserve">
+        <value>Thêm người dùng</value>
+    </data>
+    <data name="DeleteUser" xml:space="preserve">
+        <value>Xóa người dùng</value>
+    </data>
+    <data name="DescriptionAddUser" xml:space="preserve">
+        <value>Quyền này cho phép bạn thêm người dùng mới.</value>
+    </data>
+    <data name="DescriptionEditUser" xml:space="preserve">
+    <value>Quyền này cho phép bạn chỉnh sửa người dùng.</value>
+  </data>
+    <data name="DescriptionDeleteUser" xml:space="preserve">
+        <value>Quyền này cho phép bạn xóa người dùng.</value>
+    </data>
+    <data name="DescriptionViewUser" xml:space="preserve">
+        <value>Quyền này cho phép bạn xem danh sách người dùng.</value>
+    </data>
+    <data name="EditUser" xml:space="preserve">
+        <value>Sửa người dùng</value>
+    </data>
+    <data name="ViewCategory" xml:space="preserve">
+    <value>Xem danh mục</value>
+  </data>
+    <data name="AddCategory" xml:space="preserve">
+    <value>Thêm danh mục</value>
+  </data>
+    <data name="EditCategory" xml:space="preserve">
+    <value>Sửa danh mục</value>
+  </data>
+    <data name="DeleteCategory" xml:space="preserve">
+    <value>Xóa danh mục</value>
+  </data>
+    <data name="DescriptionViewCategory" xml:space="preserve">
+    <value>Quyền này cho phép bạn xem danh sách các danh mục và tùy chọn.</value>
+  </data>
+    <data name="DescriptionAddCategory" xml:space="preserve">
+    <value>Quyền này cho phép bạn thêm danh sách các danh mục và tùy chọn.</value>
+  </data>
+    <data name="DescriptionEditCategory" xml:space="preserve">
+    <value>Quyền này cho phép bạn chỉnh sửa danh sách các danh mục và tùy chọn.</value>
+  </data>
+    <data name="DescriptionDeleteCategory" xml:space="preserve">
+    <value>Quyền này cho phép bạn xóa danh sách các danh mục và tùy chọn.</value>
+  </data>
+    <data name="Category" xml:space="preserve">
+    <value>Danh mục</value>
+  </data>
+    <data name="ViewDepartment" xml:space="preserve">
+    <value>Xem phòng ban</value>
+  </data>
+    <data name="AddDepartment" xml:space="preserve">
+    <value>Thêm phòng ban</value>
+  </data>
+    <data name="EditDepartment" xml:space="preserve">
+    <value>Sửa phòng ban</value>
+  </data>
+    <data name="DeleteDepartment" xml:space="preserve">
+    <value>Xóa phòng ban</value>
+  </data>
+    <data name="ExportDepartment" xml:space="preserve">
+    <value>Xuất dữ liệu phòng ban</value>
+  </data>
+    <data name="DescriptionViewDepartment" xml:space="preserve">
+    <value>Quyền này cho phép bạn xem thông tin phòng ban.</value>
+  </data>
+    <data name="DescriptionAddDepartment" xml:space="preserve">
+    <value>Quyền này cho phép bạn thêm phòng ban mới.</value>
+  </data>
+    <data name="DescriptionEditDepartment" xml:space="preserve">
+    <value>Quyền này cho phép bạn sửa thông tin phòng ban.</value>
+  </data>
+    <data name="DescriptionDeleteDepartment" xml:space="preserve">
+    <value>Quyền này cho phép bạn xóa các phòng ban.</value>
+  </data>
+    <data name="DescriptionExportDepartment" xml:space="preserve">
+    <value>Quyền này cho phép bạn xuất danh sách các phòng ban thành một tệp.</value>
+  </data>
+    <data name="Department" xml:space="preserve">
+    <value>Phòng ban</value>
+  </data>
+    <data name="Supplier" xml:space="preserve">
+        <value>Nhà cung cấp</value>
+    </data>
+    <data name="ViewSupplier" xml:space="preserve">
+        <value>Xem nhà cung cấp</value>
+    </data>
+    <data name="AddSupplier" xml:space="preserve">
+        <value>Thêm nhà cung cấp</value>
+    </data>
+    <data name="EditSupplier" xml:space="preserve">
+        <value>Sửa nhà cung cấp</value>
+    </data>
+    <data name="DeleteSupplier" xml:space="preserve">
+        <value>Xóa nhà cung cấp</value>
+    </data>
+    <data name="DescriptionAddSupplier" xml:space="preserve">
+        <value>Quyền này cho phép bạn thêm nhà cung cấp.</value>
+    </data>
+    <data name="DescriptionEditSupplier" xml:space="preserve">
+        <value>Quyền này cho phép bạn sửa nhà cung cấp.</value>
+    </data>
+    <data name="DescriptionDeleteSupplier" xml:space="preserve">
+        <value>Quyền này cho phép bạn xóa nhà cung cấp.</value>
+    </data>
+    <data name="DescriptionViewSupplier" xml:space="preserve">
+        <value>Quyền này cho phép bạn xem thông tin nhà cung cấp</value>
+    </data>
+    <data name="Setting" xml:space="preserve">
+        <value>Cài đặt</value>
+    </data>
+    <data name="ViewSetting" xml:space="preserve">
+        <value>Xem cài đặt</value>
+    </data>
+    <data name="AddSetting" xml:space="preserve">
+        <value>Thêm cài đặt</value>
+    </data>
+    <data name="EditSetting" xml:space="preserve">
+        <value>Sửa cài đặt</value>
+    </data>
+    <data name="DeleteSetting" xml:space="preserve">
+        <value>Xóa cài đặt</value>
+    </data>
+    <data name="DescriptionAddSetting" xml:space="preserve">
+        <value>Quyền này cho phép bạn thêm cài đặt.</value>
+    </data>
+    <data name="DescriptionEditSetting" xml:space="preserve">
+        <value>Quyền này cho phép bạn sửa cài đặt.</value>
+    </data>
+    <data name="DescriptionDeleteSetting" xml:space="preserve">
+        <value>Quyền này cho phép bạn xóa cài đặt.</value>
+    </data>
+    <data name="DescriptionViewSetting" xml:space="preserve">
+        <value>Quyền này cho phép bạn xem thông tin cài đặt.</value>
+    </data>
+    <data name="PurchaseRecord" xml:space="preserve">
+        <value>Hồ sơ mua hàng</value>
+    </data>
+    <data name="ViewPurchaseRecord" xml:space="preserve">
+        <value>Xem hồ sơ mua hàng</value>
+    </data>
+    <data name="AddPurchaseRecord" xml:space="preserve">
+        <value>Thêm hồ sơ mua hàng</value>
+    </data>
+    <data name="EditPurchaseRecord" xml:space="preserve">
+        <value>Sửa hồ sơ mua hàng</value>
+    </data>
+    <data name="DeletePurchaseRecord" xml:space="preserve">
+        <value>Xóa hồ sơ mua hàng</value>
+    </data>
+    <data name="DescriptionAddPurchaseRecord" xml:space="preserve">
+        <value>Quyền này cho phép bạn thêm hồ sơ mua hàng.</value>
+    </data>
+    <data name="DescriptionEditPurchaseRecord" xml:space="preserve">
+        <value>Quyền này cho phép bạn sửa hồ sơ mua hàng.</value>
+    </data>
+    <data name="DescriptionDeletePurchaseRecord" xml:space="preserve">
+        <value>Quyền này cho phép bạn xóa hồ sơ mua hàng.</value>
+    </data>
+    <data name="DescriptionViewPurchaseRecord" xml:space="preserve">
+        <value>Quyền này cho phép bạn xem thông tin hồ sơ mua hàng.</value>
+    </data>
+    <data name="Role" xml:space="preserve">
+        <value>Quyền</value>
+    </data>
+    <data name="ViewRole" xml:space="preserve">
+        <value>Xem quyền</value>
+    </data>
+    <data name="AddRole" xml:space="preserve">
+        <value>Thêm quyền</value>
+    </data>
+    <data name="EditRole" xml:space="preserve">
+        <value>Sửa quyền</value>
+    </data>
+    <data name="DeleteRole" xml:space="preserve">
+        <value>Xóa quyền</value>
+    </data>
+    <data name="DescriptionAddRole" xml:space="preserve">
+        <value>Quyền này cho phép bạn thêm quyền.</value>
+    </data>
+    <data name="DescriptionEditRole" xml:space="preserve">
+        <value>Quyền này cho phép bạn sửa quyền.</value>
+    </data>
+    <data name="DescriptionDeleteRole" xml:space="preserve">
+        <value>Quyền này cho phép bạn xóa quyền.</value>
+    </data>
+    <data name="DescriptionViewRole" xml:space="preserve">
+        <value>Quyền này cho phép bạn xem thông tin quyền.</value>
+    </data>
+    <data name="DailyReport" xml:space="preserve">
+        <value>Báo cáo hàng ngày</value>
+    </data>
+    <data name="ViewDailyReport" xml:space="preserve">
+        <value>Xem báo cáo hàng ngày</value>
+    </data>
+    <data name="AddDailyReport" xml:space="preserve">
+        <value>Thêm báo cáo hàng ngày</value>
+    </data>
+    <data name="EditDailyReport" xml:space="preserve">
+        <value>Sửa báo cáo hàng ngày</value>
+    </data>
+    <data name="DeleteDailyReport" xml:space="preserve">
+        <value>Xóa báo cáo hàng ngày</value>
+    </data>
+    <data name="DescriptionAddDailyReport" xml:space="preserve">
+        <value>Quyền này cho phép bạn thêm báo cáo hàng ngày.</value>
+    </data>
+    <data name="DescriptionEditDailyReport" xml:space="preserve">
+        <value>Quyền này cho phép bạn sửa báo cáo hàng ngày.</value>
+    </data>
+    <data name="DescriptionDeleteDailyReport" xml:space="preserve">
+        <value>Quyền này cho phép bạn xóa báo cáo hàng ngày.</value>
+    </data>
+    <data name="DescriptionViewDailyReport" xml:space="preserve">
+        <value>Quyền này cho phép bạn xem thông tin báo cáo hàng ngày.</value>
+    </data>
+    <data name="Folder" xml:space="preserve">
+        <value>Thư mục</value>
+    </data>
+    <data name="ViewFolder" xml:space="preserve">
+        <value>Xem thư mục</value>
+    </data>
+    <data name="AddFolder" xml:space="preserve">
+        <value>Thêm thư mục</value>
+    </data>
+    <data name="EditFolder" xml:space="preserve">
+        <value>Sửa thư mục</value>
+    </data>
+    <data name="DeleteFolder" xml:space="preserve">
+        <value>Xóa thư mục</value>
+    </data>
+    <data name="DescriptionAddFolder" xml:space="preserve">
+        <value>Quyền này cho phép bạn thêm thư mục.</value>
+    </data>
+    <data name="DescriptionEditFolder" xml:space="preserve">
+        <value>Quyền này cho phép bạn sửa thư mục.</value>
+    </data>
+    <data name="DescriptionDeleteFolder" xml:space="preserve">
+        <value>Quyền này cho phép bạn xóa thư mục.</value>
+    </data>
+    <data name="DescriptionViewFolder" xml:space="preserve">
+        <value>Quyền này cho phép bạn xem thông tin thư mục.</value>
+    </data>
+    <data name="Meeting" xml:space="preserve">
+        <value>Cuộc họp</value>
+    </data>
+    <data name="ViewMeeting" xml:space="preserve">
+        <value>Xem cuộc họp</value>
+    </data>
+    <data name="AddMeeting" xml:space="preserve">
+        <value>Thêm cuộc họp</value>
+    </data>
+    <data name="EditMeeting" xml:space="preserve">
+        <value>Sửa cuộc họp</value>
+    </data>
+    <data name="DeleteMeeting" xml:space="preserve">
+        <value>Xóa cuộc họp</value>
+    </data>
+    <data name="DescriptionAddMeeting" xml:space="preserve">
+        <value>Quyền này cho phép bạn thêm cuộc họp.</value>
+    </data>
+    <data name="DescriptionEditMeeting" xml:space="preserve">
+        <value>Quyền này cho phép bạn sửa cuộc họp.</value>
+    </data>
+    <data name="DescriptionDeleteMeeting" xml:space="preserve">
+        <value>Quyền này cho phép bạn xóa cuộc họp.</value>
+    </data>
+    <data name="DescriptionViewMeeting" xml:space="preserve">
+        <value>Quyền này cho phép bạn xem thông tin cuộc họp.</value>
+    </data>
+    <data name="Schedule" xml:space="preserve">
+        <value>Lịch trình</value>
+    </data>
+    <data name="ViewSchedule" xml:space="preserve">
+        <value>Xem lịch trình</value>
+    </data>
+    <data name="AddSchedule" xml:space="preserve">
+        <value>Thêm lịch trình</value>
+    </data>
+    <data name="EditSchedule" xml:space="preserve">
+        <value>Sửa lịch trình</value>
+    </data>
+    <data name="DeleteSchedule" xml:space="preserve">
+        <value>Xóa lịch trình</value>
+    </data>
+    <data name="DescriptionAddSchedule" xml:space="preserve">
+        <value>Quyền này cho phép bạn thêm lịch trình.</value>
+    </data>
+    <data name="DescriptionEditSchedule" xml:space="preserve">
+        <value>Quyền này cho phép bạn sửa lịch trình.</value>
+    </data>
+    <data name="DescriptionDeleteSchedule" xml:space="preserve">
+        <value>Quyền này cho phép bạn xóa lịch trình.</value>
+    </data>
+    <data name="DescriptionViewSchedule" xml:space="preserve">
+        <value>Quyền này cho phép bạn xem thông tin lịch trình.</value>
+    </data>
+    <data name="WorkLog" xml:space="preserve">
+        <value>Nhật ký công việc</value>
+    </data>
+    <data name="ViewWorkLog" xml:space="preserve">
+        <value>Xem nhật ký công việc</value>
+    </data>
+    <data name="AddWorkLog" xml:space="preserve">
+        <value>Thêm nhật ký công việc</value>
+    </data>
+    <data name="EditWorkLog" xml:space="preserve">
+        <value>Sửa nhật ký công việc</value>
+    </data>
+    <data name="DeleteWorkLog" xml:space="preserve">
+        <value>Xóa nhật ký công việc</value>
+    </data>
+    <data name="DescriptionAddWorkLog" xml:space="preserve">
+        <value>Quyền này cho phép bạn thêm nhật ký công việc.</value>
+    </data>
+    <data name="DescriptionEditWorkLog" xml:space="preserve">
+        <value>Quyền này cho phép bạn sửa nhật ký công việc.</value>
+    </data>
+    <data name="DescriptionDeleteWorkLog" xml:space="preserve">
+        <value>Quyền này cho phép bạn xóa nhật ký công việc.</value>
+    </data>
+    <data name="DescriptionViewWorkLog" xml:space="preserve">
+        <value>Quyền này cho phép bạn xem thông tin nhật ký công việc.</value>
+    </data>
+    <data name="ViewBarcode" xml:space="preserve">
+        <value>View Barcode</value>
+    </data>
+    <data name="DescriptionViewBarcode" xml:space="preserve">
+        <value>Quyền này cho phép bạn xem danh sách hàng hóa nhập về, bán đi hoặc trả lại. Và quản lý hàng hóa tồn kho</value>
+    </data>
+    <data name="DescriptionAddBarcode" xml:space="preserve">
+        <value>Quyền này cho phép bạn thêm hàng hóa mới, hàng hóa bán đi và hàng hóa được trả về</value>
+    </data>
+    <data name="AddBarcode" xml:space="preserve">
+        <value>Add Barcode</value>
+    </data>
+    <data name="EditBarcode" xml:space="preserve">
+        <value>Edit Barcode</value>
+    </data>
+    <data name="DescriptionEditBarcode" xml:space="preserve">
+        <value>Quyền này cho phép bạn chỉnh sửa thông tin hàng hóa mới, hàng hóa bán đi và hàng hóa được trả về</value>
+    </data>
+    <data name="DeleteBarcode" xml:space="preserve">
+        <value>Delete Barcode</value>
+    </data>
+    <data name="DescriptionDeleteBarcode" xml:space="preserve">
+        <value>Quyền này cho phép bạn xóa dữ liệu về hàng hóa mới, hàng hóa bán đi và hàng hóa được trả về</value>
+    </data>
+    <data name="Barcode" xml:space="preserve">
+        <value>Quản lý hàng hóa</value>
+    </data>
+</root>

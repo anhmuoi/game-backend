@@ -1,0 +1,38 @@
+<root>
+    <resheader name="resmimetype">
+        <value>text/microsoft-resx</value>
+    </resheader>
+    <resheader name="version">
+        <value>1.3</value>
+    </resheader>
+    <resheader name="reader">
+        <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <resheader name="writer">
+        <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <data name="msgFolderNameExisted" xml:space="preserve">
+        <value>Folder name existed in system</value>
+    </data>
+    <data name="msgNotPermissionInFolder" xml:space="preserve">
+        <value>You not permission edit this folder</value>
+    </data>
+    <data name="msgNotPermissionDeleteFolder" xml:space="preserve">
+        <value>You do not permission delete folder</value>
+    </data>
+    <data name="msgNotPermissionDeleteFile" xml:space="preserve">
+        <value>You do not permission delete file</value>
+    </data>
+    <data name="msgFileNameExisted" xml:space="preserve">
+        <value>File name existed in system</value>
+    </data>
+    <data name="msgPermissionDenied" xml:space="preserve">
+        <value>Permission denied</value>
+    </data>
+    <data name="lblMyDrive" xml:space="preserve">
+        <value>My Drive</value>
+    </data>
+    <data name="lblSharedWithMe" xml:space="preserve">
+        <value>Shared With Me</value>
+    </data>
+</root>

@@ -1,0 +1,26 @@
+version: '2.4'
+
+x-default: &default
+  networks:
+    - dmpw-net
+  restart: always
+
+services:
+  erp-api:
+    << : *default
+    image: 009795078640.dkr.ecr.ap-southeast-1.amazonaws.com/erp-api:develop
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Staging
+    volumes:
+      - ./settings.erp-api.json:/tmp/appsettings.Staging.json
+      - /home/erp-data/images:/app/images
+      - /home/erp-data/videos:/app/videos
+      - /home/erp-data/data:/app/data
+    entrypoint: /bin/bash -c 'cp /tmp/appsettings.Staging.json /app/appsettings.Staging.json && dotnet ERPSystem.Api.dll'
+    ports:
+      - "6100:5000"
+
+networks:
+  dmpw-net:
+    external:
+      name: ubuntu_default

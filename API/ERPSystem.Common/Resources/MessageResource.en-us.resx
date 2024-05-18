@@ -1,0 +1,107 @@
+<root>
+    <resheader name="resmimetype">
+        <value>text/microsoft-resx</value>
+    </resheader>
+    <resheader name="version">
+        <value>1.3</value>
+    </resheader>
+    <resheader name="reader">
+        <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <resheader name="writer">
+        <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <data name="AnUnexpectedErrorOccurred" xml:space="preserve">
+        <value>An unexpected error has occurred.</value>
+    </data>
+    <data name="BadRequest" xml:space="preserve">
+        <value>Bad request</value>
+    </data>
+    <data name="ExpiredToken" xml:space="preserve">
+        <value>Token is expired.</value>
+    </data>
+    <data name="ExpiredTokenAndRefreshTokenMismatched" xml:space="preserve">
+        <value>Access token and refresh token mismatched.</value>
+    </data>
+    <data name="Forbidden" xml:space="preserve">
+        <value>Forbidden</value>
+    </data>
+    <data name="InvalidCredentials" xml:space="preserve">
+        <value>Email or Password is invalid.</value>
+    </data>
+    <data name="InvalidToken" xml:space="preserve">
+        <value>Invalid token.</value>
+    </data>
+    <data name="msgCreateNewFailed" xml:space="preserve">
+        <value>Create new failed</value>
+    </data>
+    <data name="msgCreateNewSuccess" xml:space="preserve">
+        <value>Create new success</value>
+    </data>
+    <data name="msgDeleteFailed" xml:space="preserve">
+        <value>Delete failed</value>
+    </data>
+    <data name="msgDeleteSuccess" xml:space="preserve">
+        <value>Delete Success</value>
+    </data>
+    <data name="msgUpdateFailed" xml:space="preserve">
+        <value>Update failed</value>
+    </data>
+    <data name="msgUpdateSuccess" xml:space="preserve">
+        <value>Update Success</value>
+    </data>
+    <data name="RequestTimeout" xml:space="preserve">
+        <value>Request timeout</value>
+    </data>
+    <data name="ResourceNotFound" xml:space="preserve">
+        <value>Resource not found.</value>
+    </data>
+    <data name="SystemError" xml:space="preserve">
+        <value>System error. Please try again later.</value>
+    </data>
+    <data name="Unauthorized" xml:space="preserve">
+        <value>Unauthorized</value>
+    </data>
+    <data name="UnprocessableEntity" xml:space="preserve">
+        <value>Unprocessable entity</value>
+    </data>
+    <data name="ValidationFailed" xml:space="preserve">
+        <value>Validation failed.</value>
+    </data>
+    <data name="InvalidDateFormat" xml:space="preserve">
+        <value>{0} must be a valid date format {1}</value>
+    </data>
+    <data name="NotSelected" xml:space="preserve">
+        <value>You must select a {0}.</value>
+    </data>
+    <data name="GreaterThan" xml:space="preserve">
+        <value>{0} must be greater than {1}.</value>
+    </data>
+    <data name="NotEmptyValidator" xml:space="preserve">
+        <value>{0} can not be blank.</value>
+    </data>
+    <data name="EmailDoestNotExist" xml:space="preserve">
+    <value>Email does not exist.</value>
+    <comment>유효성 체크</comment>
+    </data>
+    <data name="InvalidInformation" xml:space="preserve">
+    <value>Invalid information.</value>
+    <comment>유효성 체크</comment>
+    </data>
+    <data name="MessageResetPassSuccess" xml:space="preserve">
+    <value>Reset password successfully.</value>
+    <comment>패스워드 초기화 성공 메시지</comment>
+    </data>
+    <data name="NullFrontEndURL" xml:space="preserve">
+    <value>The URL is not registered. Please contact the system manager.</value>
+    <comment/>
+    </data>
+    <data name="MessageSendEmailSuccess" xml:space="preserve">
+    <value>Email has been sent to your inbox. Please check your email.</value>
+    <comment>비밀번호 분실 시 이메일 전송 성공 메시지</comment>
+    </data>
+    <data name="MessageEmailNotRegister" xml:space="preserve">
+    <value>Email is not register!</value>
+    <comment>등록되지 않은 이메일 유효성 체크</comment>
+    </data>
+</root>

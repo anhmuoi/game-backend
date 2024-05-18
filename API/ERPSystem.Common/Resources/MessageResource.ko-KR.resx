@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<root>
+    <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+        <xsd:element name="root" msdata:IsDataSet="true">
+            
+        </xsd:element>
+    </xsd:schema>
+    <resheader name="resmimetype">
+        <value>text/microsoft-resx</value>
+    </resheader>
+    <resheader name="version">
+        <value>1.3</value>
+    </resheader>
+    <resheader name="reader">
+        <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <resheader name="writer">
+        <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <data name="BadRequest" xml:space="preserve">
+        <value>잘못된 요청</value>
+    </data>
+    <data name="Unauthorized" xml:space="preserve">
+        <value>인증 실패</value>
+    </data>
+    <data name="Forbidden" xml:space="preserve">
+        <value>금지</value>
+    </data>
+    <data name="ResourceNotFound" xml:space="preserve">
+        <value>리소스를 찾을 수 없음.</value>
+    </data>
+    <data name="RequestTimeout" xml:space="preserve">
+        <value>요청 시간 초과</value>
+    </data>
+    <data name="UnprocessableEntity" xml:space="preserve">
+        <value>처리 할 수없는 항목</value>
+    </data>
+    <data name="SystemError" xml:space="preserve">
+        <value>시스템 에러입니다. 다시 시도해주세요.</value>
+    </data>
+    <data name="AnUnexpectedErrorOccurred" xml:space="preserve">
+        <value>오류가 발생했습니다.</value>
+    </data>
+    <data name="ValidationFailed" xml:space="preserve">
+        <value>검증에 실패했습니다.</value>
+    </data>
+    <data name="InvalidCredentials" xml:space="preserve">
+        <value>이메일이나 비밀번호가 유효하지 않습니다.</value>
+    </data>
+    <data name="InvalidToken" xml:space="preserve">
+        <value>잘못된 토큰.</value>
+    </data>
+    <data name="ExpiredTokenAndRefreshTokenMismatched" xml:space="preserve">
+        <value>Access token and refresh token mismatched.</value>
+    </data>
+    <data name="ExpiredToken" xml:space="preserve">
+        <value>토큰이 만료되었습니다.</value>
+    </data>
+    <data name="msgCreateNewFailed" xml:space="preserve">
+        <value>Create new failed</value>
+    </data>
+    <data name="msgCreateNewSuccess" xml:space="preserve">
+        <value>Create new success</value>
+    </data>
+    <data name="msgUpdateSuccess" xml:space="preserve">
+        <value>Update Success</value>
+    </data>
+    <data name="msgUpdateFailed" xml:space="preserve">
+        <value>Update failed</value>
+    </data>
+    <data name="msgDeleteSuccess" xml:space="preserve">
+        <value>Delete Success</value>
+    </data>
+    <data name="msgDeleteFailed" xml:space="preserve">
+        <value>Delete failed</value>
+    </data>
+    <data name="msgNotFoundRole" xml:space="preserve">
+        <value>Can not found role</value>
+    </data>
+    <data name="msgDuplicatedData" xml:space="preserve">
+        <value>이 데이터에는 {0}이(가) 중복되어 있습니다.</value>
+    </data>
+    <data name="MessageAddSuccess" xml:space="preserve">
+        <value>새로운 {0} 추가에 성공했습니다.</value>
+    </data>
+    <data name="InvalidRoleUpdate" xml:space="preserve">
+        <value>기본 Role은 수정할 수 없습니다.</value>
+    </data>
+    <data name="MessageUpdateSuccess" xml:space="preserve">
+        <value>{0} {1} 업데이트 성공.</value>
+    </data>
+    <data name="msgFailedDeleteBasicRole" xml:space="preserve">
+        <value>기본 role은 삭제할 수 없습니다.</value>
+    </data>
+    <data name="msgFailedDeleteRole" xml:space="preserve">
+        <value>해당 역할의 계정이 존재하기 때문에 삭제할 수 없습니다.</value>
+    </data>
+    <data name="MessageDeleteSuccess" xml:space="preserve">
+        <value>{0}을(를) 삭제했습니다.</value>
+    </data>
+    <data name="MessageSuccess" xml:space="preserve">
+        <value>업데이트 성공</value>
+    </data>
+    <data name="InvalidDateFormat" xml:space="preserve">
+        <value>{0}은 (는) 유효한 날짜 형식이어야합니다 {1}</value>
+    </data>
+    <data name="NotSelected" xml:space="preserve">
+        <value>반드시 {0}을 선택해주세요.</value>
+    </data>
+    <data name="GreaterThan" xml:space="preserve">
+        <value>{0}은 {1}보다 커야합니다.</value>
+    </data>
+    <data name="NotEmptyValidator" xml:space="preserve">
+        <value>{0} 은 필수 입력입니다.</value>
+    </data>
+    <data name="EmailDoestNotExist" xml:space="preserve">
+    <value>Email does not exist.</value>
+    <comment>유효성 체크</comment>
+    </data>
+    <data name="InvalidInformation" xml:space="preserve">
+    <value>Invalid information.</value>
+    <comment>유효성 체크</comment>
+    </data>
+    <data name="MessageResetPassSuccess" xml:space="preserve">
+    <value>Reset password successfully.</value>
+    <comment>패스워드 초기화 성공 메시지</comment>
+    </data>
+    <data name="NullFrontEndURL" xml:space="preserve">
+    <value>The URL is not registered. Please contact the system manager.</value>
+    <comment/>
+    </data>
+    <data name="MessageSendEmailSuccess" xml:space="preserve">
+    <value>Email has been sent to your inbox. Please check your email.</value>
+    <comment>비밀번호 분실 시 이메일 전송 성공 메시지</comment>
+    </data>
+    <data name="MessageEmailNotRegister" xml:space="preserve">
+    <value>Email is not register!</value>
+    <comment>등록되지 않은 이메일 유효성 체크</comment>
+    </data>
+</root>

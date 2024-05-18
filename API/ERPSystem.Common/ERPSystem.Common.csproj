@@ -1,0 +1,84 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net7.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+     <PackageReference Include="AutoMapper" Version="10.0.0" />
+        <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="7.0.0" />
+        <PackageReference Include="FluentValidation" Version="11.2.0" />
+        <PackageReference Include="FluentValidation.AspNetCore" Version="11.2.1" />
+        <PackageReference Include="Magick.NET-Q8-x64" Version="12.2.0" />
+        <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.2.2" />
+        <PackageReference Include="Microsoft.Extensions.Localization.Abstractions" Version="6.0.8" />
+        <PackageReference Include="Microsoft.Extensions.Logging" Version="7.0.0" />
+        <PackageReference Include="RabbitMQ.Client" Version="6.2.4" />
+        <PackageReference Include="ClosedXML" Version="0.100.3" />
+        <PackageReference Include="TimeZoneConverter" Version="3.3.0" />
+
+
+      <PackageReference Include="Magick.NET-Q8-x64" Version="12.2.0" />
+      <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="2.2.0" />
+      <PackageReference Include="Microsoft.AspNetCore.Hosting" Version="2.2.7" />
+      <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.2.2" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.10">
+        <PrivateAssets>all</PrivateAssets>
+        <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      </PackageReference>
+      <PackageReference Include="Microsoft.Extensions.Configuration" Version="8.0.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Update="Resources\DepartmentResource.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>DepartmentResource.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\DriverResource.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>DriverResource.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\WorkScheduleResource.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>WorkScheduleResource.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\WorkLogResource.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>WorkLogResource.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\DailyReportResource.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>DailyReportResource.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Update="Resources\DepartmentResource.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>DepartmentResource.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\DriverResource.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>DriverResource.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\WorkScheduleResource.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>WorkScheduleResource.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\WorkLogResource.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>WorkLogResource.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\DailyReportResource.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>DailyReportResource.resx</DependentUpon>
+      </Compile>
+    </ItemGroup>
+</Project>
