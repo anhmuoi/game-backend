@@ -20,6 +20,9 @@ namespace ERPSystem.DataModel.User
         public string Phone { get; set; }
 
         public string Email { get; set; }
+        public int InGame { get; set; }
+        public int IndexPlayer { get; set; }
+        public int OwnerRoom { get; set; }
 
         public string Position { get; set; }
         public int DepartmentId { get; set; }
@@ -48,6 +51,9 @@ namespace ERPSystem.DataModel.User
         public string Phone { get; set; }
 
         public string Email { get; set; }
+        public int InGame { get; set; }
+        public int IndexPlayer { get; set; }
+        public int OwnerRoom { get; set; }
 
         public string Position { get; set; }
 
@@ -76,6 +82,9 @@ namespace ERPSystem.DataModel.User
         public string Phone { get; set; }
 
         public string Email { get; set; }
+        public int InGame { get; set; }
+        public int IndexPlayer { get; set; }
+        public int OwnerRoom { get; set; }
         public int DepartmentId { get; set; }
 
         public string Position { get; set; }
@@ -105,6 +114,9 @@ namespace ERPSystem.DataModel.User
         public string Phone { get; set; }
 
         public string Email { get; set; }
+        public int InGame { get; set; }
+        public int IndexPlayer { get; set; }
+        public int OwnerRoom { get; set; }
 
         public string Position { get; set; }
         public int DepartmentId { get; set; }
@@ -153,6 +165,9 @@ namespace ERPSystem.DataModel.User
         public string Email { get; set; }
 
         public string Position { get; set; }
+        public int InGame { get; set; }
+        public int IndexPlayer { get; set; }
+        public int OwnerRoom { get; set; }
 
         public short Status { get; set; }
 

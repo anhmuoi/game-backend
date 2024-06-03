@@ -19,6 +19,7 @@ public class MeetingRoomMapping : Profile
             .ForMember(dest => dest.Description, opt => opt.MapFrom(src => src.Description))
 
             .ForMember(dest => dest.IsRunning, opt => opt.MapFrom(src => src.IsRunning))
+            .ForMember(dest => dest.CurrentMeetingLogId, opt => opt.MapFrom(src => src.CurrentMeetingLogId))
             .ForMember(dest => dest.TotalPeople, opt => opt.MapFrom(src => src.TotalPeople))
             .ForMember(dest => dest.Price, opt => opt.MapFrom(src => src.Price))
             .ForMember(dest => dest.UserListId, opt => opt.MapFrom(src => JsonConvert.DeserializeObject<List<int>>(src.UserListId)))
@@ -30,6 +31,7 @@ public class MeetingRoomMapping : Profile
             .ForMember(dest => dest.Description, opt => opt.MapFrom(src => src.Description))
 
             .ForMember(dest => dest.IsRunning, opt => opt.MapFrom(src => src.IsRunning))
+            .ForMember(dest => dest.CurrentMeetingLogId, opt => opt.MapFrom(src => src.CurrentMeetingLogId))
             .ForMember(dest => dest.UserListId, opt => opt.MapFrom(src => JsonConvert.SerializeObject(src.UserListId)))
             .ForMember(dest => dest.TotalPeople, opt => opt.MapFrom(src => src.TotalPeople))
             .ForMember(dest => dest.Price, opt => opt.MapFrom(src => src.Price))
@@ -39,6 +41,7 @@ public class MeetingRoomMapping : Profile
             .ForMember(dest => dest.Description, opt => opt.MapFrom(src => src.Description))
 
             .ForMember(dest => dest.IsRunning, opt => opt.MapFrom(src => src.IsRunning))
+            .ForMember(dest => dest.CurrentMeetingLogId, opt => opt.MapFrom(src => src.CurrentMeetingLogId))
             .ForMember(dest => dest.TotalPeople, opt => opt.MapFrom(src => src.TotalPeople))
             .ForMember(dest => dest.Price, opt => opt.MapFrom(src => src.Price))
             .ForMember(dest => dest.UserListId, opt => opt.MapFrom(src => JsonConvert.DeserializeObject<List<int>>(src.UserListId)))

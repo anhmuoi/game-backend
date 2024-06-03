@@ -8,6 +8,7 @@ public class MeetingRoomModel
     public bool IsRunning { get; set; }
     public int TotalPeople { get; set; }
     public int CurrentPeople { get; set; }
+    public int CurrentMeetingLogId { get; set; }
     public double Price { get; set; }
     public List<int> UserListId { get; set; }
 }
@@ -19,6 +20,7 @@ public class MeetingRoomResponseModel
     public bool IsRunning { get; set; }
     public int TotalPeople { get; set; }
     public int CurrentPeople { get; set; }
+    public int CurrentMeetingLogId { get; set; }
     public double Price { get; set; }
     public List<int> UserListId { get; set; }
 }

@@ -1,4 +1,5 @@
 ﻿using ERPSystem.DataAccess.Models;
+using ERPSystem.DataModel.MeetingRoom;
 
 namespace ERPSystem.Service.Protocol
 {
@@ -11,8 +12,9 @@ namespace ERPSystem.Service.Protocol
         public string MessageType { get; set; }
         public int NotificationType { get; set; }
         public string Message { get; set; }
-        public MeetingRoom Room { get; set; }
+        public MeetingRoomResponseModel Room { get; set; }
         public int UserId { get; set; }
+        public Action Action { get; set; }
     }
 
 

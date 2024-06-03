@@ -11,6 +11,8 @@ using ERPSystem.Common;
 using ERPSystem.Common.Infrastructure;
 using ERPSystem.Common.Resources;
 using ERPSystem.DataAccess.Models;
+using ERPSystem.DataModel.MeetingLog;
+using ERPSystem.DataModel.MeetingRoom;
 using ERPSystem.Repository;
 using ERPSystem.Service.Protocol;
 using Microsoft.AspNetCore.Http;
@@ -91,10 +93,101 @@ namespace ERPSystem.Service.RabbitMq
                 HelperService.CreateUnitOfWork(_configuration);
             var meetingRoom =
                 _unitOfWork.MeetingRoomRepository.GetById(data.Room.Id);
-            if (data.Room.IsRunning == false)
-            {
-                meetingRoom.CurrentPeople += 1;
 
+            if (data.Action.Id == (int) ActionType.Join)
+            {
+                if (data.Room.IsRunning == false)
+                {
+                    var userIdList = new List<int>();
+
+                    if (!string.IsNullOrEmpty(meetingRoom.UserListId))
+                    {
+                        var currentUser =
+                            JsonConvert
+                                .DeserializeObject<List<int>>(meetingRoom
+                                    .UserListId);
+                        if (currentUser != null)
+                        {
+                            foreach (var userId in currentUser)
+                            {
+                                userIdList.Add (userId);
+                                var user =
+                                    _unitOfWork.UserRepository.GetById(userId);
+                                if (user.InGame == 0)
+                                {
+                                    user.InGame = meetingRoom.Id;
+                                    _unitOfWork.UserRepository.Update (user);
+                                    _unitOfWork.Save();
+                                }
+                            }
+                        }
+                    }
+                    if (userIdList.Contains(data.UserId))
+                    {
+                    }
+                    else
+                    {
+                        var user =
+                            _unitOfWork.UserRepository.GetById(data.UserId);
+                        if (user.InGame == 0)
+                        {
+                            userIdList.Add(data.UserId);
+                            if (userIdList.Count == 1)
+                            {
+                                user.OwnerRoom = meetingRoom.Id;
+                            }
+
+                            user.IndexPlayer = userIdList.Count;
+                            user.InGame = meetingRoom.Id;
+                            _unitOfWork.UserRepository.Update (user);
+                            _unitOfWork.Save();
+                        }
+                        else
+                        {
+                        }
+                    }
+                    meetingRoom.UserListId =
+                        JsonConvert.SerializeObject(userIdList);
+                    meetingRoom.CurrentPeople = userIdList.Count;
+                }
+                else
+                {
+                    var userIdList = new List<int>();
+                    if (!string.IsNullOrEmpty(meetingRoom.UserListId))
+                    {
+                        var currentUser =
+                            JsonConvert
+                                .DeserializeObject<List<int>>(meetingRoom
+                                    .UserListId);
+                        if (currentUser != null)
+                        {
+                            foreach (var userId in currentUser)
+                            {
+                                userIdList.Add (userId);
+                            }
+                        }
+                    }
+                    if (userIdList.Contains(data.UserId))
+                    {
+                    }
+                    else
+                    {
+                        messageError = "Room is Running";
+                    }
+                }
+                meetingRoom.IsRunning = data.Room.IsRunning;
+                if (meetingRoom.CurrentPeople <= meetingRoom.TotalPeople)
+                {
+                    _unitOfWork.MeetingRoomRepository.Update (meetingRoom);
+                    _unitOfWork.Save();
+                }
+                else
+                {
+                    messageError = "Room is fully";
+                }
+            }
+            else if (data.Action.Id == (int) ActionType.Out)
+            {
                 var userIdList = new List<int>();
 
                 if (!string.IsNullOrEmpty(meetingRoom.UserListId))
@@ -107,29 +200,193 @@ namespace ERPSystem.Service.RabbitMq
                     {
                         foreach (var userId in currentUser)
                         {
-                            userIdList.Add (userId);
+                            if (userId != data.UserId)
+                            {
+                                userIdList.Add (userId);
+                            }
                         }
                     }
                 }
-                if (userIdList.Contains(data.UserId))
+
+                var user = _unitOfWork.UserRepository.GetById(data.UserId);
+
+                bool ownerOut = false;
+                if (user.OwnerRoom == meetingRoom.Id)
                 {
-                    meetingRoom.CurrentPeople -= 1;
+                    ownerOut = true;
                 }
-                else
+                user.InGame = 0;
+                user.OwnerRoom = 0;
+                user.IndexPlayer = 0;
+                _unitOfWork.UserRepository.Update (user);
+                _unitOfWork.Save();
+
+                // update index user in room
+                if (userIdList.Count > 0)
                 {
-                    userIdList.Add(data.UserId);
+                    var userListTemp =
+                        _unitOfWork
+                            .UserRepository
+                            .GetAll()
+                            .Where(m => m.InGame == meetingRoom.Id)
+                            .OrderBy(m => m.IndexPlayer)
+                            .ToList();
+                    var i = 0;
+                    foreach (var userTmp in userListTemp)
+                    {
+                        if (ownerOut == true && i == 0)
+                        {
+                            userTmp.OwnerRoom = meetingRoom.Id;
+                        }
+                        userTmp.IndexPlayer = i + 1;
+                        _unitOfWork.UserRepository.Update (user);
+                        _unitOfWork.Save();
+                        i = i + 1;
+                    }
                 }
-                meetingRoom.UserListId = JsonConvert.SerializeObject(userIdList);
+
+                meetingRoom.UserListId =
+                    JsonConvert.SerializeObject(userIdList);
+                meetingRoom.CurrentPeople = userIdList.Count;
+
+                meetingRoom.IsRunning = data.Room.IsRunning;
+                if (meetingRoom.CurrentPeople <= meetingRoom.TotalPeople)
+                {
+                    if (meetingRoom.CurrentPeople == 1)
+                    {
+                        meetingRoom.IsRunning = false;
+                        meetingRoom.CurrentMeetingLogId = 0;
+                    }
+                    _unitOfWork.MeetingRoomRepository.Update (meetingRoom);
+                    _unitOfWork.Save();
+                }
             }
-            meetingRoom.IsRunning = data.Room.IsRunning;
-            if (meetingRoom.CurrentPeople <= meetingRoom.TotalPeople)
+            else if (data.Action.Id == (int) ActionType.StartFirst)
             {
+                meetingRoom.IsRunning = false;
+
+                // create meeting log
+                var meetingLog = new MeetingLog();
+                meetingLog.MeetingRoomId = meetingRoom.Id;
+                meetingLog.Title = "";
+                meetingLog.Content =
+                    JsonConvert.SerializeObject(data.Action.Content);
+                meetingLog.StartDate = DateTime.UtcNow;
+                meetingLog.UserList =
+                    JsonConvert.SerializeObject(data.Action.UserStatus);
+                meetingLog.GamePlay =
+                    JsonConvert.SerializeObject(data.Action.GamePlay);
+
+                _unitOfWork.MeetingLogRepository.Add (meetingLog);
+                _unitOfWork.Save();
+
+                meetingRoom.CurrentMeetingLogId = meetingLog.Id;
                 _unitOfWork.MeetingRoomRepository.Update (meetingRoom);
                 _unitOfWork.Save();
+                data.Action.MeetingLogId = meetingLog.Id;
             }
-            else
+            else if (data.Action.Id == (int) ActionType.Chat)
             {
-                messageError = "Room is fully";
+                // update meeting log
+                if (data.Action.MeetingLogId != null)
+                {
+                    var mtLog =
+                        _unitOfWork
+                            .MeetingLogRepository
+                            .GetById(data.Action.MeetingLogId);
+
+                   
+
+                    mtLog.Content =
+                        JsonConvert.SerializeObject(data.Action.Content);
+
+                    _unitOfWork.MeetingLogRepository.Update(mtLog);
+                    _unitOfWork.Save();
+
+                
+                }
+            }
+            else if (data.Action.Id == (int) ActionType.Start)
+            {
+                // update meeting log
+                if (data.Action.MeetingLogId != null)
+                {
+                    var mtLog =
+                        _unitOfWork
+                            .MeetingLogRepository
+                            .GetById(data.Action.MeetingLogId);
+
+                    var userStatus =
+                        string.IsNullOrEmpty(mtLog.UserList)
+                            ? new List<UserData>()
+                            : JsonConvert
+                                .DeserializeObject<List<UserData>>(mtLog
+                                    .UserList);
+                    if (userStatus == null || userStatus.Count == 0)
+                    {
+                        userStatus = new List<UserData>();
+                    }
+                    foreach (var user in data.Action.UserStatus)
+                    {
+                        if (userStatus.Where(x => x.Id != user.Id) != null)
+                        {
+                            userStatus.Add (user);
+                        }
+                    }
+
+                    mtLog.GamePlay =
+                        JsonConvert.SerializeObject(data.Action.GamePlay);
+                    mtLog.UserList = JsonConvert.SerializeObject(userStatus);
+
+                    mtLog.StartDate = DateTime.UtcNow;
+                    _unitOfWork.MeetingLogRepository.Update (mtLog);
+                    _unitOfWork.Save();
+
+                    meetingRoom.IsRunning = true;
+                    _unitOfWork.MeetingRoomRepository.Update(meetingRoom);
+                    _unitOfWork.Save();
+                }
+            }
+            else if (data.Action.Id == (int) ActionType.ChooseCard)
+            {
+                // create meeting log
+                if (data.Action.MeetingLogId != null)
+                {
+                    var mtLog =
+                        _unitOfWork
+                            .MeetingLogRepository
+                            .GetById(data.Action.MeetingLogId);
+
+                    mtLog.GamePlay =
+                        JsonConvert.SerializeObject(data.Action.GamePlay);
+                    mtLog.UserList =
+                        JsonConvert.SerializeObject(data.Action.UserStatus);
+
+                    mtLog.StartDate = DateTime.UtcNow;
+                    _unitOfWork.MeetingLogRepository.Update (mtLog);
+                    _unitOfWork.Save();
+                }
+            }
+            else if (data.Action.Id == (int) ActionType.End)
+            {
+                if (meetingRoom.IsRunning == true)
+                {
+                    meetingRoom.IsRunning = false;
+                    meetingRoom.CurrentMeetingLogId = 0;
+                    _unitOfWork.MeetingRoomRepository.Update (meetingRoom);
+                    _unitOfWork.Save();
+
+                    // update meeting log
+                    var meetingLog =
+                        _unitOfWork
+                            .MeetingLogRepository
+                            .GetById(data.Action.MeetingLogId);
+
+                    meetingLog.EndDate = DateTime.UtcNow;
+
+                    _unitOfWork.MeetingLogRepository.Update (meetingLog);
+                    _unitOfWork.Save();
+                }
             }
 
             IQueueService queueService = new QueueService(_configuration);
@@ -145,6 +402,20 @@ namespace ERPSystem.Service.RabbitMq
             {
                 content = messageError;
             }
+
+            var meetingResponse = new MeetingRoomResponseModel();
+            meetingResponse.Id = meetingRoom.Id;
+            meetingResponse.Name = meetingRoom.Name;
+            meetingResponse.Description = meetingRoom.Description;
+            meetingResponse.IsRunning = meetingRoom.IsRunning;
+            meetingResponse.CurrentMeetingLogId =
+                meetingRoom.CurrentMeetingLogId;
+            meetingResponse.TotalPeople = meetingRoom.TotalPeople;
+            meetingResponse.Price = meetingRoom.Price;
+            meetingResponse.CurrentPeople = meetingRoom.CurrentPeople;
+            meetingResponse.UserListId =
+                JsonConvert
+                    .DeserializeObject<List<int>>(meetingRoom.UserListId);
 
             // push message
             string topic = $"{Constants.RabbitMqConfig.NotificationTopic}";
@@ -162,8 +433,9 @@ namespace ERPSystem.Service.RabbitMq
                                     : "error",
                             Message = content,
                             NotificationType = 1,
-                            Room = meetingRoom,
-                            UserId = data.UserId
+                            Room = meetingResponse,
+                            UserId = data.UserId,
+                            Action = data.Action
                         }
                 };
             queueService.Publish(topic, message.ToString());

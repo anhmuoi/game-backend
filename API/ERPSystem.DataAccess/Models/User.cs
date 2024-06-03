@@ -20,6 +20,9 @@ public class User : Base
     public string Position { get; set; }
     public short Status { get; set; }
     public int? AccountId { get; set; }
+    public int InGame { get; set; }
+    public int OwnerRoom { get; set; }
+    public int IndexPlayer { get; set; }
     public Account? Account { get; set; }
     public int? DepartmentId { get; set; }
     public Department? Department { get; set; }

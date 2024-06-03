@@ -53,3 +53,21 @@ public enum MediaPermission
     Editor = 1,
     Viewer = 2,
 }
+public enum ActionType
+{
+    Join = 0,
+    Out = 1,
+    Chat = 2,
+    Start = 3,
+    End = 4,
+    StartFirst = 5,
+    ChooseCard = 6,
+}
+public enum ReactType
+{
+    Like = 0,
+    Heart = 1,
+    Sad = 2,
+    Smile = 3,
+    Hate = 4,
+}

@@ -208,6 +208,8 @@ public class AppDbContext : DbContext
             
             entity.Property(m => m.Title).IsRequired();
             entity.Property(m => m.Content).IsRequired(false);
+            entity.Property(m => m.UserList).IsRequired(false);
+            entity.Property(m => m.GamePlay).IsRequired(false);
             entity.Property(m => m.MeetingRoomId).IsRequired(false);
             entity.Property(m => m.StartDate).IsRequired(false);
             entity.Property(m => m.EndDate).IsRequired(false);

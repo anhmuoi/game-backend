@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace ERPSystem.DataAccess.Models;
 
@@ -15,7 +16,10 @@ public class MeetingRoom : Base
     public bool IsRunning { get; set; }
     public int TotalPeople { get; set; }
     public int CurrentPeople { get; set; }
+    public int CurrentMeetingLogId { get; set; }
     public double Price { get; set; }
     public string? UserListId { get; set; }
+
+    [JsonIgnore]
     public ICollection<MeetingLog> MeetingLog { get; set; }
 }
