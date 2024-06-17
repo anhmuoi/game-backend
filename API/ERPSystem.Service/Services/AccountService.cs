@@ -22,6 +22,7 @@ namespace ERPSystem.Service.Services;
 public interface IAccountService
 {
     Account GetAuthenticatedAccount(LoginModel model);
+    Account GetAuthenticatedAccountByAddress(LoginModel model);
     Account? GetById(int accountId);
     Account? GetAccountByUserName(string userName);
     void ChangePassword(Account account);
@@ -216,6 +217,20 @@ public class AccountService : IAccountService
             {
                 return account;
             }
+        }
+
+        return null;
+    }
+    public Account GetAuthenticatedAccountByAddress(LoginModel model)
+    {
+        var account = _unitOfWork.AppDbContext.Account
+            .Include(m => m.User)
+            .FirstOrDefault(m => m.UserName.ToLower() == model.Username.ToLower());
+
+        if (account != null)
+        {
+           
+            return account;
         }
 
         return null;

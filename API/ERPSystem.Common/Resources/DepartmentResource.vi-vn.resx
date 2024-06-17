@@ -18,6 +18,6 @@
         <value>Department number existed in system</value>
     </data>
     <data name="msgDeleteFalseDepartmentDependant" xml:space="preserve">
-        <value>Không thể xóa phòng ban đang được sử dụng.</value>
+        <value>Không thể xóa nhóm đang được sử dụng.</value>
     </data>
 </root>

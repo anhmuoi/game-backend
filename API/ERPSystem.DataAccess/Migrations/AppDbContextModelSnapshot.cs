@@ -74,6 +74,43 @@ namespace ERPSystem.DataAccess.Migrations
                     b.ToTable("Account");
                 });
 
+            modelBuilder.Entity("ERPSystem.DataAccess.Models.BalanceHistory", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<double>("Balance")
+                        .HasColumnType("double precision");
+
+                    b.Property<int>("CreatedBy")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("text");
+
+                    b.Property<int>("UpdatedBy")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime>("UpdatedOn")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("WalletAddress")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("BalanceHistory");
+                });
+
             modelBuilder.Entity("ERPSystem.DataAccess.Models.Category", b =>
                 {
                     b.Property<int>("Id")
@@ -328,6 +365,142 @@ namespace ERPSystem.DataAccess.Migrations
                     b.ToTable("FolderLog");
                 });
 
+            modelBuilder.Entity("ERPSystem.DataAccess.Models.FriendUser", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("CreatedBy")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<int>("UpdatedBy")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime>("UpdatedOn")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<int>("UserId1")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("UserId2")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("FriendUser");
+                });
+
+            modelBuilder.Entity("ERPSystem.DataAccess.Models.ItemNft", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Address")
+                        .HasColumnType("text");
+
+                    b.Property<string>("AliasId")
+                        .HasColumnType("text");
+
+                    b.Property<int>("CreatedBy")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Image")
+                        .HasColumnType("text");
+
+                    b.Property<int>("Mana")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("text");
+
+                    b.Property<int>("UpdatedBy")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime>("UpdatedOn")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ItemNft");
+                });
+
+            modelBuilder.Entity("ERPSystem.DataAccess.Models.ItemNftUser", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Address")
+                        .HasColumnType("text");
+
+                    b.Property<string>("AliasId")
+                        .HasColumnType("text");
+
+                    b.Property<int>("CreatedBy")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Image")
+                        .HasColumnType("text");
+
+                    b.Property<bool>("IsUse")
+                        .HasColumnType("boolean");
+
+                    b.Property<int>("ItemNftId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("Mana")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("text");
+
+                    b.Property<double>("Price")
+                        .HasColumnType("double precision");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("UpdatedBy")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime>("UpdatedOn")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ItemNftId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("ItemNftUser");
+                });
+
             modelBuilder.Entity("ERPSystem.DataAccess.Models.MailTemplate", b =>
                 {
                     b.Property<int>("Id")
@@ -386,11 +559,17 @@ namespace ERPSystem.DataAccess.Migrations
                     b.Property<string>("Content")
                         .HasColumnType("text");
 
+                    b.Property<bool>("CreateBattleSuccess")
+                        .HasColumnType("boolean");
+
                     b.Property<int>("CreatedBy")
                         .HasColumnType("integer");
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("timestamp with time zone");
+
+                    b.Property<bool>("DepositDone")
+                        .HasColumnType("boolean");
 
                     b.Property<DateTime?>("EndDate")
                         .HasColumnType("timestamp with time zone");
@@ -668,6 +847,9 @@ namespace ERPSystem.DataAccess.Migrations
 
                     b.Property<string>("Avatar")
                         .HasColumnType("text");
+
+                    b.Property<double>("Balance")
+                        .HasColumnType("double precision");
 
                     b.Property<int>("CreatedBy")
                         .HasColumnType("integer");
@@ -970,6 +1152,27 @@ namespace ERPSystem.DataAccess.Migrations
                     b.Navigation("Parent");
                 });
 
+            modelBuilder.Entity("ERPSystem.DataAccess.Models.ItemNftUser", b =>
+                {
+                    b.HasOne("ERPSystem.DataAccess.Models.ItemNft", "ItemNft")
+                        .WithMany("ItemNftUser")
+                        .HasForeignKey("ItemNftId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("FK_ItemNftUser_ItemNftId");
+
+                    b.HasOne("ERPSystem.DataAccess.Models.User", "User")
+                        .WithMany("ItemNftUser")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("FK_ItemNftUser_User");
+
+                    b.Navigation("ItemNft");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("ERPSystem.DataAccess.Models.MeetingLog", b =>
                 {
                     b.HasOne("ERPSystem.DataAccess.Models.MeetingRoom", "MeetingRoom")
@@ -1137,6 +1340,11 @@ namespace ERPSystem.DataAccess.Migrations
                     b.Navigation("WorkSchedule");
                 });
 
+            modelBuilder.Entity("ERPSystem.DataAccess.Models.ItemNft", b =>
+                {
+                    b.Navigation("ItemNftUser");
+                });
+
             modelBuilder.Entity("ERPSystem.DataAccess.Models.MeetingRoom", b =>
                 {
                     b.Navigation("MeetingLog");
@@ -1155,6 +1363,8 @@ namespace ERPSystem.DataAccess.Migrations
             modelBuilder.Entity("ERPSystem.DataAccess.Models.User", b =>
                 {
                     b.Navigation("DailyReport");
+
+                    b.Navigation("ItemNftUser");
 
                     b.Navigation("UserFile");
 

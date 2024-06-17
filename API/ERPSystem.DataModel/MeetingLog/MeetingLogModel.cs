@@ -8,6 +8,10 @@ public class MeetingLogModel
     public string? EndDate { get; set; }
     public int FolderLogId { get; set; }
     public int? MeetingRoomId { get; set; }
+    
+    public bool CreateBattleSuccess { get; set; }
+    public bool DepositDone { get; set; }
+    
     public List<ChatInfo> Content { get; set; }
     public List<UserData> UserList { get; set; }
     public GamePlay GamePlay { get; set; }
@@ -22,6 +26,9 @@ public class MeetingLogResponseModel
     public int FolderLogId { get; set; }
     public int? MeetingRoomId { get; set; }
     public bool IsAction { get; set; }
+    public bool CreateBattleSuccess { get; set; }
+    public bool DepositDone { get; set; }
+
     public List<ChatInfo> Content { get; set; }
     public List<UserData> UserList { get; set; }
     public GamePlay GamePlay { get; set; }
@@ -38,6 +45,8 @@ public class UserData
     public int Shield { get; set; }
     public int IndexPlayer { get; set; }
     public string skillId { get; set; }
+    public bool IsDeposit { get; set; }
+
 
     public List<NFT> NFTList { get; set; }
 }

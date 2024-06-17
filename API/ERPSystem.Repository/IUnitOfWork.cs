@@ -24,6 +24,10 @@ public interface IUnitOfWork : IDisposable
     IWorkLogRepository WorkLogRepository { get; }
     IUserFolderRepository UserFolderRepository { get; }
     IMailTemplateRepository MailTemplateRepository { get; }
+    IItemNftRepository ItemNftRepository { get; }
+    IItemNftUserRepository ItemNftUserRepository { get; }
+    IBalanceHistoryRepository BalanceHistoryRepository { get; }
+    IFriendUserRepository FriendUserRepository { get; }
     AppDbContext AppDbContext { get; }
     void Save();
     Task SaveAsync();
@@ -53,6 +57,10 @@ public class UnitOfWork : IUnitOfWork
     private IWorkLogRepository _workLogRepository;
     private IUserFolderRepository _userFolderRepository;
     private IMailTemplateRepository _mailTemplateRepository;
+    private IItemNftRepository _itemNftRepository;
+    private IItemNftUserRepository _itemNftUserRepository;
+    private IBalanceHistoryRepository _balanceHistoryRepository;
+    private IFriendUserRepository _friendUserRepository;
 
     public UnitOfWork(AppDbContext appDbContext, IHttpContextAccessor contextAccessor)
     {
@@ -257,6 +265,34 @@ public class UnitOfWork : IUnitOfWork
         get
         {
             return _mailTemplateRepository = _mailTemplateRepository ?? new MailTemplateRepository(_appDbContext, _httpContext);
+        }
+    }
+    public IItemNftRepository ItemNftRepository
+    {
+        get
+        {
+            return _itemNftRepository = _itemNftRepository ?? new ItemNftRepository(_appDbContext, _httpContext);
+        }
+    }
+    public IItemNftUserRepository ItemNftUserRepository
+    {
+        get
+        {
+            return _itemNftUserRepository = _itemNftUserRepository ?? new ItemNftUserRepository(_appDbContext, _httpContext);
+        }
+    }
+    public IBalanceHistoryRepository BalanceHistoryRepository
+    {
+        get
+        {
+            return _balanceHistoryRepository = _balanceHistoryRepository ?? new BalanceHistoryRepository(_appDbContext, _httpContext);
+        }
+    }
+    public IFriendUserRepository FriendUserRepository
+    {
+        get
+        {
+            return _friendUserRepository = _friendUserRepository ?? new FriendUserRepository(_appDbContext, _httpContext);
         }
     }
 

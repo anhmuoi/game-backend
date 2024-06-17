@@ -129,6 +129,8 @@ public class Constants
         
         public const string ApiDepartments = "/departments";
         public const string ApiDepartmentsId = "/departments/{id}";
+        public const string ApiDepartmentsIdJoinGroup = "/departments/{id}/join-group";
+        public const string ApiDepartmentsIdConfirmJoinGroup = "/departments/{id}/confirm-join";
         public const string ApiDepartmentsIdAssign = "/departments/{id}/assign";
         public const string ApiDepartmentsIdUnAssign = "/departments/{id}/un-assign";
         public const string ApiDepartmentsTree = "/departments-tree";
@@ -158,10 +160,23 @@ public class Constants
         public const string ApiUsersInit = "/users/init";
         public const string ApiUsers = "/users";
         public const string ApiUsersId = "/users/{id}";
+        public const string ApiUsersOutGroup = "/users/{id}/out-group";
         public const string ApiAccountProfile = "/accounts-profile";
         public const string ApiAccountsAvatar = "/accounts/avatar";
         public const string ErrorPage = "/error/systemerror";
         public const string ApiImageStatic = "/static/images/{rootFolder}/{fileName}";
+
+        public const string ApiItemNfts = "/item-nfts";
+        public const string ApiItemNftsId = "/item-nfts/{id}";
+        public const string ApiFriendUsers = "/friends";
+        public const string ApiFriendUsersId = "/friends/{id}";
+
+        public const string ApiBalanceHistorys = "/balances";
+        public const string ApiBalanceHistorysId = "/balances/{id}";
+
+        public const string ApiItemNftUsers = "/item-nft-users";
+        public const string ApiItemNftUsersId = "/item-nft-users/{id}";
+        public const string ApiAssignItemNftUsers = "/item-nft-users/assign";
     }
     /// <summary>
     /// Config for logger system
@@ -179,6 +194,7 @@ public class Constants
     public class ImageConfig
     {
         public const string BaseFolderUser = "images/user";
+        public const string BaseFolderItemNft = "images/nft";
     }
     public class MediaConfig
     {

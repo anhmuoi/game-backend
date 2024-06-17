@@ -73,37 +73,37 @@
     <value>Danh mục</value>
   </data>
     <data name="ViewDepartment" xml:space="preserve">
-    <value>Xem phòng ban</value>
+    <value>Xem nhóm</value>
   </data>
     <data name="AddDepartment" xml:space="preserve">
-    <value>Thêm phòng ban</value>
+    <value>Thêm nhóm</value>
   </data>
     <data name="EditDepartment" xml:space="preserve">
-    <value>Sửa phòng ban</value>
+    <value>Sửa nhóm</value>
   </data>
     <data name="DeleteDepartment" xml:space="preserve">
-    <value>Xóa phòng ban</value>
+    <value>Xóa nhóm</value>
   </data>
     <data name="ExportDepartment" xml:space="preserve">
-    <value>Xuất dữ liệu phòng ban</value>
+    <value>Xuất dữ liệu nhóm</value>
   </data>
     <data name="DescriptionViewDepartment" xml:space="preserve">
-    <value>Quyền này cho phép bạn xem thông tin phòng ban.</value>
+    <value>Quyền này cho phép bạn xem thông tin nhóm.</value>
   </data>
     <data name="DescriptionAddDepartment" xml:space="preserve">
-    <value>Quyền này cho phép bạn thêm phòng ban mới.</value>
+    <value>Quyền này cho phép bạn thêm nhóm mới.</value>
   </data>
     <data name="DescriptionEditDepartment" xml:space="preserve">
-    <value>Quyền này cho phép bạn sửa thông tin phòng ban.</value>
+    <value>Quyền này cho phép bạn sửa thông tin nhóm.</value>
   </data>
     <data name="DescriptionDeleteDepartment" xml:space="preserve">
-    <value>Quyền này cho phép bạn xóa các phòng ban.</value>
+    <value>Quyền này cho phép bạn xóa các nhóm.</value>
   </data>
     <data name="DescriptionExportDepartment" xml:space="preserve">
-    <value>Quyền này cho phép bạn xuất danh sách các phòng ban thành một tệp.</value>
+    <value>Quyền này cho phép bạn xuất danh sách các nhóm thành một tệp.</value>
   </data>
     <data name="Department" xml:space="preserve">
-    <value>Phòng ban</value>
+    <value>Nhóm</value>
   </data>
     <data name="Supplier" xml:space="preserve">
         <value>Nhà cung cấp</value>

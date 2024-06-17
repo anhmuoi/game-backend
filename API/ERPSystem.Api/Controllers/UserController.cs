@@ -202,6 +202,32 @@ public class UserController : ControllerBase
 
         return new ApiSuccessResult(StatusCodes.Status200OK, MessageResource.msgUpdateSuccess);
     }
+    /// <summary>
+    /// Update user by id
+    /// </summary>
+    /// <param name="id"></param>
+    /// <param name="groupId">
+    /// UpdatedOn: Format MM.DD.YYYY HH:mm:ss
+    /// </param>
+    /// <returns></returns>
+    [HttpPost]
+    [Route(Constants.Route.ApiUsersOutGroup)]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+    public IActionResult UserOutGroup(int id, int groupId)
+    {
+        var user = _userService.GetById(id);
+        if (user == null)
+            return new ApiErrorResult(StatusCodes.Status404NotFound, MessageResource.ResourceNotFound);
+       
+
+      
+        
+        bool isUpdate = _userService.UserOutGroup(id, groupId);
+        if (!isUpdate)
+            return new ApiErrorResult(StatusCodes.Status422UnprocessableEntity, MessageResource.msgUpdateFailed);
+
+        return new ApiSuccessResult(StatusCodes.Status200OK, MessageResource.msgUpdateSuccess);
+    }
 
     /// <summary>
     /// Delete user by id
@@ -439,13 +465,13 @@ public class UserController : ControllerBase
             return new ValidationFailedResult(ModelState);
         }
 
-        var account = _userService.GetAccountByUserName(model.Email);
+        var account = _userService.GetAccountByEmail(model.Email);
         if (account == null)
         {
             return new ApiErrorResult(StatusCodes.Status400BadRequest, MessageResource.MessageEmailNotRegister);
         }
 
-        _userService.SendResetAccountMail(account);
+        _userService.SendResetAccountMail(account, model.Email);
 
         return new ApiSuccessResult(StatusCodes.Status200OK, MessageResource.MessageSendEmailSuccess);
     }

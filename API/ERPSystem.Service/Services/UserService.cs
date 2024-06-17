@@ -28,6 +28,7 @@ public interface IUserService
     User? GetById(int userId);
     Account? GetAccountById(int accountId);
     Account? GetAccountByUserName(string userName);
+    Account? GetAccountByEmail(string email);
     User? GetUserByUserName(string userName);
     User? GetUserByAccountId(int accountId);
     void UpdateProfile(AccountEditModel model);
@@ -36,13 +37,16 @@ public interface IUserService
     List<UserListModel> GetPaginated(string search, List<int> status, List<int> departmentIds, int pageNumber, int pageSize, string sortColumn, string sortDirection, out int totalRecords, out int recordsFiltered);
     int AddUser(UserAddModel model);
     bool UpdateUser(UserEditModel model);
+    bool UserOutGroup(int id, int groupId);
     bool LoginByAddress(string address);
     bool DeleteMultiUsers(List<int> ids);
     bool IsExistedUserName(string name, int ignoredId);
     bool IsExistedEmail(string email, int ignoredId);
     bool IsExistedUserPhone(string phone, int ignoredId);
     void ChangePassword(Account account);
-    void SendResetAccountMail(Account account);
+    void SendResetAccountMail(Account account, string email);
+    void SendJoinGroupEmail(Account account, string email, User userRequest, Department department);
+    void SendConfirmJoinGroupEmail(Account account, string email, Department department, bool confirm);
     List<string> CheckDepartmentManagerByUserId(List<int> userIds);
 }
 
@@ -118,6 +122,20 @@ public class UserService : IUserService
         return _unitOfWork.AppDbContext.Account
             .FirstOrDefault(m => m.UserName.ToLower() == userName.ToLower());
     }
+    public Account? GetAccountByEmail(string email)
+    {
+        var user = _unitOfWork.UserRepository.Gets().FirstOrDefault(m => m.Email.ToLower() == email.ToLower());
+        if(user == null)
+        {
+            return  null;
+        }
+        else 
+        {
+
+            return _unitOfWork.AppDbContext.Account
+                .FirstOrDefault(m => user.AccountId == m.Id);
+        }
+    }
     
     public Dictionary<string, object> GetInit()
     {
@@ -185,10 +203,11 @@ public class UserService : IUserService
                 try
                 {
                     User user = _mapper.Map<User>(model);
-                    if (string.IsNullOrEmpty(model.Email))
-                    {
-                        user.Email = model.UserName;
-                    }
+                    // if (string.IsNullOrEmpty(model.Email))
+                    // {
+                    //     user.Email = model.UserName;
+                    // }
+                    user.WalletAddress = model.UserName;
                     if(user.DepartmentId == 0)
                     {
                         user.DepartmentId = null;
@@ -256,6 +275,7 @@ public class UserService : IUserService
                         throw new Exception($"Can not get user by id = {model.Id}");
 
                     _mapper.Map(model, user);
+
                     if(user.DepartmentId == 0)
                     {
                         user.DepartmentId = null;
@@ -291,6 +311,42 @@ public class UserService : IUserService
                         _unitOfWork.UserRepository.Update(user);
                         _unitOfWork.Save();
                     }
+
+                    
+                    transaction.Commit();
+                    result = true;
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogError(ex.Message + ex.StackTrace);
+                    transaction.Rollback();
+                    result = false;
+                }
+            }
+        });
+        
+        return result;
+    }
+    public bool UserOutGroup(int id, int groupId)
+    {
+        bool result = false;
+        _unitOfWork.AppDbContext.Database.CreateExecutionStrategy().Execute(() =>
+        {
+            using (var transaction = _unitOfWork.AppDbContext.Database.BeginTransaction())
+            {
+                try
+                {
+                    // edit user information
+                    var user = _unitOfWork.UserRepository.GetById(id);
+                    if (user == null)
+                        throw new Exception($"Can not get user by id = {id}");
+
+
+                    user.DepartmentId = null;
+                      
+                    _unitOfWork.UserRepository.Update(user);
+                    _unitOfWork.Save();
+
 
                     
                     transaction.Commit();
@@ -432,67 +488,6 @@ public class UserService : IUserService
         
         if (email.IsEmailValid())
         {
-            // var mailTemplate = _mailTemplateService.GetMailTemplateByType((short)Constants.TypeEmailTemplate.WelcomeUserEmail);
-            // if (mailTemplate == null)
-            // {
-            //     mailTemplate = _mailTemplateService.CreateMailTemplateByType((short)Constants.TypeEmailTemplate.WelcomeUserEmail);
-            // }
-            // else if (!mailTemplate.IsEnable)
-            // {
-            //     _logger.LogWarning("Block send email");
-            //     return;
-            // }
-            // // var logoSetting = _unitOfWork.SettingRepository.GetLogo();
-            // string mailBody = _mailTemplateService.UpdateValueInMailBody(mailTemplate.Body);
-            // mailBody = mailBody.Replace("{{" + Constants.VariableEmailTemplate.Token + "}}", token);
-            // mailBody = mailBody.Replace("{{" + Constants.VariableEmailTemplate.UserNameWelcome + "}}", userName);
-            // mailBody = mailBody.Replace("{{" + Constants.VariableEmailTemplate.EmailWelcome + "}}", email);
-
-            // // update image                    
-            // var variables = JObject.Parse(mailTemplate.Variables);
-            // if (variables[Constants.VariableEmailTemplate.LogoImageId.ToString()] != null && mailTemplate.Body.Contains(Constants.VariableEmailTemplate.LogoImageId.ToString()))
-            // {
-            //     var pathToLogoImage = _mailService.GetPathToImageFile("logo.png");
-            //     byte[] imageBytes = System.IO.File.ReadAllBytes(pathToLogoImage);
-
-            //     // Convert byte array to Base64 string
-            //     string base64String = Constants.Image.DefaultHeaderPng + Convert.ToBase64String(imageBytes);
-
-            //     // mailBody = mailBody.Replace("cid:logoImageId", variables[Constants.VariableEmailTemplate.LogoImageId.ToString()].ToString());
-            //     mailBody = mailBody.Replace("cid:logoImageId", base64String);
-            // }
-           
-            
-            // if (variables[Constants.VariableEmailTemplate.FireCrackerIcon.ToString()] != null && mailTemplate.Body.Contains(Constants.VariableEmailTemplate.FireCrackerIcon.ToString()))
-            // {
-            //     var pathToFireCrackerImage = _mailService.GetPathToImageFile("fire_cracker_icon.png");
-            //     byte[] imageBytes = System.IO.File.ReadAllBytes(pathToFireCrackerImage);
-
-            //     // Convert byte array to Base64 string
-            //     string base64String = Constants.Image.DefaultHeaderPng + Convert.ToBase64String(imageBytes);
-            //     mailBody = mailBody.Replace("cid:fireCrackerImageId", base64String);
-            //     // mailBody = mailBody.Replace("cid:fireCrackerImageId", variables[Constants.VariableEmailTemplate.FireCrackerIcon.ToString()].ToString());
-            // }
-            // if (variables[Constants.VariableEmailTemplate.CompanyLogo.ToString()] != null && mailTemplate.Body.Contains(Constants.VariableEmailTemplate.CompanyLogo.ToString()))
-            // {
-            //     var pathToLogoImage = _mailService.GetPathToImageFile("logo.png");
-            //     byte[] imageBytes = System.IO.File.ReadAllBytes(pathToLogoImage);
-
-            //     // Convert byte array to Base64 string
-            //     string base64String = Constants.Image.DefaultHeaderPng + Convert.ToBase64String(imageBytes);
-
-
-            //     mailBody = mailBody.Replace("cid:companyLogoImageId",base64String);
-            //     // mailBody = mailBody.Replace("cid:companyLogoImageId", variables[Constants.VariableEmailTemplate.CompanyLogo.ToString()].ToString());
-
-
-            // }
-            
-
-            
-            // _mailService.SendMail(email, null, mailTemplate.Subject, mailBody);
-
-
 
             var supportMail = _mailService.GetSupportMailAddress();
 
@@ -602,14 +597,172 @@ public class UserService : IUserService
 
         }
     }
+    public void SendJoinGroupEmail(Account account, string email, User userRequest, Department department)
+    {
+        
+       if (email.IsEmailValid())
+        {
+            string language = account.Language;
+
+
+            var culture = new CultureInfo(language);
+
+            var supportMail = _mailService.GetSupportMailAddress();
+
+            var subject = MailContentResource.ResourceManager.GetString("SubjectJoinGroup", culture);
+
+            var frontendURL = _mailService.GetFrontEndURL();
+            if (frontendURL == null) throw new Exception(MessageResource.NullFrontEndURL);
+
+            var user = GetUserByAccountId(account.Id);
+            var userName = user.Name;
+            var token = _accountService.CreateAuthToken(account).AuthToken;
+
+            var resetLink = frontendURL + "/join-group/" + userRequest.Id +"/" + department.Id +"/"+ token;
+
+            var thread = new Thread(delegate ()
+            {
+                var pathToTemplateFile = _mailService.GetPathToTemplateFile("Join_Group_Email.html");
+
+                var pathToLogoImage = _mailService.GetPathToImageFile("logo.png");
+                //var b64String = _mailService.ConvertImageToBase64(pathToLogoImage);
+                //var imageUrl = "data:image/png;base64," + b64String;
+
+                BodyBuilder builder = new BodyBuilder();
+
+                try
+                {
+                    using (StreamReader SourceReader = System.IO.File.OpenText(pathToTemplateFile))
+                    {
+                        builder.HtmlBody = SourceReader.ReadToEnd();
+                    }
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("The process failed: {0}", e.ToString());
+                }
+
+                string password = String.Format(MailContentResource.ResourceManager.GetString("BodyJoinGroup", culture), resetLink);
+                var contents = string.Format(MailContentResource.ResourceManager.GetString("BodyJoinGroupInfo", culture), userName, userRequest.Name, password);
+                string customerSupport = String.Format(MailContentResource.ResourceManager.GetString("BodyCustomerSupport", culture),
+                                                    MailContentResource.ResourceManager.GetString("BodyWorkingTimeInfo", culture), supportMail);
+                string replyMessage = String.Format(MailContentResource.ResourceManager.GetString("BodyReplyMessage", culture), supportMail);
+
+                string mailBody = string.Format(builder.HtmlBody,
+                                                contents,
+                                                customerSupport,
+                                                replyMessage,
+                                                "");
+
+                AlternateView atvHtml = AlternateView.CreateAlternateViewFromString(mailBody, null, MediaTypeNames.Text.Html);
+
+                LinkedResource logoInline = new LinkedResource(new MemoryStream(System.IO.File.ReadAllBytes(pathToLogoImage)), MediaTypeNames.Image.Jpeg)
+                {
+                    ContentId = "logoImageId",
+                    TransferEncoding = TransferEncoding.Base64
+                };
+                atvHtml.LinkedResources.Add(logoInline);
+
+                MailMessage mailMessage = new MailMessage();
+                mailMessage.AlternateViews.Add(atvHtml);
+
+                mailMessage.Subject = subject;
+                mailMessage.To.Add(email);
+
+                _mailService.SendMail(mailMessage);
+
+                //_mailService.SendMail(email, null, subject, mailBody);
+
+            });
+            thread.Start();
+        }
+    }
+    public void SendConfirmJoinGroupEmail(Account account, string email, Department department, bool confirm)
+    {
+        
+       if (email.IsEmailValid())
+        {
+            string language = account.Language;
+
+
+            var culture = new CultureInfo(language);
+
+            var supportMail = _mailService.GetSupportMailAddress();
+
+            var subject = MailContentResource.ResourceManager.GetString("SubjectConfirmJoinGroup", culture);
+
+            var frontendURL = _mailService.GetFrontEndURL();
+            if (frontendURL == null) throw new Exception(MessageResource.NullFrontEndURL);
+
+            var user = GetUserByAccountId(account.Id);
+            var userName = user.Name;
+            var token = _accountService.CreateAuthToken(account).AuthToken;
+
+
+            var thread = new Thread(delegate ()
+            {
+                var pathToTemplateFile = _mailService.GetPathToTemplateFile("Confirm_Join_Group_Email.html");
+
+                var pathToLogoImage = _mailService.GetPathToImageFile("logo.png");
+                //var b64String = _mailService.ConvertImageToBase64(pathToLogoImage);
+                //var imageUrl = "data:image/png;base64," + b64String;
+
+                BodyBuilder builder = new BodyBuilder();
+
+                try
+                {
+                    using (StreamReader SourceReader = System.IO.File.OpenText(pathToTemplateFile))
+                    {
+                        builder.HtmlBody = SourceReader.ReadToEnd();
+                    }
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("The process failed: {0}", e.ToString());
+                }
+
+                
+                var contents = confirm ?  string.Format(MailContentResource.ResourceManager.GetString("BodyConfirmJoinGroupInfo", culture), userName, department.Name) : string.Format(MailContentResource.ResourceManager.GetString("BodyRejectJoinGroupInfo", culture), userName, department.Name);
+                string customerSupport = String.Format(MailContentResource.ResourceManager.GetString("BodyCustomerSupport", culture),
+                                                    MailContentResource.ResourceManager.GetString("BodyWorkingTimeInfo", culture), supportMail);
+                string replyMessage = String.Format(MailContentResource.ResourceManager.GetString("BodyReplyMessage", culture), supportMail);
+
+                string mailBody = string.Format(builder.HtmlBody,
+                                                contents,
+                                                customerSupport,
+                                                replyMessage,
+                                                "");
+
+                AlternateView atvHtml = AlternateView.CreateAlternateViewFromString(mailBody, null, MediaTypeNames.Text.Html);
+
+                LinkedResource logoInline = new LinkedResource(new MemoryStream(System.IO.File.ReadAllBytes(pathToLogoImage)), MediaTypeNames.Image.Jpeg)
+                {
+                    ContentId = "logoImageId",
+                    TransferEncoding = TransferEncoding.Base64
+                };
+                atvHtml.LinkedResources.Add(logoInline);
+
+                MailMessage mailMessage = new MailMessage();
+                mailMessage.AlternateViews.Add(atvHtml);
+
+                mailMessage.Subject = subject;
+                mailMessage.To.Add(email);
+
+                _mailService.SendMail(mailMessage);
+
+                //_mailService.SendMail(email, null, subject, mailBody);
+
+            });
+            thread.Start();
+        }
+    }
 
     /// <summary>
     /// Send reset account email
     /// </summary>
   
-    public void SendResetAccountMail(Account account)
+    public void SendResetAccountMail(Account account, string email)
     {
-        var email = account.UserName;
 
         if (email.IsEmailValid())
         {

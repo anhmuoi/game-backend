@@ -31,9 +31,16 @@ namespace ERPSystem.Service.Protocol
     { 
         public int Id { get; set; }
         public int MeetingLogId { get; set; }
+        public bool CreateBattleSuccess { get; set; }
+        public bool DepositDone { get; set; }
+        public bool DoneReceiveReward { get; set; }
         public List<ChatInfo> Content { get; set; }
         public List<UserData> UserStatus { get; set; }
         public GamePlay GamePlay { get; set; }
+        public int UserId1 { get; set; }
+        public int UserId2 { get; set; }
+        public string UserId1Name { get; set; }
+        public string UserId2Name { get; set; }
   
     }
     public class GamePlay

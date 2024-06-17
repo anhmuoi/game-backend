@@ -7,6 +7,7 @@ public class User : Base
     public User()
     {
         UserFile = new HashSet<UserFile>();
+        ItemNftUser = new HashSet<ItemNftUser>();
         DailyReport = new HashSet<DailyReport>();
         WorkLog = new HashSet<WorkLog>();
         UserFolder = new HashSet<UserFolder>();
@@ -23,6 +24,7 @@ public class User : Base
     public int InGame { get; set; }
     public int OwnerRoom { get; set; }
     public int IndexPlayer { get; set; }
+    public double Balance { get; set; }
     public Account? Account { get; set; }
     public int? DepartmentId { get; set; }
     public Department? Department { get; set; }
@@ -30,4 +32,5 @@ public class User : Base
     public ICollection<DailyReport> DailyReport { get; set; }
     public ICollection<WorkLog> WorkLog { get; set; }
     public ICollection<UserFolder> UserFolder { get; set; }
+    public ICollection<ItemNftUser> ItemNftUser { get; set; }
 }

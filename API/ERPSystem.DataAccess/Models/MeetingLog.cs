@@ -15,5 +15,8 @@ public class MeetingLog : Base
     public DateTime? EndDate { get; set; }
     public string UserList { get; set; }
     public string GamePlay { get; set; }
+    public bool CreateBattleSuccess { get; set; }
+    public bool DepositDone { get; set; }
+
 
 }

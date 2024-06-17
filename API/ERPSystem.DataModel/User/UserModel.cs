@@ -14,6 +14,7 @@ namespace ERPSystem.DataModel.User
         public string Name { get; set; }
         public string UserName { get; set; }
         public string Avatar { get; set; }
+        public string WalletAddress { get; set; }
 
         public string Password { get; set; }
 
@@ -35,6 +36,7 @@ namespace ERPSystem.DataModel.User
         public string CreatedOn { get; set; }
 
         public int? AccountId { get; set; }
+        public double Balance { get; set; }
     }
 
     public class UserEditModel
@@ -45,6 +47,7 @@ namespace ERPSystem.DataModel.User
 
         public string Name { get; set; }
         public string UserName { get; set; }
+        public string WalletAddress { get; set; }
 
         public string Password { get; set; }
 
@@ -66,6 +69,7 @@ namespace ERPSystem.DataModel.User
         public string Language { get; set; }
 
         public int UpdatedBy { get; set; }
+        public double Balance { get; set; }
     }
 
     public class UserAddModel
@@ -73,6 +77,7 @@ namespace ERPSystem.DataModel.User
         public int Id { get; set; }
 
         public string Avatar { get; set; }
+        public string WalletAddress { get; set; }
 
         public string Name { get; set; }
         public string UserName { get; set; }
@@ -100,6 +105,7 @@ namespace ERPSystem.DataModel.User
         public string CreatedOn { get; set; }
 
         public int CreatedBy { get; set; }
+        public double Balance { get; set; }
     }
 
     public class UserListModel
@@ -110,6 +116,7 @@ namespace ERPSystem.DataModel.User
 
         public string Name { get; set; }
         public string UserName { get; set; }
+        public string WalletAddress { get; set; }
 
         public string Phone { get; set; }
 
@@ -133,6 +140,7 @@ namespace ERPSystem.DataModel.User
         public int UpdatedBy { get; set; }
 
         public int? AccountId { get; set; }
+        public double Balance { get; set; }
     }
 
     public class UserAvatarModel

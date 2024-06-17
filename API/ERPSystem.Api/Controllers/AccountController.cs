@@ -48,7 +48,7 @@ public class AccountController : ControllerBase
     [HttpPost]
     [AllowAnonymous]
     [Route(Constants.Route.ApiLogin)]
-    public IActionResult Login([FromBody] LoginModel model)
+    public IActionResult Login([FromBody] LoginModel model, bool haveAddress)
     {
         if (!ModelState.IsValid)
         {
@@ -56,7 +56,8 @@ public class AccountController : ControllerBase
         }
 
         //Get the account in the system
-        var account = _accountService.GetAuthenticatedAccount(model);
+
+        var account = !haveAddress ? _accountService.GetAuthenticatedAccount(model): _accountService.GetAuthenticatedAccountByAddress(model);
         if (account == null)
         {
             return new ApiUnauthorizedResult((int)LoginUnauthorized.InvalidCredentials,
@@ -83,7 +84,7 @@ public class AccountController : ControllerBase
         newModel.Username = model.Address;
         newModel.Password = "123456789";
         //Get the account in the system
-        var account = _accountService.GetAuthenticatedAccount(newModel);
+        var account = _accountService.GetAuthenticatedAccountByAddress(newModel);
         if (account == null)
         {
             return new ApiUnauthorizedResult((int)LoginUnauthorized.InvalidCredentials,

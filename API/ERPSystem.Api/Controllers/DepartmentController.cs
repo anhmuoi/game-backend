@@ -6,6 +6,7 @@ using ERPSystem.DataModel;
 using ERPSystem.DataModel.API;
 using ERPSystem.DataModel.Department;
 using ERPSystem.DataModel.User;
+using ERPSystem.Service.Handler;
 using ERPSystem.Service.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
@@ -13,15 +14,18 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ERPSystem.Api.Controllers;
 
-[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+
 public class DepartmentController : ControllerBase
 {
     private readonly IDepartmentService _departmentService;
     private readonly IMapper _mapper;
+    
+    private readonly IJwtHandler _jwtHandler;
 
-    public DepartmentController(IDepartmentService departmentService, IMapper mapper)
+    public DepartmentController(IDepartmentService departmentService, IMapper mapper,  IJwtHandler jwtHandler)
     {
         _departmentService = departmentService;
+        _jwtHandler = jwtHandler;
         _mapper = mapper;
     }
 
@@ -38,6 +42,7 @@ public class DepartmentController : ControllerBase
     /// <returns></returns>
     [HttpGet]
     [Route(Constants.Route.ApiDepartments)]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [CheckPermission(PagePermission.ActionName.View + PagePermission.Page.Department)]
     public IActionResult Gets(string name, string number, List<int>types, int pageNumber = 1, int pageSize = 10, string sortColumn = "Name", string sortDirection = "asc")
     {
@@ -71,6 +76,7 @@ public class DepartmentController : ControllerBase
     /// <returns></returns>
     [HttpPost]
     [Route(Constants.Route.ApiDepartments)]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [CheckPermission(PagePermission.ActionName.Add + PagePermission.Page.Department)]
     public IActionResult Add([FromBody] DepartmentAddModel model)
     {
@@ -95,6 +101,7 @@ public class DepartmentController : ControllerBase
     /// <returns></returns>
     [HttpDelete]
     [Route(Constants.Route.ApiDepartments)]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [CheckPermission(PagePermission.ActionName.Delete + PagePermission.Page.Department)]
     public IActionResult DeleteMulti(List<int> ids)
     {
@@ -126,6 +133,7 @@ public class DepartmentController : ControllerBase
     /// <returns></returns>
     [HttpGet]
     [Route(Constants.Route.ApiDepartmentsId)]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [CheckPermission(PagePermission.ActionName.View + PagePermission.Page.Department)]
     public IActionResult GetById(int id)
     {
@@ -146,6 +154,7 @@ public class DepartmentController : ControllerBase
     /// <returns></returns>
     [HttpPut]
     [Route(Constants.Route.ApiDepartmentsId)]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [CheckPermission(PagePermission.ActionName.Edit + PagePermission.Page.Department)]
     public IActionResult Edit(int id, [FromBody] DepartmentEditModel model)
     {
@@ -178,6 +187,7 @@ public class DepartmentController : ControllerBase
     /// <returns></returns>
     [HttpDelete]
     [Route(Constants.Route.ApiDepartmentsId)]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [CheckPermission(PagePermission.ActionName.Delete + PagePermission.Page.Department)]
     public IActionResult Delete(int id)
     {
@@ -202,6 +212,7 @@ public class DepartmentController : ControllerBase
     /// <returns></returns>
     [HttpGet]
     [Route(Constants.Route.ApiDepartmentsTree)]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [CheckPermission(PagePermission.ActionName.View + PagePermission.Page.Department)]
     public IActionResult GetDepartmentTree()
    {
@@ -220,6 +231,7 @@ public class DepartmentController : ControllerBase
     /// <returns></returns>
     [HttpGet]
     [Route(Constants.Route.ApiDepartmentsIdAssign)]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [CheckPermission(PagePermission.ActionName.Edit + PagePermission.Page.User)]
     public IActionResult GetUsersByDepartment(int id, string name, int pageNumber = 1, int pageSize = 10, string sortColumn = "Name", string sortDirection = "asc")
     {
@@ -254,6 +266,7 @@ public class DepartmentController : ControllerBase
     /// <returns></returns>
     [HttpPost]
     [Route(Constants.Route.ApiDepartmentsIdAssign)]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [CheckPermission(PagePermission.ActionName.Edit + PagePermission.Page.User)]
     public IActionResult AssignUsersToDepartment(int id, [FromBody]List<int> userIds)
     {
@@ -264,6 +277,68 @@ public class DepartmentController : ControllerBase
         }
 
         bool result = _departmentService.AssignUsersToDepartment(id, userIds);
+        if (!result)
+        {
+            return new ApiErrorResult(StatusCodes.Status422UnprocessableEntity, MessageResource.msgUpdateFailed);
+        }
+
+        return new ApiSuccessResult(StatusCodes.Status200OK, MessageResource.msgUpdateSuccess);
+    }
+    
+    /// <summary>
+    /// send request join group
+    /// </summary>
+    /// <param name="id"></param>
+    /// <param name="userId"></param>
+    /// <returns></returns>
+    [HttpPost]
+    [Route(Constants.Route.ApiDepartmentsIdJoinGroup)]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+    [CheckPermission(PagePermission.ActionName.Edit + PagePermission.Page.User)]
+    public IActionResult RequestJoinGroup(int id, int userId)
+    {
+        var item = _departmentService.GetById(id);
+        if (item == null)
+        {
+            return new ApiErrorResult(StatusCodes.Status404NotFound, MessageResource.ResourceNotFound);
+        }
+
+        bool result = _departmentService.RequestJoinGroup(id, userId);
+        if (!result)
+        {
+            return new ApiErrorResult(StatusCodes.Status422UnprocessableEntity, MessageResource.msgUpdateFailed);
+        }
+
+        return new ApiSuccessResult(StatusCodes.Status200OK, MessageResource.msgUpdateSuccess);
+    }
+
+
+    /// <summary>
+    /// send request join group
+    /// </summary>
+    /// <param name="id"></param>
+    /// <param name="userId"></param>
+    /// <param name="token"></param>
+    /// <param name="confirm"></param>
+    /// <returns></returns>
+    [HttpPost]
+    [AllowAnonymous]
+    [Route(Constants.Route.ApiDepartmentsIdConfirmJoinGroup)]
+    public IActionResult ConfirmJoinGroup(int id, int userId, bool confirm, string token)
+    {
+
+        var clAcc = _jwtHandler.GetPrincipalFromExpiredToken(token);
+        if (clAcc == null)
+        {
+            return new ApiErrorResult(StatusCodes.Status400BadRequest, MessageResource.InvalidInformation);
+        }
+        var item = _departmentService.GetById(id);
+        if (item == null)
+        {
+            return new ApiErrorResult(StatusCodes.Status404NotFound, MessageResource.ResourceNotFound);
+        }
+
+        bool result = _departmentService.ConfirmJoinGroup(id, userId, confirm);
         if (!result)
         {
             return new ApiErrorResult(StatusCodes.Status422UnprocessableEntity, MessageResource.msgUpdateFailed);
@@ -284,6 +359,7 @@ public class DepartmentController : ControllerBase
     /// <returns></returns>
     [HttpGet]
     [Route(Constants.Route.ApiDepartmentsIdUnAssign)]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [CheckPermission(PagePermission.ActionName.Edit + PagePermission.Page.User)]
     public IActionResult GetUsersWithoutDepartment(int id, string name, int pageNumber = 1, int pageSize = 10, string sortColumn = "Name", string sortDirection = "asc")
     {

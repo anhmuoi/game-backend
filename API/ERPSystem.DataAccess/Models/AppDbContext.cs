@@ -56,6 +56,10 @@ public class AppDbContext : DbContext
     public DbSet<Folder> Folder { get; set; }
     public DbSet<UserFolder> UserFolder { get; set; }
     public DbSet<MailTemplate> MailTemplate { get; set; }
+    public DbSet<ItemNft> ItemNft { get; set; }
+    public DbSet<ItemNftUser> ItemNftUser { get; set; }
+    public DbSet<BalanceHistory> BalanceHistory { get; set; }
+    public DbSet<FriendUser> FriendUser { get; set; }
     
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -365,5 +369,56 @@ public class AppDbContext : DbContext
                 entity.Property(e => e.Id).ValueGeneratedOnAdd();
                 entity.Property(e => e.IsEnable).HasDefaultValue(true);
             });
+
+        modelBuilder.Entity<ItemNft>(entity =>
+        {
+            entity.HasKey(m => m.Id);
+            entity.Property(m => m.Id).ValueGeneratedOnAdd();
+            entity.Property(m => m.Description).IsRequired(false);
+            entity.Property(m => m.Name).IsRequired(false);
+            entity.Property(m => m.Address).IsRequired(false);
+            entity.Property(m => m.AliasId).IsRequired(false);
+            entity.Property(m => m.Image).IsRequired(false);
+   
+        });
+        modelBuilder.Entity<ItemNftUser>(entity =>
+        {
+            entity.HasKey(m => m.Id);
+            entity.Property(m => m.Id).ValueGeneratedOnAdd();
+       
+            entity.Property(m => m.Description).IsRequired(false);
+            entity.Property(m => m.Name).IsRequired(false);
+            entity.Property(m => m.Address).IsRequired(false);
+            entity.Property(m => m.Image).IsRequired(false);
+            entity.Property(m => m.AliasId).IsRequired(false);
+   
+            
+            entity.HasOne(m => m.User)
+                .WithMany(m => m.ItemNftUser)
+                .HasForeignKey(m => m.UserId)
+                .OnDelete(DeleteBehavior.Cascade)
+                .HasConstraintName("FK_ItemNftUser_User");
+            
+            entity.HasOne(m => m.ItemNft)
+                .WithMany(m => m.ItemNftUser)
+                .HasForeignKey(m => m.ItemNftId)
+                .OnDelete(DeleteBehavior.Cascade)
+                .HasConstraintName("FK_ItemNftUser_ItemNftId");
+        });
+        modelBuilder.Entity<BalanceHistory>(entity =>
+        {
+            entity.HasKey(m => m.Id);
+            entity.Property(m => m.Id).ValueGeneratedOnAdd();
+       
+            entity.Property(m => m.WalletAddress).IsRequired(false);
+            entity.Property(m => m.Name).IsRequired(false);
+   
+        });
+        modelBuilder.Entity<FriendUser>(entity =>
+        {
+            entity.HasKey(m => m.Id);
+            entity.Property(m => m.Id).ValueGeneratedOnAdd();
+       
+        });
     }
 }

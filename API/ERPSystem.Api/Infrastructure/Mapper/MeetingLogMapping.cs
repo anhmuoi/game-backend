@@ -44,6 +44,8 @@ public class MeetingLogMapping : Profile
             .ForMember(dest => dest.GamePlay, opt => opt.MapFrom(src => JsonConvert.DeserializeObject<GamePlay>(src.GamePlay)))
             .ForMember(dest => dest.Content, opt => opt.MapFrom(src => JsonConvert.DeserializeObject<List<ChatInfo>>(src.Content)))
             .ForMember(dest => dest.Title, opt => opt.MapFrom(src => src.Title))
+            .ForMember(dest => dest.DepositDone, opt => opt.MapFrom(src => src.DepositDone))
+            .ForMember(dest => dest.CreateBattleSuccess, opt => opt.MapFrom(src => src.CreateBattleSuccess))
             .ForMember(dest => dest.MeetingRoomId, opt => opt.MapFrom(src => src.MeetingRoomId))
             .ForMember(dest => dest.UserList, opt => opt.MapFrom(src => JsonConvert.DeserializeObject<List<UserData>>(src.UserList)))
             .ForMember(dest => dest.StartDate, opt => opt.MapFrom(src => src.StartDate.HasValue ? src.StartDate.Value.ConvertDefaultDateTimeToString(Constants.Settings.DateTimeFormatDefault): null))

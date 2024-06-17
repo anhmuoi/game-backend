@@ -62,6 +62,12 @@ public enum ActionType
     End = 4,
     StartFirst = 5,
     ChooseCard = 6,
+    DoneCreateGame = 7,
+    RejectCreateGame = 71,
+    Deposit = 8,
+    DoneReceiveReward = 9,
+    AddFriend = 10,
+    AgreeAddFriend = 11,
 }
 public enum ReactType
 {
@@ -70,4 +76,9 @@ public enum ReactType
     Sad = 2,
     Smile = 3,
     Hate = 4,
+}
+public enum StatusNft
+{
+    NotSale = 0,
+    Sale = 1
 }

@@ -135,7 +135,7 @@
 &lt;/tr&gt;
 &lt;/table&gt;
 &lt;br&gt;&lt;br&gt;
-Hân hạnh ,&lt;br&gt;Demaster Pro Support Team.</value>
+Hân hạnh ,&lt;br&gt;Card Battle Team.</value>
   </data>
   <data name="BodyCompanyAccountAdmin" xml:space="preserve">
     <value>Dear {0}&amp;nbsp;, &lt;br&gt;&lt;br&gt; User's account has been created.&amp;nbsp;&lt;br&gt;
@@ -151,7 +151,7 @@ Hân hạnh ,&lt;br&gt;Demaster Pro Support Team.</value>
 
 &lt;/table&gt;
 &lt;br&gt;&lt;br&gt;
-Regards,&lt;br&gt;Demaster Pro Support Team.</value>
+Regards,&lt;br&gt;Card Battle Team.</value>
   </data>
   <data name="BodyCompanyExpired" xml:space="preserve">
     <value>{0}님께, &amp;nbsp; &lt;br&gt;
@@ -186,7 +186,7 @@ Demaster Pro 지원팀.</value>
 &lt;/tr&gt;
 &lt;/table&gt;
 &lt;br&gt; &lt;br&gt;
-감사합니다. &lt;br&gt; Demaster Pro Support Team.</value>
+감사합니다. &lt;br&gt; Card Battle Team.</value>
   </data>
   <data name="BodyInternalServerError" xml:space="preserve">
     <value>&lt;table&gt;
@@ -219,7 +219,7 @@ Demaster Pro 지원팀.</value>
 &lt;br&gt;&lt;br&gt;
 Best Regards,
 &lt;br&gt;
-Demaster Pro Support Team.</value>
+Card Battle Team.</value>
   </data>
   <data name="SubjectCompanyAccount" xml:space="preserve">
     <value>Tạo tài khoản thành công.</value>
@@ -252,7 +252,7 @@ Demaster Pro Support Team.</value>
 &lt;br&gt;&lt;br&gt;
 Best Regards,
 &lt;br&gt;
-Demaster Pro Support Team.</value>
+Card Battle Team.</value>
   </data>
   <data name="BodyWelcome" xml:space="preserve">
     <value>&lt;b&gt;Chúc mừng! &lt;small&gt;Tài khoản tạo thành công.&lt;/small&gt;&lt;/b&gt;</value>
@@ -487,5 +487,45 @@ vui lòng không xóa email này.&lt;br&gt;</value>
   </data>
   <data name="SubjectLeaveRequestReject" xml:space="preserve">
     <value>Đơn xin nghỉ đã bị từ chối</value>
+  </data>
+   <data name="BodyJoinGroupInfo" xml:space="preserve">
+    <value>Dear {0}, You have an invitation to join from: {1}&amp;nbsp;&lt;br&gt;&#xD;&#xD;
+&lt;table&gt;&#xD;&#xD;
+&lt;tr&gt;&#xD;&#xD;
+&lt;td&gt;&lt;strong&gt;{2}&lt;/strong&gt;&lt;/td&gt;&#xD;&#xD;
+&lt;/tr&gt;&#xD;&#xD;
+&lt;/table&gt;&#xD;&#xD;
+&lt;br&gt;&lt;br&gt;&#xD;&#xD;
+Best Regards,&#xD;&#xD;
+&lt;br&gt;&#xD;&#xD;
+Card Battle Team.</value>
+    <comment/>
+  </data>
+  <data name="BodyConfirmJoinGroupInfo" xml:space="preserve">
+    <value>Dear {0}, Congratulations you have been accepted to join the group {1}&amp;nbsp;&lt;br&gt;&#xD;&#xD;
+&lt;table&gt;&#xD;&#xD;
+&lt;tr&gt;&#xD;&#xD;
+&lt;/tr&gt;&#xD;&#xD;
+&lt;/table&gt;&#xD;&#xD;
+&lt;br&gt;&lt;br&gt;&#xD;&#xD;
+Best Regards,&#xD;&#xD;
+&lt;br&gt;&#xD;&#xD;
+Card Battle Team.</value>
+    <comment/>
+  </data>
+  <data name="BodyRejectJoinGroupInfo" xml:space="preserve">
+    <value>Gửi {0}, Rất tiếc bạn đã bị từ chối tham gia vào group {1}&amp;nbsp;&lt;br&gt;&#xD;&#xD;
+&lt;table&gt;&#xD;&#xD;
+&lt;tr&gt;&#xD;&#xD;
+&lt;/tr&gt;&#xD;&#xD;
+&lt;/table&gt;&#xD;&#xD;
+&lt;br&gt;&lt;br&gt;&#xD;&#xD;
+Best Regards,&#xD;&#xD;
+&lt;br&gt;&#xD;&#xD;
+Card Battle Team.</value>
+    <comment/>
+  </data>
+  <data name="SubjectConfirmJoinGroup" xml:space="preserve">
+    <value>Xác nhận vào group</value>
   </data>
 </root>

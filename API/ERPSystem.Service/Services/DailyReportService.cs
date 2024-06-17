@@ -133,7 +133,7 @@ public class DailyReportService : IDailyReportService
         if (sortColumn.ToLower() == "departmentname" && sortDirection.ToLower() == "asc")
         {
             result = result.OrderBy(r => r.DepartmentName).ToList();
-            // Trả về dữ liệu theo kích thước trang cho phần sắp xếp theo phòng ban
+            // Trả về dữ liệu theo kích thước trang cho phần sắp xếp theo nhóm
             return result.Skip((pageNumber - 1) * pageSize).Take(pageSize).ToList();
         }
         else if (sortColumn.ToLower() == "departmentname" && sortDirection.ToLower() == "desc")

@@ -18,6 +18,8 @@ public interface IDepartmentService
     Department? GetById(int id);
     bool Add(DepartmentAddModel model);
     bool Edit(DepartmentEditModel model);
+    bool RequestJoinGroup(int id, int userId);
+    bool ConfirmJoinGroup(int id, int userId, bool confirm);
     bool Delete(List<int> ids);
     bool CheckDepentdance(List<int> ids);
     List<DepartmentItemModel> GetDepartmentTree();
@@ -30,12 +32,14 @@ public class DepartmentService : IDepartmentService
 {
     private readonly IUnitOfWork _unitOfWork;
     private readonly ILogger _logger;
+    private readonly IUserService _userService;
     private readonly IMapper _mapper;
 
-    public DepartmentService(IUnitOfWork unitOfWork, IMapper mapper)
+    public DepartmentService(IUnitOfWork unitOfWork, IUserService userService, IMapper mapper)
     {
         _unitOfWork = unitOfWork;
         _mapper = mapper;
+        _userService = userService;
         _logger = ApplicationVariables.LoggerFactory.CreateLogger<DepartmentService>();
     }
 
@@ -204,6 +208,73 @@ public class DepartmentService : IDepartmentService
                         _unitOfWork.UserRepository.Update(user);
                         _unitOfWork.Save();
                     }
+                    transaction.Commit();
+                    result = true;
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogError(ex.Message + ex.StackTrace);
+                    transaction.Rollback();
+                    result = false;
+                }
+            }
+        });
+        return result;
+    }
+    public bool RequestJoinGroup(int id, int userId)
+    {
+        bool result = false;
+        _unitOfWork.AppDbContext.Database.CreateExecutionStrategy().Execute(() =>
+        {
+            using (var transaction = _unitOfWork.AppDbContext.Database.BeginTransaction())
+            {
+                try
+                {
+                    var department = _unitOfWork.DepartmentRepository.GetById(id);
+                    var userRequest = _unitOfWork.UserRepository.GetById(userId);
+
+                    var account = _unitOfWork.AccountRepository.GetById(department.DepartmentManagerId.Value);
+                    var user = _userService.GetUserByAccountId(account.Id);
+                   _userService.SendJoinGroupEmail(account, user.Email, userRequest, department);
+                    transaction.Commit();
+                    result = true;
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogError(ex.Message + ex.StackTrace);
+                    transaction.Rollback();
+                    result = false;
+                }
+            }
+        });
+        return result;
+    }
+    public bool ConfirmJoinGroup(int id, int userId, bool confirm)
+    {
+        bool result = false;
+        _unitOfWork.AppDbContext.Database.CreateExecutionStrategy().Execute(() =>
+        {
+            using (var transaction = _unitOfWork.AppDbContext.Database.BeginTransaction())
+            {
+                try
+                {
+                    if(confirm == true)
+                    {
+                        var user = _unitOfWork.UserRepository.GetById(userId);
+                        user.DepartmentId = id;
+                        _unitOfWork.UserRepository.Update(user);
+                        _unitOfWork.Save();
+                    }
+
+
+                    var department = _unitOfWork.DepartmentRepository.GetById(id);
+                    var userRequest = _unitOfWork.UserRepository.GetById(userId);
+
+                    var account = _unitOfWork.AccountRepository.GetByUserId(userId);
+
+            
+
+                   _userService.SendConfirmJoinGroupEmail(account, userRequest.Email, department, confirm);
                     transaction.Commit();
                     result = true;
                 }

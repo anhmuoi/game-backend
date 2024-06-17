@@ -223,6 +223,10 @@ namespace ERPSystem.Api
             // Services business
             services.AddScoped<IAccountService, AccountService>();
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IItemNftService, ItemNftService>();
+            services.AddScoped<IItemNftUserService, ItemNftUserService>();
+            services.AddScoped<IFriendUserService, FriendUserService>();
+            services.AddScoped<IBalanceHistoryService, BalanceHistoryService>();
             services.AddScoped<IRoleService, RoleService>();
             services.AddScoped<ICategoryService, CategoryService>();
             services.AddScoped<IDepartmentService, DepartmentService>();

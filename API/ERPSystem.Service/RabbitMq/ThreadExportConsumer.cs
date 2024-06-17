@@ -239,7 +239,7 @@ namespace ERPSystem.Service.RabbitMq
                             userTmp.OwnerRoom = meetingRoom.Id;
                         }
                         userTmp.IndexPlayer = i + 1;
-                        _unitOfWork.UserRepository.Update (user);
+                        _unitOfWork.UserRepository.Update (userTmp);
                         _unitOfWork.Save();
                         i = i + 1;
                     }
@@ -255,6 +255,26 @@ namespace ERPSystem.Service.RabbitMq
                     if (meetingRoom.CurrentPeople == 1)
                     {
                         meetingRoom.IsRunning = false;
+                        
+                        data.Action.GamePlay.OrderWinning = userIdList;
+
+                        var mtLog =
+                        _unitOfWork
+                            .MeetingLogRepository
+                            .GetById(meetingRoom.CurrentMeetingLogId);
+                        if(mtLog != null)
+                        {
+
+                            var userStatus =
+                            string.IsNullOrEmpty(mtLog.UserList)
+                                ? new List<UserData>()
+                                : JsonConvert
+                                    .DeserializeObject<List<UserData>>(mtLog
+                                        .UserList);
+
+                            data.Action.UserStatus = userStatus;
+                        }
+                        data.Room.IsRunning = false;
                         meetingRoom.CurrentMeetingLogId = 0;
                     }
                     _unitOfWork.MeetingRoomRepository.Update (meetingRoom);
@@ -285,6 +305,121 @@ namespace ERPSystem.Service.RabbitMq
                 _unitOfWork.Save();
                 data.Action.MeetingLogId = meetingLog.Id;
             }
+            else if (data.Action.Id == (int) ActionType.RejectCreateGame)
+            {
+                meetingRoom.IsRunning = false;
+
+               
+                _unitOfWork.MeetingLogRepository.Delete (m => m.Id == data.Action.MeetingLogId);
+                _unitOfWork.Save();
+
+                meetingRoom.CurrentMeetingLogId = 0;
+                _unitOfWork.MeetingRoomRepository.Update (meetingRoom);
+                _unitOfWork.Save();
+                
+            }
+            else if (data.Action.Id == (int) ActionType.DoneCreateGame)
+            {
+                meetingRoom.IsRunning = false;
+                data.Action.CreateBattleSuccess = true;
+
+                 // update meeting log
+                if (data.Action.MeetingLogId != null)
+                {
+                    var mtLog =
+                        _unitOfWork
+                            .MeetingLogRepository
+                            .GetById(data.Action.MeetingLogId);
+
+                    var userStatus =
+                        string.IsNullOrEmpty(mtLog.UserList)
+                            ? new List<UserData>()
+                            : JsonConvert
+                                .DeserializeObject<List<UserData>>(mtLog
+                                    .UserList);
+                    if (userStatus == null || userStatus.Count == 0)
+                    {
+                        userStatus = new List<UserData>();
+                    }
+                    foreach (var user in data.Action.UserStatus)
+                    {
+                        if (userStatus.Where(x => x.Id == user.Id) != null)
+                        {
+                            userStatus = userStatus.Where(x => x.Id != user.Id).ToList();
+                            userStatus.Add (user);
+                        }
+                    }
+
+                    mtLog.GamePlay =
+                        JsonConvert.SerializeObject(data.Action.GamePlay);
+                    mtLog.UserList = JsonConvert.SerializeObject(userStatus);
+                    mtLog.CreateBattleSuccess = true;
+
+                    _unitOfWork.MeetingLogRepository.Update (mtLog);
+                    _unitOfWork.Save();
+
+                    _unitOfWork.MeetingRoomRepository.Update(meetingRoom);
+                    _unitOfWork.Save();
+                }
+            }
+            else if (data.Action.Id == (int) ActionType.Deposit)
+            {
+                meetingRoom.IsRunning = false;
+
+                 // update meeting log
+                if (data.Action.MeetingLogId != null)
+                {
+                    var mtLog =
+                        _unitOfWork
+                            .MeetingLogRepository
+                            .GetById(data.Action.MeetingLogId);
+
+                    var userStatus =
+                        string.IsNullOrEmpty(mtLog.UserList)
+                            ? new List<UserData>()
+                            : JsonConvert
+                                .DeserializeObject<List<UserData>>(mtLog
+                                    .UserList);
+                    if (userStatus == null || userStatus.Count == 0)
+                    {
+                        userStatus = new List<UserData>();
+                    }
+                    foreach (var user in data.Action.UserStatus)
+                    {
+                        if (userStatus.Where(x => x.Id == user.Id) != null)
+                        {
+                            userStatus = userStatus.Where(x => x.Id != user.Id).ToList();
+                            userStatus.Add (user);
+                        }
+                    }
+
+                    mtLog.GamePlay =
+                        JsonConvert.SerializeObject(data.Action.GamePlay);
+                    mtLog.UserList = JsonConvert.SerializeObject(userStatus);
+                    mtLog.CreateBattleSuccess = true;
+
+                    if(userStatus.Count() == userStatus.Count(m=> m.IsDeposit == true))
+                    {
+                        mtLog.DepositDone = true;
+                        data.Action.DepositDone = true;
+                    }
+
+                    _unitOfWork.MeetingLogRepository.Update (mtLog);
+                    _unitOfWork.Save();
+
+
+                    _unitOfWork.MeetingRoomRepository.Update(meetingRoom);
+                    _unitOfWork.Save();
+                }
+            }
+            else if (data.Action.Id == (int) ActionType.DoneReceiveReward)
+            {
+
+                
+                data.Action.DoneReceiveReward = true;
+
+
+            }
             else if (data.Action.Id == (int) ActionType.Chat)
             {
                 // update meeting log
@@ -305,6 +440,14 @@ namespace ERPSystem.Service.RabbitMq
 
                 
                 }
+            }
+            else if (data.Action.Id == (int) ActionType.AddFriend)
+            {
+                
+            }
+            else if (data.Action.Id == (int) ActionType.AgreeAddFriend)
+            {
+                
             }
             else if (data.Action.Id == (int) ActionType.Start)
             {
@@ -328,8 +471,9 @@ namespace ERPSystem.Service.RabbitMq
                     }
                     foreach (var user in data.Action.UserStatus)
                     {
-                        if (userStatus.Where(x => x.Id != user.Id) != null)
+                        if (userStatus.Where(x => x.Id == user.Id) != null)
                         {
+                            userStatus = userStatus.Where(x => x.Id != user.Id).ToList();
                             userStatus.Add (user);
                         }
                     }

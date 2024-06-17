@@ -134,7 +134,7 @@
 &lt;/tr&gt;
 &lt;/table&gt;
 &lt;br&gt; &lt;br&gt;
-감사합니다. &lt;br&gt; Demaster Pro Support Team.</value>
+감사합니다. &lt;br&gt; Card Battle Team.</value>
   </data>
   <data name="BodyCompanyAccountAdmin" xml:space="preserve">
     <value>친애하는 {0} &amp;nbsp; &lt;br&gt; &lt;br&gt; 다음 사용자의 계정이 만들어 졌으므로 지금 해당 되는 사용자는 사이트를 관리 할 수 있습니다. &amp;nbsp; &lt;br&gt;
@@ -149,7 +149,7 @@
 &lt;/tr&gt;
 &lt;/table&gt;
 &lt;br&gt; &lt;br&gt;
-감사합니다. &lt;br&gt; Demaster Pro Support Team.</value>
+감사합니다. &lt;br&gt; Card Battle Team.</value>
   </data>
   <data name="BodyCompanyExpired" xml:space="preserve">
     <value>{0}님께, &amp;nbsp; &lt;br&gt;
@@ -184,7 +184,7 @@ Demaster Pro 지원팀.</value>
 &lt;/tr&gt;
 &lt;/table&gt;
 &lt;br&gt; &lt;br&gt;
-감사합니다. &lt;br&gt; Demaster Pro Support Team.</value>
+감사합니다. &lt;br&gt; Card Battle Team.</value>
   </data>
   <data name="BodyInternalServerError" xml:space="preserve">
     <value>&lt;table&gt;
@@ -217,7 +217,7 @@ Demaster Pro 지원팀.</value>
 &lt;br&gt;&lt;br&gt;
 감사합니다.
 &lt;br&gt;
-Demaster Pro Support Team.</value>
+Card Battle Team.</value>
   </data>
   <data name="SubjectCompanyAccount" xml:space="preserve">
     <value>로그인 계정이 성공적으로 생성되었습니다.</value>
@@ -250,7 +250,7 @@ Demaster Pro Support Team.</value>
 &lt;br&gt;&lt;br&gt;
 감사합니다.
 &lt;br&gt;
-Demaster Pro Support Team.</value>
+Card Battle Team.</value>
   </data>
   <data name="BodyWelcome" xml:space="preserve">
     <value>&lt;b&gt;축하합니다! &lt;small&gt;계정이 등록되셨습니다.&lt;/small&gt;&lt;/b&gt;</value>
@@ -484,5 +484,45 @@ DeMasterPro 팀&lt;br&gt;</value>
   </data>
   <data name="SubjectLeaveRequestReject" xml:space="preserve">
     <value>Leave Request is rejected</value>
+  </data>
+  <data name="BodyJoinGroupInfo" xml:space="preserve">
+    <value>Dear {0}, You have an invitation to join from: {1}&amp;nbsp;&lt;br&gt;&#xD;&#xD;
+&lt;table&gt;&#xD;&#xD;
+&lt;tr&gt;&#xD;&#xD;
+&lt;td&gt;&lt;strong&gt;{2}&lt;/strong&gt;&lt;/td&gt;&#xD;&#xD;
+&lt;/tr&gt;&#xD;&#xD;
+&lt;/table&gt;&#xD;&#xD;
+&lt;br&gt;&lt;br&gt;&#xD;&#xD;
+Best Regards,&#xD;&#xD;
+&lt;br&gt;&#xD;&#xD;
+Card Battle Team.</value>
+    <comment/>
+  </data>
+  <data name="BodyConfirmJoinGroupInfo" xml:space="preserve">
+    <value>Dear {0}, Congratulations you have been accepted to join the group {1}&amp;nbsp;&lt;br&gt;&#xD;&#xD;
+&lt;table&gt;&#xD;&#xD;
+&lt;tr&gt;&#xD;&#xD;
+&lt;/tr&gt;&#xD;&#xD;
+&lt;/table&gt;&#xD;&#xD;
+&lt;br&gt;&lt;br&gt;&#xD;&#xD;
+Best Regards,&#xD;&#xD;
+&lt;br&gt;&#xD;&#xD;
+Card Battle Team.</value>
+    <comment/>
+  </data>
+  <data name="BodyRejectJoinGroupInfo" xml:space="preserve">
+    <value>Dear {0}, We're sorry you were rejected from joining the group {1}&amp;nbsp;&lt;br&gt;&#xD;&#xD;
+&lt;table&gt;&#xD;&#xD;
+&lt;tr&gt;&#xD;&#xD;
+&lt;/tr&gt;&#xD;&#xD;
+&lt;/table&gt;&#xD;&#xD;
+&lt;br&gt;&lt;br&gt;&#xD;&#xD;
+Best Regards,&#xD;&#xD;
+&lt;br&gt;&#xD;&#xD;
+Card Battle Team.</value>
+    <comment/>
+  </data>
+  <data name="SubjectConfirmJoinGroup" xml:space="preserve">
+    <value>Confirm Join Group</value>
   </data>
 </root>

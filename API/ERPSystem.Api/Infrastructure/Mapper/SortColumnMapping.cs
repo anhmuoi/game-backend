@@ -136,4 +136,44 @@ public static class SortColumnMapping
             default: return typeof(UserFile).GetProperty(sortColumn) == null ? columnDefault : sortColumn;
         }
     }
+    public static string ItemNftColumn(this string sortColumn, string columnDefault = "Name")
+    {
+        if (string.IsNullOrEmpty(sortColumn)) return columnDefault;
+        sortColumn = char.ToUpper(sortColumn[0]) + sortColumn.Substring(1);
+        switch (sortColumn)
+        {
+            case "Name": return "Name";
+            default: return typeof(ItemNft).GetProperty(sortColumn) == null ? columnDefault : sortColumn;
+        }
+    }
+    public static string ItemNftUserColumn(this string sortColumn, string columnDefault = "Name")
+    {
+        if (string.IsNullOrEmpty(sortColumn)) return columnDefault;
+        sortColumn = char.ToUpper(sortColumn[0]) + sortColumn.Substring(1);
+        switch (sortColumn)
+        {
+            case "Name": return "Name";
+            default: return typeof(ItemNftUser).GetProperty(sortColumn) == null ? columnDefault : sortColumn;
+        }
+    }
+    public static string BalanceHistoryColumn(this string sortColumn, string columnDefault = "CreatedOn")
+    {
+        if (string.IsNullOrEmpty(sortColumn)) return columnDefault;
+        sortColumn = char.ToUpper(sortColumn[0]) + sortColumn.Substring(1);
+        switch (sortColumn)
+        {
+            case "CreatedOn": return "CreatedOn";
+            default: return typeof(ItemNftUser).GetProperty(sortColumn) == null ? columnDefault : sortColumn;
+        }
+    }
+    public static string FriendUserColumn(this string sortColumn, string columnDefault = "CreatedOn")
+    {
+        if (string.IsNullOrEmpty(sortColumn)) return columnDefault;
+        sortColumn = char.ToUpper(sortColumn[0]) + sortColumn.Substring(1);
+        switch (sortColumn)
+        {
+            case "CreatedOn": return "CreatedOn";
+            default: return typeof(FriendUser).GetProperty(sortColumn) == null ? columnDefault : sortColumn;
+        }
+    }
 }

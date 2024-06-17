@@ -4,7 +4,7 @@
         <name>ERPSystem.Api</name>
     </assembly>
     <members>
-        <member name="M:ERPSystem.Api.Controllers.AccountController.Login(ERPSystem.DataModel.Login.LoginModel)">
+        <member name="M:ERPSystem.Api.Controllers.AccountController.Login(ERPSystem.DataModel.Login.LoginModel,System.Boolean)">
             <summary>
             Login by account and password
             </summary>
@@ -53,6 +53,53 @@
             <param name="companyCode"></param>
             <param name="date"></param>
             <param name="fileName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ERPSystem.Api.Controllers.BalanceHistoryController.Gets(System.String,System.Int32,System.Int32,System.String,System.String)">
+            <summary>
+            Get list 
+            </summary>
+            <param name="search"></param>
+            <param name="pageNumber"></param>
+            <param name="pageSize"></param>
+            <param name="sortColumn"></param>
+            <param name="sortDirection"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ERPSystem.Api.Controllers.BalanceHistoryController.Add(ERPSystem.DataModel.BalanceHistory.BalanceHistoryAddModel)">
+            <summary>
+            Add new 
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ERPSystem.Api.Controllers.BalanceHistoryController.DeleteMulti(System.Collections.Generic.List{System.Int32})">
+            <summary>
+            Delete multi 
+            </summary>
+            <param name="ids"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ERPSystem.Api.Controllers.BalanceHistoryController.GetById(System.Int32)">
+            <summary>
+            Get detail  by id
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ERPSystem.Api.Controllers.BalanceHistoryController.Edit(System.Int32,ERPSystem.DataModel.BalanceHistory.BalanceHistoryEditModel)">
+            <summary>
+            Edit  by id
+            </summary>
+            <param name="id"></param>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ERPSystem.Api.Controllers.BalanceHistoryController.Delete(System.Int32)">
+            <summary>
+            Delete  by id
+            </summary>
+            <param name="id"></param>
             <returns></returns>
         </member>
         <member name="M:ERPSystem.Api.Controllers.CategoryController.GetInit">
@@ -239,6 +286,24 @@
             </summary>
             <param name="id"></param>
             <param name="userIds"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ERPSystem.Api.Controllers.DepartmentController.RequestJoinGroup(System.Int32,System.Int32)">
+            <summary>
+            send request join group
+            </summary>
+            <param name="id"></param>
+            <param name="userId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ERPSystem.Api.Controllers.DepartmentController.ConfirmJoinGroup(System.Int32,System.Int32,System.Boolean,System.String)">
+            <summary>
+            send request join group
+            </summary>
+            <param name="id"></param>
+            <param name="userId"></param>
+            <param name="token"></param>
+            <param name="confirm"></param>
             <returns></returns>
         </member>
         <member name="M:ERPSystem.Api.Controllers.DepartmentController.GetUsersWithoutDepartment(System.Int32,System.String,System.Int32,System.Int32,System.String,System.String)">
@@ -507,6 +572,53 @@
             <param name="id"></param>
             <returns></returns>
         </member>
+        <member name="M:ERPSystem.Api.Controllers.FriendUserController.Gets(System.Int32,System.Int32,System.Int32,System.String,System.String)">
+            <summary>
+            Get list 
+            </summary>
+            <param name="userId"></param>
+            <param name="pageNumber"></param>
+            <param name="pageSize"></param>
+            <param name="sortColumn"></param>
+            <param name="sortDirection"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ERPSystem.Api.Controllers.FriendUserController.Add(ERPSystem.DataModel.FriendUser.FriendUserAddModel)">
+            <summary>
+            Add new 
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ERPSystem.Api.Controllers.FriendUserController.DeleteMulti(System.Collections.Generic.List{System.Int32})">
+            <summary>
+            Delete multi 
+            </summary>
+            <param name="ids"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ERPSystem.Api.Controllers.FriendUserController.GetById(System.Int32)">
+            <summary>
+            Get detail  by id
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ERPSystem.Api.Controllers.FriendUserController.Edit(System.Int32,ERPSystem.DataModel.FriendUser.FriendUserEditModel)">
+            <summary>
+            Edit  by id
+            </summary>
+            <param name="id"></param>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ERPSystem.Api.Controllers.FriendUserController.Delete(System.Int32)">
+            <summary>
+            Delete  by id
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
         <member name="T:ERPSystem.Api.Controllers.HomeController">
             <summary>
             Home controller
@@ -516,6 +628,109 @@
             <summary>
             Display data for dashboash
             </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ERPSystem.Api.Controllers.ItemNftController.Gets(System.String,System.Int32,System.Int32,System.String,System.String)">
+            <summary>
+            Get list 
+            </summary>
+            <param name="search"></param>
+            <param name="pageNumber"></param>
+            <param name="pageSize"></param>
+            <param name="sortColumn"></param>
+            <param name="sortDirection"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ERPSystem.Api.Controllers.ItemNftController.Add(ERPSystem.DataModel.ItemNft.ItemNftAddModel)">
+            <summary>
+            Add new 
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ERPSystem.Api.Controllers.ItemNftController.DeleteMulti(System.Collections.Generic.List{System.Int32})">
+            <summary>
+            Delete multi 
+            </summary>
+            <param name="ids"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ERPSystem.Api.Controllers.ItemNftController.GetById(System.Int32)">
+            <summary>
+            Get detail  by id
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ERPSystem.Api.Controllers.ItemNftController.Edit(System.Int32,ERPSystem.DataModel.ItemNft.ItemNftEditModel)">
+            <summary>
+            Edit  by id
+            </summary>
+            <param name="id"></param>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ERPSystem.Api.Controllers.ItemNftController.Delete(System.Int32)">
+            <summary>
+            Delete  by id
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ERPSystem.Api.Controllers.ItemNftUserController.Gets(System.String,System.Int32,System.Collections.Generic.List{System.Int32},System.Boolean,System.Int32,System.Int32,System.String,System.String)">
+            <summary>
+            Get list 
+            </summary>
+            <param name="search"></param>
+            <param name="userId"></param>
+            <param name="status"></param>
+            <param name="pageNumber"></param>
+            <param name="pageSize"></param>
+            <param name="sortColumn"></param>
+            <param name="sortDirection"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ERPSystem.Api.Controllers.ItemNftUserController.Add(ERPSystem.DataModel.ItemNftUser.ItemNftUserAddModel)">
+            <summary>
+            Add new 
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ERPSystem.Api.Controllers.ItemNftUserController.AssignItemNftForUser(System.Int32,System.Int32)">
+            <summary>
+            Add new 
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ERPSystem.Api.Controllers.ItemNftUserController.DeleteMulti(System.Collections.Generic.List{System.Int32})">
+            <summary>
+            Delete multi 
+            </summary>
+            <param name="ids"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ERPSystem.Api.Controllers.ItemNftUserController.GetById(System.Int32)">
+            <summary>
+            Get detail  by id
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ERPSystem.Api.Controllers.ItemNftUserController.Edit(System.Int32,ERPSystem.DataModel.ItemNftUser.ItemNftUserEditModel)">
+            <summary>
+            Edit  by id
+            </summary>
+            <param name="id"></param>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ERPSystem.Api.Controllers.ItemNftUserController.Delete(System.Int32)">
+            <summary>
+            Delete  by id
+            </summary>
+            <param name="id"></param>
             <returns></returns>
         </member>
         <member name="M:ERPSystem.Api.Controllers.MeetingRoomController.Gets(System.String,System.Collections.Generic.List{System.Int32},System.Collections.Generic.List{System.Int32},System.Int32,System.Int32,System.String,System.String)">
@@ -750,6 +965,16 @@
             </param>
             <returns></returns>
         </member>
+        <member name="M:ERPSystem.Api.Controllers.UserController.UserOutGroup(System.Int32,System.Int32)">
+            <summary>
+            Update user by id
+            </summary>
+            <param name="id"></param>
+            <param name="groupId">
+            UpdatedOn: Format MM.DD.YYYY HH:mm:ss
+            </param>
+            <returns></returns>
+        </member>
         <member name="M:ERPSystem.Api.Controllers.UserController.DeleteUser(System.Int32)">
             <summary>
             Delete user by id
@@ -928,6 +1153,26 @@
         <member name="M:ERPSystem.Api.Infrastructure.Mapper.AccountMapping.#ctor">
             <summary>
             AccountMapping mapping
+            </summary>
+        </member>
+        <member name="M:ERPSystem.Api.Infrastructure.Mapper.BalanceHistoryMapping.#ctor">
+            <summary>
+            BalanceHistory mapping
+            </summary>
+        </member>
+        <member name="M:ERPSystem.Api.Infrastructure.Mapper.FriendUserMapping.#ctor">
+            <summary>
+            FriendUser mapping
+            </summary>
+        </member>
+        <member name="M:ERPSystem.Api.Infrastructure.Mapper.ItemNftMapping.#ctor">
+            <summary>
+            ItemNft mapping
+            </summary>
+        </member>
+        <member name="M:ERPSystem.Api.Infrastructure.Mapper.ItemNftUserMapping.#ctor">
+            <summary>
+            ItemNftUser mapping
             </summary>
         </member>
         <member name="M:ERPSystem.Api.Infrastructure.Mapper.UserMapping.#ctor">
