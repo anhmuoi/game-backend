@@ -37,6 +37,8 @@ namespace ERPSystem.DataModel.User
 
         public int? AccountId { get; set; }
         public double Balance { get; set; }
+        public int TotalWin { get; set; }
+        public int TotalLose { get; set; }
     }
 
     public class UserEditModel
@@ -141,6 +143,8 @@ namespace ERPSystem.DataModel.User
 
         public int? AccountId { get; set; }
         public double Balance { get; set; }
+        public int TotalWin { get; set; }
+        public int TotalLose { get; set; }
     }
 
     public class UserAvatarModel

@@ -49,7 +49,6 @@ public class RoleController : ControllerBase
     [HttpGet]
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     [Route(Constants.Route.ApiRoles)]
-    [CheckPermission(PagePermission.ActionName.View + PagePermission.Page.Role)]
     public IActionResult Gets(string search, int pageNumber = 1, int pageSize = 10, string sortColumn = "0", string sortDirection = "desc")
     {
         sortColumn = Helpers.CheckPropertyInObject<RoleModel>(sortColumn, "RoleName");
@@ -79,7 +78,6 @@ public class RoleController : ControllerBase
     [HttpGet]
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     [Route(Constants.Route.ApiRolesId)]
-    [CheckPermission(PagePermission.ActionName.View + PagePermission.Page.Role)]
     public IActionResult Get(int id)
     {
         var model = new RoleModel();
@@ -150,7 +148,6 @@ public class RoleController : ControllerBase
     /// <response code="429">Too Many Requests: Quota exceeded. Maximum allowed: 10 per 1s, 500 per 1m, 2000 per 1d.</response>
     [HttpPost]
     [Route(Constants.Route.ApiRoles)]
-    [CheckPermission(PagePermission.ActionName.Add + PagePermission.Page.Role)]
     public IActionResult Add([FromBody] RoleModel model, int similarId = 0)
     {
         // Below code is for unexcepted exception.
@@ -204,7 +201,6 @@ public class RoleController : ControllerBase
     /// <response code="429">Too Many Requests: Quota exceeded. Maximum allowed: 10 per 1s, 500 per 1m, 2000 per 1d.</response>
     [HttpPut]
     [Route(Constants.Route.ApiRolesId)]
-    [CheckPermission(PagePermission.ActionName.Edit + PagePermission.Page.Role)]
     public IActionResult Edit(int id, [FromBody] RoleModel model, int similarId = 0)
     {
         model.Id = id;
@@ -266,7 +262,6 @@ public class RoleController : ControllerBase
     /// <response code="429">Too Many Requests: Quota exceeded. Maximum allowed: 10 per 1s, 500 per 1m, 2000 per 1d.</response>
     [HttpDelete]
     [Route(Constants.Route.ApiRolesId)]
-    [CheckPermission(PagePermission.ActionName.Delete + PagePermission.Page.Role)]
     public IActionResult Delete(int id)
     {
         var role = _roleService.GetById(id);
@@ -307,7 +302,6 @@ public class RoleController : ControllerBase
     /// <response code="429">Too Many Requests: Quota exceeded. Maximum allowed: 10 per 1s, 500 per 1m, 2000 per 1d.</response>
     [HttpDelete]
     [Route(Constants.Route.ApiRoles)]
-    [CheckPermission(PagePermission.ActionName.Delete + PagePermission.Page.Role)]
     public IActionResult DeleteMultiple(List<int> ids)
     {
 
@@ -347,7 +341,6 @@ public class RoleController : ControllerBase
     /// <returns></returns>
     [HttpPost]
     [Route(Constants.Route.ApiChangeRoleSettingDefault)]
-    [CheckPermission(PagePermission.ActionName.Edit + PagePermission.Page.Role)]
     public IActionResult ChangeDefaultRoleSettingForUser(int id)
     {
         var role = _roleService.GetById(id);

@@ -43,7 +43,6 @@ public class DepartmentController : ControllerBase
     [HttpGet]
     [Route(Constants.Route.ApiDepartments)]
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-    [CheckPermission(PagePermission.ActionName.View + PagePermission.Page.Department)]
     public IActionResult Gets(string name, string number, List<int>types, int pageNumber = 1, int pageSize = 10, string sortColumn = "Name", string sortDirection = "asc")
     {
         var filter = new DepartmentFilterModel()
@@ -77,7 +76,6 @@ public class DepartmentController : ControllerBase
     [HttpPost]
     [Route(Constants.Route.ApiDepartments)]
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-    [CheckPermission(PagePermission.ActionName.Add + PagePermission.Page.Department)]
     public IActionResult Add([FromBody] DepartmentAddModel model)
     {
         if (!ModelState.IsValid)
@@ -102,7 +100,6 @@ public class DepartmentController : ControllerBase
     [HttpDelete]
     [Route(Constants.Route.ApiDepartments)]
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-    [CheckPermission(PagePermission.ActionName.Delete + PagePermission.Page.Department)]
     public IActionResult DeleteMulti(List<int> ids)
     {
         if (ids is not { Count: > 0 })
@@ -134,7 +131,6 @@ public class DepartmentController : ControllerBase
     [HttpGet]
     [Route(Constants.Route.ApiDepartmentsId)]
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-    [CheckPermission(PagePermission.ActionName.View + PagePermission.Page.Department)]
     public IActionResult GetById(int id)
     {
         var item = _departmentService.GetById(id);
@@ -155,7 +151,6 @@ public class DepartmentController : ControllerBase
     [HttpPut]
     [Route(Constants.Route.ApiDepartmentsId)]
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-    [CheckPermission(PagePermission.ActionName.Edit + PagePermission.Page.Department)]
     public IActionResult Edit(int id, [FromBody] DepartmentEditModel model)
     {
         var item = _departmentService.GetById(id);
@@ -188,7 +183,6 @@ public class DepartmentController : ControllerBase
     [HttpDelete]
     [Route(Constants.Route.ApiDepartmentsId)]
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-    [CheckPermission(PagePermission.ActionName.Delete + PagePermission.Page.Department)]
     public IActionResult Delete(int id)
     {
         var item = _departmentService.GetById(id);
@@ -213,7 +207,6 @@ public class DepartmentController : ControllerBase
     [HttpGet]
     [Route(Constants.Route.ApiDepartmentsTree)]
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-    [CheckPermission(PagePermission.ActionName.View + PagePermission.Page.Department)]
     public IActionResult GetDepartmentTree()
    {
         return Ok(_departmentService.GetDepartmentTree());
@@ -232,7 +225,6 @@ public class DepartmentController : ControllerBase
     [HttpGet]
     [Route(Constants.Route.ApiDepartmentsIdAssign)]
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-    [CheckPermission(PagePermission.ActionName.Edit + PagePermission.Page.User)]
     public IActionResult GetUsersByDepartment(int id, string name, int pageNumber = 1, int pageSize = 10, string sortColumn = "Name", string sortDirection = "asc")
     {
         var filter = new UserFilterModel()
@@ -267,7 +259,6 @@ public class DepartmentController : ControllerBase
     [HttpPost]
     [Route(Constants.Route.ApiDepartmentsIdAssign)]
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-    [CheckPermission(PagePermission.ActionName.Edit + PagePermission.Page.User)]
     public IActionResult AssignUsersToDepartment(int id, [FromBody]List<int> userIds)
     {
         var item = _departmentService.GetById(id);
@@ -294,7 +285,6 @@ public class DepartmentController : ControllerBase
     [HttpPost]
     [Route(Constants.Route.ApiDepartmentsIdJoinGroup)]
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-    [CheckPermission(PagePermission.ActionName.Edit + PagePermission.Page.User)]
     public IActionResult RequestJoinGroup(int id, int userId)
     {
         var item = _departmentService.GetById(id);
@@ -360,7 +350,6 @@ public class DepartmentController : ControllerBase
     [HttpGet]
     [Route(Constants.Route.ApiDepartmentsIdUnAssign)]
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-    [CheckPermission(PagePermission.ActionName.Edit + PagePermission.Page.User)]
     public IActionResult GetUsersWithoutDepartment(int id, string name, int pageNumber = 1, int pageSize = 10, string sortColumn = "Name", string sortDirection = "asc")
     {
         var filter = new UserFilterModel()

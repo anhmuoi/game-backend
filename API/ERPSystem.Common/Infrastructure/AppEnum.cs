@@ -68,6 +68,8 @@ public enum ActionType
     DoneReceiveReward = 9,
     AddFriend = 10,
     AgreeAddFriend = 11,
+    UpdateSettingRoom = 12,
+    CreateCustomRoom = 13,
 }
 public enum ReactType
 {
@@ -80,5 +82,6 @@ public enum ReactType
 public enum StatusNft
 {
     NotSale = 0,
-    Sale = 1
+    Sale = 1,
+    Used = 2,
 }

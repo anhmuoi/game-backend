@@ -62,7 +62,6 @@ public class WorkScheduleController : ControllerBase
     [HttpGet]
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     [Route(Constants.Route.ApiWorkSchedules)]
-    [CheckPermission(PagePermission.ActionName.View + PagePermission.Page.Schedule)]
     public IActionResult Gets(string search, string accounts, DateTime date, string categoryTypes, List<int> types, 
         List<int> categories, List<int> folderLogs, int pageNumber = 1, int pageSize = 10, string sortColumn = "Title", string sortDirection = "asc")
     {
@@ -86,7 +85,6 @@ public class WorkScheduleController : ControllerBase
     /// <returns></returns>
     [HttpPost]
     [Route(Constants.Route.ApiWorkSchedules)]
-    [CheckPermission(PagePermission.ActionName.Add + PagePermission.Page.Schedule)]
     public IActionResult Add([FromBody] WorkScheduleModel model)
     {
         if (!ModelState.IsValid)
@@ -110,7 +108,6 @@ public class WorkScheduleController : ControllerBase
     /// <returns></returns>
     [HttpDelete]
     [Route(Constants.Route.ApiWorkSchedules)]
-    [CheckPermission(PagePermission.ActionName.Delete + PagePermission.Page.Schedule)]
     public IActionResult DeleteMulti(List<int> ids)
     {
         if (ids is not { Count: > 0 })
@@ -139,7 +136,6 @@ public class WorkScheduleController : ControllerBase
     /// <returns></returns>
     [HttpGet]
     [Route(Constants.Route.ApiWorkSchedulesId)]
-    [CheckPermission(PagePermission.ActionName.View + PagePermission.Page.Schedule)]
     public IActionResult GetById(int id)
     {
         var item = _workScheduleService.GetById(id);
@@ -160,7 +156,6 @@ public class WorkScheduleController : ControllerBase
     /// <returns></returns>
     [HttpPut]
     [Route(Constants.Route.ApiWorkSchedulesId)]
-    [CheckPermission(PagePermission.ActionName.Edit + PagePermission.Page.Schedule)]
     public IActionResult Edit(int id, [FromBody] WorkScheduleModel model)
     {
         var item = _workScheduleService.GetById(id);
@@ -198,7 +193,6 @@ public class WorkScheduleController : ControllerBase
     /// <returns></returns>
     [HttpDelete]
     [Route(Constants.Route.ApiWorkSchedulesId)]
-    [CheckPermission(PagePermission.ActionName.Delete + PagePermission.Page.Schedule)]
     public IActionResult Delete(int id)
     {
         var item = _workScheduleService.GetById(id);

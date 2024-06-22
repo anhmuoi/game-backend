@@ -17,6 +17,6 @@ public class MeetingRoomRepository : GenericRepository<MeetingRoom>, IMeetingRoo
     }
     public IQueryable<MeetingRoom> GetByIds(List<int> ids)
     {
-        return _dbContext.MeetingRoom.Where(x => ids.Contains(x.Id));
+        return _dbContext.MeetingRoom.Where(x => ids.Contains(x.Id) && x.IsDelete == false);
     }
 }

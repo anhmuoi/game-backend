@@ -503,6 +503,10 @@ Best Regards,&#xD;&#xD;
 Card Battle Team.</value>
     <comment/>
   </data>
+  <data name="BodyJoinGroup" xml:space="preserve">
+    <value>&lt;a href="{0}" style="color:#478dfc; text-decoration:underline;"&gt;CLICK HERE&lt;/a&gt; to check.</value>
+    <comment/>
+  </data>
   <data name="BodyConfirmJoinGroupInfo" xml:space="preserve">
     <value>Dear {0}, Congratulations you have been accepted to join the group {1}&amp;nbsp;&lt;br&gt;&#xD;&#xD;
 &lt;table&gt;&#xD;&#xD;
@@ -526,5 +530,52 @@ Best Regards,&#xD;&#xD;
 &lt;br&gt;&#xD;&#xD;
 Card Battle Team.</value>
     <comment/>
+  </data>
+  <data name="BodyAddFriendInfo" xml:space="preserve">
+    <value>Dear {0}, you have a friend request from {1}&amp;nbsp;&lt;br&gt;&#xD;&#xD;
+&lt;table&gt;&#xD;&#xD;
+&lt;tr&gt;&#xD;&#xD;
+&lt;td&gt;&lt;strong&gt;{2}&lt;/strong&gt;&lt;/td&gt;&#xD;&#xD;
+&lt;/tr&gt;&#xD;&#xD;
+&lt;/table&gt;&#xD;&#xD;
+&lt;br&gt;&lt;br&gt;&#xD;&#xD;
+Best Regards,&#xD;&#xD;
+&lt;br&gt;&#xD;&#xD;
+Card Battle Team.</value>
+    <comment/>
+  </data>
+  <data name="BodyAddFriend" xml:space="preserve">
+    <value>&lt;a href="{0}" style="color:#478dfc; text-decoration:underline;"&gt;CLICK HERE&lt;/a&gt; to check.</value>
+    <comment/>
+  </data>
+  <data name="BodyConfirmAddFriendInfo" xml:space="preserve">
+    <value>Dear {0}, {1} agreed to make friends&amp;nbsp;&lt;br&gt;&#xD;&#xD;
+&lt;table&gt;&#xD;&#xD;
+&lt;tr&gt;&#xD;&#xD;
+&lt;/tr&gt;&#xD;&#xD;
+&lt;/table&gt;&#xD;&#xD;
+&lt;br&gt;&lt;br&gt;&#xD;&#xD;
+Best Regards,&#xD;&#xD;
+&lt;br&gt;&#xD;&#xD;
+Card Battle Team.</value>
+    <comment/>
+  </data>
+  <data name="BodyRejectAddFriendInfo" xml:space="preserve">
+    <value>Dear {0}, you have been rejected as friends from {1}&amp;nbsp;&lt;br&gt;&#xD;&#xD;
+&lt;table&gt;&#xD;&#xD;
+&lt;tr&gt;&#xD;&#xD;
+&lt;/tr&gt;&#xD;&#xD;
+&lt;/table&gt;&#xD;&#xD;
+&lt;br&gt;&lt;br&gt;&#xD;&#xD;
+Best Regards,&#xD;&#xD;
+&lt;br&gt;&#xD;&#xD;
+Card Battle Team.</value>
+    <comment/>
+  </data>
+    <data name="SubjectConfirmAddFriend" xml:space="preserve">
+    <value>Confirm Add Friend</value>
+  </data>
+  <data name="SubjectAddFriend" xml:space="preserve">
+    <value>Add Friend</value>
   </data>
 </root>

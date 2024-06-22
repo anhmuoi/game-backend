@@ -212,4 +212,48 @@ public static class Helpers
         }
         return date;
     }
+
+    public static DateTime ConvertToSystemTime(this DateTime date, string userTimeZone = "")
+    {
+        if (date == DateTime.MinValue || DateTime.MaxValue - date <= new TimeSpan(0, 0, 1)) return date;
+
+        // var culture = Thread.CurrentThread.CurrentCulture.Name;
+        // string dateFormat = ApplicationVariables.Configuration[Constants.DateServerFormat + ":" + culture];
+
+        if (!String.IsNullOrEmpty(userTimeZone))
+        {
+            TimeZoneInfo cstZone;
+
+            try
+            {
+                cstZone = userTimeZone.ToTimeZoneInfo();
+
+                DateTime cstTime = date.Subtract(cstZone.BaseUtcOffset);
+
+                return cstTime;
+            }
+            catch (TimeZoneNotFoundException)
+            {
+
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                cstZone = userTimeZone.ToTimeZoneInfo();
+
+                var maxDiff = DateTime.MaxValue - date;
+                var minDiff = date - DateTime.MinValue;
+
+                if (maxDiff <= cstZone.BaseUtcOffset)
+                {
+                    date = DateTime.MaxValue;
+                }
+                else if (minDiff <= cstZone.BaseUtcOffset)
+                {
+                    date = DateTime.MinValue;
+                }
+            }
+        }
+        return date;
+    }
+    
 }

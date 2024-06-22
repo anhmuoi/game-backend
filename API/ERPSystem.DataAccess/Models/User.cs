@@ -25,6 +25,8 @@ public class User : Base
     public int OwnerRoom { get; set; }
     public int IndexPlayer { get; set; }
     public double Balance { get; set; }
+    public int TotalWin { get; set; }
+    public int TotalLose { get; set; }
     public Account? Account { get; set; }
     public int? DepartmentId { get; set; }
     public Department? Department { get; set; }

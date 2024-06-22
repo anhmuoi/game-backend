@@ -271,8 +271,8 @@ public class AppDbContext : DbContext
             entity.Property(m => m.Id).ValueGeneratedOnAdd();
             
             entity.Property(m => m.Name).IsRequired();
-            entity.HasIndex(m => m.Name).IsUnique();
             entity.Property(m => m.Description).IsRequired(false);
+            entity.Property(m => m.PasswordRoom).IsRequired(false);
             entity.Property(m => m.UserListId).IsRequired(false);
         });
         modelBuilder.Entity<PurchaseRecord>(entity =>

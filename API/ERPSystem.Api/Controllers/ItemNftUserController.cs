@@ -45,7 +45,6 @@ public class ItemNftUserController : ControllerBase
     [HttpGet]
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     [Route(Constants.Route.ApiItemNftUsers)]
-    [CheckPermission(PagePermission.ActionName.View + PagePermission.Page.Meeting)]
     public IActionResult Gets(string search, int userId, List<int> status, bool getAll, int pageNumber = 1, int pageSize = 10,
         string sortColumn = "Name",
         string sortDirection = "asc")
@@ -69,7 +68,6 @@ public class ItemNftUserController : ControllerBase
     /// <returns></returns>
     [HttpPost]
     [Route(Constants.Route.ApiItemNftUsers)]
-    [CheckPermission(PagePermission.ActionName.Add + PagePermission.Page.Meeting)]
     public IActionResult Add([FromBody] ItemNftUserAddModel model)
     {
         if (!ModelState.IsValid)
@@ -92,8 +90,7 @@ public class ItemNftUserController : ControllerBase
     /// <returns></returns>
     [HttpPost]
     [Route(Constants.Route.ApiAssignItemNftUsers)]
-    [CheckPermission(PagePermission.ActionName.Add + PagePermission.Page.Meeting)]
-    public IActionResult AssignItemNftForUser(int idItemNftId, int userId)
+    public IActionResult AssignItemNftForUser(List<int> idItemNftId, int userId)
     {
         if (!ModelState.IsValid)
         {
@@ -116,7 +113,6 @@ public class ItemNftUserController : ControllerBase
     /// <returns></returns>
     [HttpDelete]
     [Route(Constants.Route.ApiItemNftUsers)]
-    [CheckPermission(PagePermission.ActionName.Delete + PagePermission.Page.Meeting)]
     public IActionResult DeleteMulti(List<int> ids)
     {
         if (ids is not { Count: > 0 })
@@ -141,7 +137,6 @@ public class ItemNftUserController : ControllerBase
     /// <returns></returns>
     [HttpGet]
     [Route(Constants.Route.ApiItemNftUsersId)]
-    [CheckPermission(PagePermission.ActionName.View + PagePermission.Page.Meeting)]
     public IActionResult GetById(int id)
     {
         var item = _itemNftUserService.GetById(id);
@@ -161,7 +156,6 @@ public class ItemNftUserController : ControllerBase
     /// <returns></returns>
     [HttpPut]
     [Route(Constants.Route.ApiItemNftUsersId)]
-    [CheckPermission(PagePermission.ActionName.Edit + PagePermission.Page.Meeting)]
     public IActionResult Edit(int id, [FromBody] ItemNftUserEditModel model)
     {
         var item = _itemNftUserService.GetById(id);
@@ -187,6 +181,26 @@ public class ItemNftUserController : ControllerBase
 
         return new ApiSuccessResult(StatusCodes.Status200OK, MessageResource.msgUpdateSuccess);
     }
+    /// <summary>
+    /// Edit  by id
+    /// </summary>
+    /// <param name="idItemList"></param>
+    /// <returns></returns>
+    [HttpPut]
+    [Route(Constants.Route.ApiItemNftUsersUse)]
+    public IActionResult Edit(List<int> idItemList)
+    {
+        
+   
+
+        bool result = _itemNftUserService.UseItem(idItemList);
+        if (!result)
+        {
+            return new ApiErrorResult(StatusCodes.Status422UnprocessableEntity, MessageResource.msgUpdateFailed);
+        }
+
+        return new ApiSuccessResult(StatusCodes.Status200OK, MessageResource.msgUpdateSuccess);
+    }
 
     /// <summary>
     /// Delete  by id
@@ -195,7 +209,6 @@ public class ItemNftUserController : ControllerBase
     /// <returns></returns>
     [HttpDelete]
     [Route(Constants.Route.ApiItemNftUsersId)]
-    [CheckPermission(PagePermission.ActionName.Delete + PagePermission.Page.Meeting)]
     public IActionResult Delete(int id)
     {
         var item = _itemNftUserService.GetById(id);

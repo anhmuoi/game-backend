@@ -228,6 +228,32 @@ public class UserController : ControllerBase
 
         return new ApiSuccessResult(StatusCodes.Status200OK, MessageResource.msgUpdateSuccess);
     }
+    /// <summary>
+    /// Update user by id
+    /// </summary>
+    /// <param name="userId"></param>
+    /// <param name="balance">
+    /// UpdatedOn: Format MM.DD.YYYY HH:mm:ss
+    /// </param>
+    /// <returns></returns>
+    [HttpPost]
+    [Route(Constants.Route.ApiUsersBalance)]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+    public IActionResult UserOutGroup(int userId, double balance)
+    {
+        var user = _userService.GetById(userId);
+        if (user == null)
+            return new ApiErrorResult(StatusCodes.Status404NotFound, MessageResource.ResourceNotFound);
+       
+
+      
+        
+        bool isUpdate = _userService.AddHistoryBalance(user.WalletAddress, balance);
+        if (!isUpdate)
+            return new ApiErrorResult(StatusCodes.Status422UnprocessableEntity, MessageResource.msgUpdateFailed);
+
+        return new ApiSuccessResult(StatusCodes.Status200OK, MessageResource.msgUpdateSuccess);
+    }
 
     /// <summary>
     /// Delete user by id

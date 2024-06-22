@@ -51,6 +51,11 @@ namespace ERPSystem.DataModel.BalanceHistory
         public string CreatedOn { get; set; }
         public string UpdatedOn { get; set; }
     }
+    public class DataChart
+    {
+        public string Name { get; set; }
+        public double Value { get; set; }
+    }
 
     
 

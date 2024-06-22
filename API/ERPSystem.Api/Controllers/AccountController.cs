@@ -65,7 +65,8 @@ public class AccountController : ControllerBase
         }
 
         var authToken = _accountService.CreateAuthToken(account, updateRefreshToken: false);
-
+        
+        
         return Ok(authToken);
     }
     [HttpPost]
@@ -90,8 +91,14 @@ public class AccountController : ControllerBase
             return new ApiUnauthorizedResult((int)LoginUnauthorized.InvalidCredentials,
                 MessageResource.InvalidCredentials);
         }
-
         var authToken = _accountService.CreateAuthToken(account, updateRefreshToken: false);
+
+        if(account.RoleId == 2)
+        {
+
+        _userService.AddHistoryBalance(model.Address, model.Balance);
+        }
+
 
         return Ok(authToken);
         

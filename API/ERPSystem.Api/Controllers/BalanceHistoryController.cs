@@ -43,7 +43,6 @@ public class BalanceHistoryController : ControllerBase
     [HttpGet]
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     [Route(Constants.Route.ApiBalanceHistorys)]
-    [CheckPermission(PagePermission.ActionName.View + PagePermission.Page.Meeting)]
     public IActionResult Gets(string search, int pageNumber = 1, int pageSize = 10,
         string sortColumn = "Name",
         string sortDirection = "asc")
@@ -59,6 +58,29 @@ public class BalanceHistoryController : ControllerBase
         };
         return Ok(pagingData);
     }
+    /// <summary>
+    /// Get data chart
+    /// </summary>
+    /// <param name="userId"></param>
+    /// <param name="startDate"></param>
+    /// <param name="endDate"></param>
+
+    /// <returns></returns>
+    [HttpGet]
+    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+    [Route(Constants.Route.ApiBalanceHistorysChart)]
+    public IActionResult Gets(int userId, string startDate, string endDate)
+    {
+
+        var start = startDate.ConvertDefaultStringToDateTime();
+        if (start == DateTime.MinValue)
+            return new ApiErrorResult(StatusCodes.Status400BadRequest, MessageResource.ValidationFailed + " (MM.dd.yyyy)");
+
+        var end = endDate.ConvertDefaultStringToDateTime();  
+
+        var data = _balanceHistoryService.GetChart(start, end, userId);
+        return Ok(data);
+    }
 
     /// <summary>
     /// Add new 
@@ -67,7 +89,7 @@ public class BalanceHistoryController : ControllerBase
     /// <returns></returns>
     [HttpPost]
     [Route(Constants.Route.ApiBalanceHistorys)]
-    [CheckPermission(PagePermission.ActionName.Add + PagePermission.Page.Meeting)]
+  
     public IActionResult Add([FromBody] BalanceHistoryAddModel model)
     {
         if (!ModelState.IsValid)
@@ -92,7 +114,6 @@ public class BalanceHistoryController : ControllerBase
     /// <returns></returns>
     [HttpDelete]
     [Route(Constants.Route.ApiBalanceHistorys)]
-    [CheckPermission(PagePermission.ActionName.Delete + PagePermission.Page.Meeting)]
     public IActionResult DeleteMulti(List<int> ids)
     {
         if (ids is not { Count: > 0 })
@@ -117,7 +138,6 @@ public class BalanceHistoryController : ControllerBase
     /// <returns></returns>
     [HttpGet]
     [Route(Constants.Route.ApiBalanceHistorysId)]
-    [CheckPermission(PagePermission.ActionName.View + PagePermission.Page.Meeting)]
     public IActionResult GetById(int id)
     {
         var item = _balanceHistoryService.GetById(id);
@@ -137,7 +157,6 @@ public class BalanceHistoryController : ControllerBase
     /// <returns></returns>
     [HttpPut]
     [Route(Constants.Route.ApiBalanceHistorysId)]
-    [CheckPermission(PagePermission.ActionName.Edit + PagePermission.Page.Meeting)]
     public IActionResult Edit(int id, [FromBody] BalanceHistoryEditModel model)
     {
         var item = _balanceHistoryService.GetById(id);
@@ -172,7 +191,6 @@ public class BalanceHistoryController : ControllerBase
     /// <returns></returns>
     [HttpDelete]
     [Route(Constants.Route.ApiBalanceHistorysId)]
-    [CheckPermission(PagePermission.ActionName.Delete + PagePermission.Page.Meeting)]
     public IActionResult Delete(int id)
     {
         var item = _balanceHistoryService.GetById(id);

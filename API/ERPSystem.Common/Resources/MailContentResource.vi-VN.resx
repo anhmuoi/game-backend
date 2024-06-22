@@ -513,6 +513,10 @@ Best Regards,&#xD;&#xD;
 Card Battle Team.</value>
     <comment/>
   </data>
+  <data name="BodyJoinGroup" xml:space="preserve">
+    <value>&lt;a href="{0}" style="color:#478dfc; text-decoration:underline;"&gt;CLICK HERE&lt;/a&gt; to check.</value>
+    <comment/>
+  </data>
   <data name="BodyRejectJoinGroupInfo" xml:space="preserve">
     <value>Gửi {0}, Rất tiếc bạn đã bị từ chối tham gia vào group {1}&amp;nbsp;&lt;br&gt;&#xD;&#xD;
 &lt;table&gt;&#xD;&#xD;
@@ -525,7 +529,54 @@ Best Regards,&#xD;&#xD;
 Card Battle Team.</value>
     <comment/>
   </data>
+   <data name="BodyJoinGroupInfo" xml:space="preserve">
+    <value>Gửi {0}, bạn có lời mời kết bạn từ {1}&amp;nbsp;&lt;br&gt;&#xD;&#xD;
+&lt;table&gt;&#xD;&#xD;
+&lt;tr&gt;&#xD;&#xD;
+&lt;td&gt;&lt;strong&gt;{2}&lt;/strong&gt;&lt;/td&gt;&#xD;&#xD;
+&lt;/tr&gt;&#xD;&#xD;
+&lt;/table&gt;&#xD;&#xD;
+&lt;br&gt;&lt;br&gt;&#xD;&#xD;
+Best Regards,&#xD;&#xD;
+&lt;br&gt;&#xD;&#xD;
+Card Battle Team.</value>
+    <comment/>
+  </data>
+  <data name="BodyConfirmAddFriendInfo" xml:space="preserve">
+    <value>Gủi {0}, {1} đã đồng ý kết bạn &amp;nbsp;&lt;br&gt;&#xD;&#xD;
+&lt;table&gt;&#xD;&#xD;
+&lt;tr&gt;&#xD;&#xD;
+&lt;/tr&gt;&#xD;&#xD;
+&lt;/table&gt;&#xD;&#xD;
+&lt;br&gt;&lt;br&gt;&#xD;&#xD;
+Best Regards,&#xD;&#xD;
+&lt;br&gt;&#xD;&#xD;
+Card Battle Team.</value>
+    <comment/>
+  </data>
+  <data name="BodyAddFriend" xml:space="preserve">
+    <value>&lt;a href="{0}" style="color:#478dfc; text-decoration:underline;"&gt;CLICK HERE&lt;/a&gt; để kiểm tra.</value>
+    <comment/>
+  </data>
+  <data name="BodyRejectAddFriendInfo" xml:space="preserve">
+    <value>Gửi {0}, Rất tiếc bạn đã bị từ chối kết bạn từ {1}&amp;nbsp;&lt;br&gt;&#xD;&#xD;
+&lt;table&gt;&#xD;&#xD;
+&lt;tr&gt;&#xD;&#xD;
+&lt;/tr&gt;&#xD;&#xD;
+&lt;/table&gt;&#xD;&#xD;
+&lt;br&gt;&lt;br&gt;&#xD;&#xD;
+Best Regards,&#xD;&#xD;
+&lt;br&gt;&#xD;&#xD;
+Card Battle Team.</value>
+    <comment/>
+  </data>
   <data name="SubjectConfirmJoinGroup" xml:space="preserve">
     <value>Xác nhận vào group</value>
+  </data>
+    <data name="SubjectConfirmAddFriend" xml:space="preserve">
+    <value>Confirm Add Friend</value>
+  </data>
+  <data name="SubjectAddFriend" xml:space="preserve">
+    <value>Add Friend</value>
   </data>
 </root>

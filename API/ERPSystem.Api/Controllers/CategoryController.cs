@@ -32,7 +32,6 @@ public class CategoryController : ControllerBase
     /// <returns></returns>
     [HttpGet]
     [Route(Constants.Route.ApiCategoriesInit)]
-    [CheckPermission(PagePermission.ActionName.View + PagePermission.Page.Category)]
     public IActionResult GetInit()
     {
         return Ok(_categoryService.GetInit());
@@ -44,7 +43,6 @@ public class CategoryController : ControllerBase
     /// <returns></returns>
     [HttpGet]
     [Route(Constants.Route.ApiCategories)]
-    [CheckPermission(PagePermission.ActionName.View + PagePermission.Page.Category)]
     public IActionResult Gets(string name, List<int>types, int pageNumber = 1, int pageSize = 10, string sortColumn = "Name", string sortDirection = "asc")
     {
         var filter = new CategoryFilterModel()
@@ -77,7 +75,6 @@ public class CategoryController : ControllerBase
     /// <returns></returns>
     [HttpPost]
     [Route(Constants.Route.ApiCategories)]
-    [CheckPermission(PagePermission.ActionName.Add + PagePermission.Page.Category)]
     public IActionResult Add([FromBody] CategoryAddModel model)
     {
         if (!ModelState.IsValid)
@@ -101,7 +98,6 @@ public class CategoryController : ControllerBase
     /// <returns></returns>
     [HttpDelete]
     [Route(Constants.Route.ApiCategories)]
-    [CheckPermission(PagePermission.ActionName.Delete + PagePermission.Page.Category)]
     public IActionResult DeleteMulti(List<int> ids)
     {
         if (ids is not { Count: > 0 })
@@ -125,7 +121,6 @@ public class CategoryController : ControllerBase
     /// <returns></returns>
     [HttpGet]
     [Route(Constants.Route.ApiCategoriesId)]
-    [CheckPermission(PagePermission.ActionName.View + PagePermission.Page.Category)]
     public IActionResult GetById(int id)
     {
         var item = _categoryService.GetById(id);
@@ -145,7 +140,6 @@ public class CategoryController : ControllerBase
     /// <returns></returns>
     [HttpPut]
     [Route(Constants.Route.ApiCategoriesId)]
-    [CheckPermission(PagePermission.ActionName.Edit + PagePermission.Page.Category)]
     public IActionResult Edit(int id, [FromBody] CategoryEditModel model)
     {
         var item = _categoryService.GetById(id);
@@ -177,7 +171,6 @@ public class CategoryController : ControllerBase
     /// <returns></returns>
     [HttpDelete]
     [Route(Constants.Route.ApiCategoriesId)]
-    [CheckPermission(PagePermission.ActionName.Delete + PagePermission.Page.Category)]
     public IActionResult Delete(int id)
     {
         var item = _categoryService.GetById(id);

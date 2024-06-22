@@ -4,7 +4,7 @@ using ERPSystem.Common.Infrastructure;
 using ERPSystem.Common.Resources;
 using ERPSystem.DataModel;
 using ERPSystem.DataModel.API;
-using ERPSystem.DataModel.MeetingLog;
+using ERPSystem.DataModel.MeetingRoom;
 using ERPSystem.Service.Handler;
 using ERPSystem.Service.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -14,16 +14,16 @@ using Microsoft.AspNetCore.Mvc;
 namespace ERPSystem.Api.Controllers;
 
 [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-public class MeetingLogController : ControllerBase
+public class MeetingRoomController : ControllerBase
 {
     private readonly HttpContext _httpContext;
     private readonly IConfiguration _configuration;
-    private readonly IMeetingLogService _meetingLogService;
+    private readonly IMeetingRoomService _meetingLogService;
     private readonly IMapper _mapper;
 
-    public MeetingLogController(IHttpContextAccessor httpContextAccessor, IConfiguration configuration,
+    public MeetingRoomController(IHttpContextAccessor httpContextAccessor, IConfiguration configuration,
         IJwtHandler jwtHandler,
-        IMeetingLogService meetingLogService, IMapper mapper)
+        IMeetingRoomService meetingLogService, IMapper mapper)
     {
         _httpContext = httpContextAccessor.HttpContext;
         _configuration = configuration;
@@ -44,17 +44,16 @@ public class MeetingLogController : ControllerBase
     /// <returns></returns>
     [HttpGet]
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-    [Route(Constants.Route.ApiMeetingLogs)]
-    [CheckPermission(PagePermission.ActionName.View + PagePermission.Page.Meeting)]
+    [Route(Constants.Route.ApiMeetingRooms)]
     public IActionResult Gets(string search, List<int> meetingRoomIds, List<int> folderLogs, int pageNumber = 1, int pageSize = 10,
         string sortColumn = "Title",
         string sortDirection = "asc")
     {
-        var meetingLogs = _meetingLogService.GetPaginated(search, meetingRoomIds, folderLogs, pageNumber, pageSize, sortColumn.MeetingLogColumn(),
+        var meetingLogs = _meetingLogService.GetPaginated(search, meetingRoomIds, folderLogs, pageNumber, pageSize, sortColumn.MeetingRoomColumn(),
             sortDirection, out var recordsTotal,
             out var recordsFiltered);
 
-        var pagingData = new PagingData<MeetingLogResponseModel>
+        var pagingData = new PagingData<MeetingRoomResponseModel>
         {
             Data = meetingLogs,
             Meta = { RecordsTotal = recordsTotal, RecordsFiltered = recordsFiltered }
@@ -68,9 +67,8 @@ public class MeetingLogController : ControllerBase
     /// <param name="model"></param>
     /// <returns></returns>
     [HttpPost]
-    [Route(Constants.Route.ApiMeetingLogs)]
-    [CheckPermission(PagePermission.ActionName.Add + PagePermission.Page.Meeting)]
-    public IActionResult Add([FromBody] MeetingLogModel model)
+    [Route(Constants.Route.ApiMeetingRooms)]
+    public IActionResult Add([FromBody] MeetingRoomModel model)
     {
         if (!ModelState.IsValid)
         {
@@ -92,8 +90,7 @@ public class MeetingLogController : ControllerBase
     /// <param name="ids"></param>
     /// <returns></returns>
     [HttpDelete]
-    [Route(Constants.Route.ApiMeetingLogs)]
-    [CheckPermission(PagePermission.ActionName.Delete + PagePermission.Page.Meeting)]
+    [Route(Constants.Route.ApiMeetingRooms)]
     public IActionResult DeleteMulti(List<int> ids)
     {
         if (ids is not { Count: > 0 })
@@ -101,13 +98,6 @@ public class MeetingLogController : ControllerBase
             return new ApiErrorResult(StatusCodes.Status400BadRequest, MessageResource.BadRequest);
         }
 
-        // check current user map createdBy.
-        bool isUser = _meetingLogService.CheckCreatedBy(ids, _httpContext.User.GetAccountId());
-        if (!isUser)
-        {
-            return new ApiErrorResult(StatusCodes.Status422UnprocessableEntity,
-                MeetingLogResource.msgCanNotDeleteRecordOfAnotherUser);
-        }
 
         bool result = _meetingLogService.Delete(ids);
         if (!result)
@@ -124,8 +114,7 @@ public class MeetingLogController : ControllerBase
     /// <param name="id"></param>
     /// <returns></returns>
     [HttpGet]
-    [Route(Constants.Route.ApiMeetingLogsId)]
-    [CheckPermission(PagePermission.ActionName.View + PagePermission.Page.Meeting)]
+    [Route(Constants.Route.ApiMeetingRoomsId)]
     public IActionResult GetById(int id)
     {
         var item = _meetingLogService.GetById(id);
@@ -144,9 +133,8 @@ public class MeetingLogController : ControllerBase
     /// <param name="model"></param>
     /// <returns></returns>
     [HttpPut]
-    [Route(Constants.Route.ApiMeetingLogsId)]
-    [CheckPermission(PagePermission.ActionName.Edit + PagePermission.Page.Meeting)]
-    public IActionResult Edit(int id, [FromBody] MeetingLogModel model)
+    [Route(Constants.Route.ApiMeetingRoomsId)]
+    public IActionResult Edit(int id, [FromBody] MeetingRoomModel model)
     {
         var item = _meetingLogService.GetById(id);
         if (item == null)
@@ -161,12 +149,7 @@ public class MeetingLogController : ControllerBase
             return new ValidationFailedResult(ModelState);
         }
 
-        bool isUser = _meetingLogService.CheckCreatedBy(new List<int>{id}, _httpContext.User.GetAccountId());
-        if (!isUser)
-        {
-            return new ApiErrorResult(StatusCodes.Status422UnprocessableEntity,
-                MeetingLogResource.msgCanNotEditRecordOfAnotherUser);
-        }
+   
 
         bool result = _meetingLogService.Update(model);
         if (!result)
@@ -183,8 +166,7 @@ public class MeetingLogController : ControllerBase
     /// <param name="id"></param>
     /// <returns></returns>
     [HttpDelete]
-    [Route(Constants.Route.ApiMeetingLogsId)]
-    [CheckPermission(PagePermission.ActionName.Delete + PagePermission.Page.Meeting)]
+    [Route(Constants.Route.ApiMeetingRoomsId)]
     public IActionResult Delete(int id)
     {
         var item = _meetingLogService.GetById(id);
@@ -192,13 +174,7 @@ public class MeetingLogController : ControllerBase
         {
             return new ApiErrorResult(StatusCodes.Status404NotFound, MessageResource.ResourceNotFound);
         }
-        // check current user map createdBy.
-        bool isUser = _meetingLogService.CheckCreatedBy(new List<int>(){id}, _httpContext.User.GetAccountId());
-        if (!isUser)
-        {
-            return new ApiErrorResult(StatusCodes.Status422UnprocessableEntity,
-                MeetingLogResource.msgCanNotDeleteRecordOfAnotherUser);
-        }
+     
         bool result = _meetingLogService.Delete(new List<int>{id});
         if (!result)
         {

@@ -46,7 +46,6 @@ public class WorkLogController : ControllerBase
     [HttpGet]
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     [Route(Constants.Route.ApiWorkLogs)]
-    [CheckPermission(PagePermission.ActionName.View + PagePermission.Page.WorkLog)]
     public IActionResult Gets(string search, List<int> userIds, List<int> folderLogs, int pageNumber = 1, int pageSize = 10,
         string sortColumn = "Title",
         string sortDirection = "asc")
@@ -70,7 +69,6 @@ public class WorkLogController : ControllerBase
     /// <returns></returns>
     [HttpPost]
     [Route(Constants.Route.ApiWorkLogs)]
-    [CheckPermission(PagePermission.ActionName.Add + PagePermission.Page.WorkLog)]
     public IActionResult Add([FromBody] WorkLogModel model)
     {
         if (!ModelState.IsValid)
@@ -94,7 +92,6 @@ public class WorkLogController : ControllerBase
     /// <returns></returns>
     [HttpDelete]
     [Route(Constants.Route.ApiWorkLogs)]
-    [CheckPermission(PagePermission.ActionName.Delete + PagePermission.Page.WorkLog)]
     public IActionResult DeleteMulti(List<int> ids)
     {
         if (ids is not { Count: > 0 })
@@ -126,7 +123,6 @@ public class WorkLogController : ControllerBase
     /// <returns></returns>
     [HttpGet]
     [Route(Constants.Route.ApiWorkLogsId)]
-    [CheckPermission(PagePermission.ActionName.View + PagePermission.Page.WorkLog)]
     public IActionResult GetById(int id)
     {
         var item = _workLogService.GetById(id);
@@ -146,7 +142,6 @@ public class WorkLogController : ControllerBase
     /// <returns></returns>
     [HttpPut]
     [Route(Constants.Route.ApiWorkLogsId)]
-    [CheckPermission(PagePermission.ActionName.Edit + PagePermission.Page.WorkLog)]
     public IActionResult Edit(int id, [FromBody] WorkLogModel model)
     {
         var item = _workLogService.GetById(id);
@@ -185,7 +180,6 @@ public class WorkLogController : ControllerBase
     /// <returns></returns>
     [HttpDelete]
     [Route(Constants.Route.ApiWorkLogsId)]
-    [CheckPermission(PagePermission.ActionName.Delete + PagePermission.Page.WorkLog)]
     public IActionResult Delete(int id)
     {
         var item = _workLogService.GetById(id);

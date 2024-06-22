@@ -32,7 +32,7 @@ public static class SortColumnMapping
             default: return typeof(WorkLog).GetProperty(sortColumn) == null ? columnDefault : sortColumn;
         }
     }
-    public static string MeetingLogColumn(this string sortColumn, string columnDefault = "Title")
+    public static string MeetingLogColumn(this string sortColumn, string columnDefault = "CreatedOn")
     {
         if (string.IsNullOrEmpty(sortColumn)) return columnDefault;
         sortColumn = char.ToUpper(sortColumn[0]) + sortColumn.Substring(1);

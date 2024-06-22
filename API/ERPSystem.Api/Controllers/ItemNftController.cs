@@ -43,7 +43,6 @@ public class ItemNftController : ControllerBase
     [HttpGet]
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     [Route(Constants.Route.ApiItemNfts)]
-    [CheckPermission(PagePermission.ActionName.View + PagePermission.Page.Meeting)]
     public IActionResult Gets(string search, int pageNumber = 1, int pageSize = 10,
         string sortColumn = "Name",
         string sortDirection = "asc")
@@ -67,7 +66,6 @@ public class ItemNftController : ControllerBase
     /// <returns></returns>
     [HttpPost]
     [Route(Constants.Route.ApiItemNfts)]
-    [CheckPermission(PagePermission.ActionName.Add + PagePermission.Page.Meeting)]
     public IActionResult Add([FromBody] ItemNftAddModel model)
     {
         if (!ModelState.IsValid)
@@ -102,7 +100,6 @@ public class ItemNftController : ControllerBase
     /// <returns></returns>
     [HttpDelete]
     [Route(Constants.Route.ApiItemNfts)]
-    [CheckPermission(PagePermission.ActionName.Delete + PagePermission.Page.Meeting)]
     public IActionResult DeleteMulti(List<int> ids)
     {
         if (ids is not { Count: > 0 })
@@ -127,7 +124,6 @@ public class ItemNftController : ControllerBase
     /// <returns></returns>
     [HttpGet]
     [Route(Constants.Route.ApiItemNftsId)]
-    [CheckPermission(PagePermission.ActionName.View + PagePermission.Page.Meeting)]
     public IActionResult GetById(int id)
     {
         var item = _itemNftService.GetById(id);
@@ -147,7 +143,6 @@ public class ItemNftController : ControllerBase
     /// <returns></returns>
     [HttpPut]
     [Route(Constants.Route.ApiItemNftsId)]
-    [CheckPermission(PagePermission.ActionName.Edit + PagePermission.Page.Meeting)]
     public IActionResult Edit(int id, [FromBody] ItemNftEditModel model)
     {
         var item = _itemNftService.GetById(id);
@@ -192,7 +187,6 @@ public class ItemNftController : ControllerBase
     /// <returns></returns>
     [HttpDelete]
     [Route(Constants.Route.ApiItemNftsId)]
-    [CheckPermission(PagePermission.ActionName.Delete + PagePermission.Page.Meeting)]
     public IActionResult Delete(int id)
     {
         var item = _itemNftService.GetById(id);

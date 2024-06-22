@@ -66,6 +66,15 @@
             <param name="sortDirection"></param>
             <returns></returns>
         </member>
+        <member name="M:ERPSystem.Api.Controllers.BalanceHistoryController.Gets(System.Int32,System.String,System.String)">
+            <summary>
+            Get data chart
+            </summary>
+            <param name="userId"></param>
+            <param name="startDate"></param>
+            <param name="endDate"></param>
+            <returns></returns>
+        </member>
         <member name="M:ERPSystem.Api.Controllers.BalanceHistoryController.Add(ERPSystem.DataModel.BalanceHistory.BalanceHistoryAddModel)">
             <summary>
             Add new 
@@ -619,6 +628,24 @@
             <param name="id"></param>
             <returns></returns>
         </member>
+        <member name="M:ERPSystem.Api.Controllers.FriendUserController.RequestAddFriend(System.Int32,System.Int32)">
+            <summary>
+            send request add friend 
+            </summary>
+            <param name="userId1"></param>
+            <param name="userId2"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ERPSystem.Api.Controllers.FriendUserController.ConfirmAddFriend(System.Int32,System.Int32,System.Boolean,System.String)">
+            <summary>
+            confirm request add friend 
+            </summary>
+            <param name="userId1"></param>
+            <param name="userId2"></param>
+            <param name="token"></param>
+            <param name="confirm"></param>
+            <returns></returns>
+        </member>
         <member name="T:ERPSystem.Api.Controllers.HomeController">
             <summary>
             Home controller
@@ -697,7 +724,7 @@
             <param name="model"></param>
             <returns></returns>
         </member>
-        <member name="M:ERPSystem.Api.Controllers.ItemNftUserController.AssignItemNftForUser(System.Int32,System.Int32)">
+        <member name="M:ERPSystem.Api.Controllers.ItemNftUserController.AssignItemNftForUser(System.Collections.Generic.List{System.Int32},System.Int32)">
             <summary>
             Add new 
             </summary>
@@ -726,9 +753,65 @@
             <param name="model"></param>
             <returns></returns>
         </member>
+        <member name="M:ERPSystem.Api.Controllers.ItemNftUserController.Edit(System.Collections.Generic.List{System.Int32})">
+            <summary>
+            Edit  by id
+            </summary>
+            <param name="idItemList"></param>
+            <returns></returns>
+        </member>
         <member name="M:ERPSystem.Api.Controllers.ItemNftUserController.Delete(System.Int32)">
             <summary>
             Delete  by id
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ERPSystem.Api.Controllers.MeetingLogController.Gets(System.Int32,System.Collections.Generic.List{System.Int32},System.Collections.Generic.List{System.Int32},System.Int32,System.Int32,System.String,System.String)">
+            <summary>
+            Get list meeting log
+            </summary>
+            <param name="userId"></param>
+            <param name="meetingRoomIds"></param>
+            <param name="folderLogs"></param>
+            <param name="pageNumber"></param>
+            <param name="pageSize"></param>
+            <param name="sortColumn"></param>
+            <param name="sortDirection"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ERPSystem.Api.Controllers.MeetingLogController.Add(ERPSystem.DataModel.MeetingLog.MeetingLogModel)">
+            <summary>
+            Add new meeting log
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ERPSystem.Api.Controllers.MeetingLogController.DeleteMulti(System.Collections.Generic.List{System.Int32})">
+            <summary>
+            Delete multi meeting log
+            </summary>
+            <param name="ids"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ERPSystem.Api.Controllers.MeetingLogController.GetById(System.Int32)">
+            <summary>
+            Get detail meeting log by id
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ERPSystem.Api.Controllers.MeetingLogController.Edit(System.Int32,ERPSystem.DataModel.MeetingLog.MeetingLogModel)">
+            <summary>
+            Edit meeting log by id
+            </summary>
+            <param name="id"></param>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ERPSystem.Api.Controllers.MeetingLogController.Delete(System.Int32)">
+            <summary>
+            Delete meeting log by id
             </summary>
             <param name="id"></param>
             <returns></returns>
@@ -776,55 +859,6 @@
             <returns></returns>
         </member>
         <member name="M:ERPSystem.Api.Controllers.MeetingRoomController.Delete(System.Int32)">
-            <summary>
-            Delete meeting log by id
-            </summary>
-            <param name="id"></param>
-            <returns></returns>
-        </member>
-        <member name="M:ERPSystem.Api.Controllers.MeetingLogController.Gets(System.String,System.Collections.Generic.List{System.Int32},System.Collections.Generic.List{System.Int32},System.Int32,System.Int32,System.String,System.String)">
-            <summary>
-            Get list meeting log
-            </summary>
-            <param name="search"></param>
-            <param name="meetingRoomIds"></param>
-            <param name="folderLogs"></param>
-            <param name="pageNumber"></param>
-            <param name="pageSize"></param>
-            <param name="sortColumn"></param>
-            <param name="sortDirection"></param>
-            <returns></returns>
-        </member>
-        <member name="M:ERPSystem.Api.Controllers.MeetingLogController.Add(ERPSystem.DataModel.MeetingLog.MeetingLogModel)">
-            <summary>
-            Add new meeting log
-            </summary>
-            <param name="model"></param>
-            <returns></returns>
-        </member>
-        <member name="M:ERPSystem.Api.Controllers.MeetingLogController.DeleteMulti(System.Collections.Generic.List{System.Int32})">
-            <summary>
-            Delete multi meeting log
-            </summary>
-            <param name="ids"></param>
-            <returns></returns>
-        </member>
-        <member name="M:ERPSystem.Api.Controllers.MeetingLogController.GetById(System.Int32)">
-            <summary>
-            Get detail meeting log by id
-            </summary>
-            <param name="id"></param>
-            <returns></returns>
-        </member>
-        <member name="M:ERPSystem.Api.Controllers.MeetingLogController.Edit(System.Int32,ERPSystem.DataModel.MeetingLog.MeetingLogModel)">
-            <summary>
-            Edit meeting log by id
-            </summary>
-            <param name="id"></param>
-            <param name="model"></param>
-            <returns></returns>
-        </member>
-        <member name="M:ERPSystem.Api.Controllers.MeetingLogController.Delete(System.Int32)">
             <summary>
             Delete meeting log by id
             </summary>
@@ -971,6 +1005,16 @@
             </summary>
             <param name="id"></param>
             <param name="groupId">
+            UpdatedOn: Format MM.DD.YYYY HH:mm:ss
+            </param>
+            <returns></returns>
+        </member>
+        <member name="M:ERPSystem.Api.Controllers.UserController.UserOutGroup(System.Int32,System.Double)">
+            <summary>
+            Update user by id
+            </summary>
+            <param name="userId"></param>
+            <param name="balance">
             UpdatedOn: Format MM.DD.YYYY HH:mm:ss
             </param>
             <returns></returns>

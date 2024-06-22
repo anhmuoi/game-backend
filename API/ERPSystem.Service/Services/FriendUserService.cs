@@ -32,6 +32,8 @@ public interface IFriendUserService
     int AddFriendUser(FriendUserAddModel model);
     bool UpdateFriendUser(FriendUserEditModel model);
     bool DeleteMultiFriendUsers(List<int> ids);
+    bool RequestAddFriend(int userId1, int userId2);
+    bool ConfirmAddFriend(int userId1, int userId2, bool confirm);
    
 }
 
@@ -45,15 +47,17 @@ public class FriendUserService : IFriendUserService
     private readonly IAccountService _accountService;
     private readonly IMailTemplateService _mailTemplateService;
     private readonly IMailService _mailService;
+    private readonly IUserService _userService;
 
 
-    public FriendUserService(IUnitOfWork unitOfWork, IOptions<JwtOptionsModel> options, IJwtHandler jwtHandler, IMapper mapper, IAccountService accountService, IMailTemplateService mailTemplateService, IMailService mailService)
+    public FriendUserService(IUnitOfWork unitOfWork, IOptions<JwtOptionsModel> options, IJwtHandler jwtHandler, IMapper mapper, IAccountService accountService, IMailTemplateService mailTemplateService, IMailService mailService, IUserService userService)
     {
         _unitOfWork = unitOfWork;
         _logger = ApplicationVariables.LoggerFactory.CreateLogger<FriendUserService>();
         _jwtHandler = jwtHandler;
         _options = options?.Value;
         _mapper = mapper;
+        _userService = userService;
         _accountService = accountService;
         _mailTemplateService = mailTemplateService;
         _mailService = mailService;
@@ -222,7 +226,74 @@ public class FriendUserService : IFriendUserService
     
    
     
-  
+  public bool RequestAddFriend(int userId1, int userId2)
+    {
+        bool result = false;
+        _unitOfWork.AppDbContext.Database.CreateExecutionStrategy().Execute(() =>
+        {
+            using (var transaction = _unitOfWork.AppDbContext.Database.BeginTransaction())
+            {
+                try
+                {
+                    
+                    var user1 = _unitOfWork.UserRepository.GetById(userId1);
+                    var user2 = _unitOfWork.UserRepository.GetById(userId2);
+
+                    var account2 = _unitOfWork.AccountRepository.GetById(user2.AccountId.Value);
+                   _userService.SendAddFriendEmail(account2, user1, user2);
+                    transaction.Commit();
+                    result = true;
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogError(ex.Message + ex.StackTrace);
+                    transaction.Rollback();
+                    result = false;
+                }
+            }
+        });
+        return result;
+    }
+    public bool ConfirmAddFriend(int userId1, int userId2, bool confirm)
+    {
+        bool result = false;
+        _unitOfWork.AppDbContext.Database.CreateExecutionStrategy().Execute(() =>
+        {
+            using (var transaction = _unitOfWork.AppDbContext.Database.BeginTransaction())
+            {
+                try
+                {
+                    if(confirm == true)
+                    {
+                        var friendUser = new FriendUser();
+                        friendUser.UserId1 = userId1;
+                        friendUser.UserId2 = userId2;
+                        _unitOfWork.FriendUserRepository.Add(friendUser);
+                        _unitOfWork.Save();
+                    }
+
+
+                    var user1 = _unitOfWork.UserRepository.GetById(userId1);
+                    var user2 = _unitOfWork.UserRepository.GetById(userId2);
+
+                    var account1 = _unitOfWork.AccountRepository.GetById(user1.AccountId.Value);
+
+            
+
+                   _userService.SendConfirmAddFriendEmail(account1, user1, user2, confirm);
+                    transaction.Commit();
+                    result = true;
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogError(ex.Message + ex.StackTrace);
+                    transaction.Rollback();
+                    result = false;
+                }
+            }
+        });
+        return result;
+    }
 
    
 }

@@ -20,6 +20,7 @@ using AutoMapper;
 using System.Linq.Dynamic.Core;
 using Newtonsoft.Json.Linq;
 using MimeKit;
+using Microsoft.AspNetCore.Http;
 
 namespace ERPSystem.Service.Services;
 
@@ -32,6 +33,8 @@ public interface IBalanceHistoryService
     int AddBalanceHistory(BalanceHistoryAddModel model);
     bool UpdateBalanceHistory(BalanceHistoryEditModel model);
     bool DeleteMultiBalanceHistorys(List<int> ids);
+
+    List<DataChart> GetChart(DateTime start, DateTime end, int userId);
    
 }
 
@@ -45,9 +48,11 @@ public class BalanceHistoryService : IBalanceHistoryService
     private readonly IAccountService _accountService;
     private readonly IMailTemplateService _mailTemplateService;
     private readonly IMailService _mailService;
+    private readonly HttpContext _httpContext;
 
 
-    public BalanceHistoryService(IUnitOfWork unitOfWork, IOptions<JwtOptionsModel> options, IJwtHandler jwtHandler, IMapper mapper, IAccountService accountService, IMailTemplateService mailTemplateService, IMailService mailService)
+
+    public BalanceHistoryService(IUnitOfWork unitOfWork, IOptions<JwtOptionsModel> options, IJwtHandler jwtHandler, IMapper mapper, IAccountService accountService, IMailTemplateService mailTemplateService, IMailService mailService, IHttpContextAccessor contextAccessor)
     {
         _unitOfWork = unitOfWork;
         _logger = ApplicationVariables.LoggerFactory.CreateLogger<BalanceHistoryService>();
@@ -57,6 +62,7 @@ public class BalanceHistoryService : IBalanceHistoryService
         _accountService = accountService;
         _mailTemplateService = mailTemplateService;
         _mailService = mailService;
+        _httpContext = contextAccessor.HttpContext;
 
     }
 
@@ -218,7 +224,49 @@ public class BalanceHistoryService : IBalanceHistoryService
         return result;
     }
     
-    
+   public List<DataChart> GetChart(DateTime start, DateTime end, int userId)
+    {
+        List<DataChart> result = new List<DataChart>();
+        string timezone = _httpContext.User.GetTimezone() ?? "";
+        int totalDay = (int)(end.Date - start.Date).TotalDays + 1;
+
+        DateTime newDate = end;
+        decimal? lastKnownBalance = null; // Biến lưu trữ giá trị cuối cùng đã biết
+
+        for (int i = 1; i < totalDay; i++)
+        {
+            var startDate = newDate.AddDays(-i).ConvertToSystemTime(timezone);
+            var endDate = startDate.AddDays(1);
+
+            // Lấy các bản ghi balance của từng ngày
+            var balanceList = _unitOfWork.BalanceHistoryRepository.GetByTime(startDate, endDate)
+                                .Where(b => b.UserId == userId)
+                                .OrderBy(b => b.CreatedOn) 
+                                .ToList();
+
+            if (balanceList.Any())
+            {
+                // Lấy giá trị cuối cùng của ngày và chuyển đổi sang decimal?
+                lastKnownBalance = (decimal?)balanceList.Last().Balance;
+            }
+
+            // Nếu có giá trị cuối cùng đã biết, thêm vào danh sách kết quả
+            if (lastKnownBalance.HasValue)
+            {
+                result.Add(new DataChart() { Name = $"{startDate:dd/MM/yy}", Value = (double)lastKnownBalance.Value });
+            }
+        }
+
+        // Đảo ngược danh sách để đúng thứ tự thời gian
+        result.Reverse();
+
+        return result;
+    }
+
+
+
+
+
    
     
   

@@ -21,6 +21,7 @@ namespace ERPSystem.Service.Protocol
         public string Name { get; set; }
         public string Description { get; set; }
         public bool IsRunning { get; set; }
+        public string PasswordRoom { get; set; }
         public int TotalPeople { get; set; }
         public int CurrentPeople { get; set; }
         public double Price { get; set; }

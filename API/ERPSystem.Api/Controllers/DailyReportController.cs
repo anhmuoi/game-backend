@@ -56,7 +56,6 @@ public class DailyReportController : ControllerBase
     [HttpGet]
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     [Route(Constants.Route.ApiDailyReports)]
-    [CheckPermission(PagePermission.ActionName.View + PagePermission.Page.DailyReport)]
     public IActionResult Gets(string search, List<int> userIds, List<int> folderLogs, List<int> reporters,List<int> departmentIds , DateTime start, DateTime end, int pageNumber = 1, int pageSize = 10,
         string sortColumn = "userId",
         string sortDirection = "asc")
@@ -80,7 +79,6 @@ public class DailyReportController : ControllerBase
     /// <returns></returns>
     [HttpPost]
     [Route(Constants.Route.ApiDailyReports)]
-    [CheckPermission(PagePermission.ActionName.Add + PagePermission.Page.DailyReport)]
     public IActionResult Add([FromBody] DailyReportModel model)
     {
         if (!ModelState.IsValid)
@@ -104,7 +102,6 @@ public class DailyReportController : ControllerBase
     /// <returns></returns>
     [HttpDelete]
     [Route(Constants.Route.ApiDailyReports)]
-    [CheckPermission(PagePermission.ActionName.Delete + PagePermission.Page.DailyReport)]
     public IActionResult DeleteMulti(List<int> ids)
     {
         if (ids is not { Count: > 0 })
@@ -136,7 +133,6 @@ public class DailyReportController : ControllerBase
     /// <returns></returns>
     [HttpGet]
     [Route(Constants.Route.ApiDailyReportsId)]
-    [CheckPermission(PagePermission.ActionName.View + PagePermission.Page.DailyReport)]
     public IActionResult GetById(int id)
     {
         var item = _dailyReportService.GetById(id);
@@ -154,7 +150,6 @@ public class DailyReportController : ControllerBase
     /// <returns></returns>
     [HttpGet]
     [Route(Constants.Route.ApiDailyReportsByUserIdAndDate)]
-    [CheckPermission(PagePermission.ActionName.View + PagePermission.Page.DailyReport)]
     public IActionResult GetByUserIdAndDate(int userId, string date)
     {
         var item = _dailyReportService.GetByUserIdAndDate(userId, date);
@@ -174,7 +169,6 @@ public class DailyReportController : ControllerBase
     /// <returns></returns>
     [HttpPut]
     [Route(Constants.Route.ApiDailyReportsId)]
-    [CheckPermission(PagePermission.ActionName.Edit + PagePermission.Page.DailyReport)]
     public IActionResult Edit(int id, [FromBody] DailyReportModel model)
     {
         var item = _dailyReportService.GetById(id);
@@ -213,7 +207,6 @@ public class DailyReportController : ControllerBase
     /// <returns></returns>
     [HttpDelete]
     [Route(Constants.Route.ApiDailyReportsId)]
-    [CheckPermission(PagePermission.ActionName.Delete + PagePermission.Page.DailyReport)]
     public IActionResult Delete(int id)
     {
         var item = _dailyReportService.GetById(id);

@@ -22,7 +22,7 @@ public class CheckPermission : AuthorizeAttribute, IAuthorizationFilter
 
     public void OnAuthorization(AuthorizationFilterContext context)
     {
-        string authorHeader = context.HttpContext.Request.Headers["Authorization"];
+       string authorHeader = context.HttpContext.Request.Headers["Authorization"];
 
         if (string.IsNullOrEmpty(authorHeader) || authorHeader.Length < 7)
         {

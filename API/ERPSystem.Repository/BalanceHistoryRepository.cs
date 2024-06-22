@@ -8,6 +8,7 @@ public interface IBalanceHistoryRepository : IGenericRepository<BalanceHistory>
 {
     IQueryable<BalanceHistory> Gets();
     BalanceHistory GetById(int userId);
+    public IQueryable<BalanceHistory> GetByTime(DateTime start, DateTime end);
 
 }
 
@@ -28,6 +29,11 @@ public class BalanceHistoryRepository : GenericRepository<BalanceHistory>, IBala
     {
         var balanceHistory = _dbContext.BalanceHistory.FirstOrDefault(n=>n.Id == id);
         return balanceHistory;
+    }
+    public IQueryable<BalanceHistory> GetByTime(DateTime start, DateTime end)
+    {
+        return _dbContext.BalanceHistory
+            .Where(m => start <= m.CreatedOn && m.CreatedOn < end);
     }
    
 }

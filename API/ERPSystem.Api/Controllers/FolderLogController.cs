@@ -69,7 +69,6 @@ public class FolderLogController : ControllerBase
     [HttpGet]
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     [Route(Constants.Route.ApiFolderLogs)]
-    [CheckPermission(PagePermission.ActionName.View + PagePermission.Page.Folder)]
     public IActionResult Gets(string search, int pageNumber = 1, int pageSize = 10,
         string sortColumn = "Title",
         string sortDirection = "asc")
@@ -93,7 +92,6 @@ public class FolderLogController : ControllerBase
     /// <returns></returns>
     [HttpPost]
     [Route(Constants.Route.ApiFolderLogs)]
-    [CheckPermission(PagePermission.ActionName.Add + PagePermission.Page.Folder)]
     public IActionResult Add([FromBody] FolderLogModel model)
     {
         if (!ModelState.IsValid)
@@ -117,7 +115,6 @@ public class FolderLogController : ControllerBase
     /// <returns></returns>
     [HttpDelete]
     [Route(Constants.Route.ApiFolderLogs)]
-    [CheckPermission(PagePermission.ActionName.Delete + PagePermission.Page.Folder)]
     public IActionResult DeleteMulti(List<int> ids)
     {
         if (ids is not { Count: > 0 })
@@ -141,7 +138,6 @@ public class FolderLogController : ControllerBase
     /// <returns></returns>
     [HttpGet]
     [Route(Constants.Route.ApiFolderLogsId)]
-    [CheckPermission(PagePermission.ActionName.View + PagePermission.Page.Folder)]
     public IActionResult GetById(int id)
     {
         var item = _folderLogService.GetById(id);
@@ -159,7 +155,6 @@ public class FolderLogController : ControllerBase
     /// <returns></returns>
     [HttpGet]
     [Route(Constants.Route.ApiFolderLogsIds)]
-    [CheckPermission(PagePermission.ActionName.View + PagePermission.Page.Folder)]
     public IActionResult GetByIds(List<int> ids)
     {
         var item = _folderLogService.GetByIds(ids);
@@ -179,7 +174,6 @@ public class FolderLogController : ControllerBase
     /// <returns></returns>
     [HttpPut]
     [Route(Constants.Route.ApiFolderLogsId)]
-    [CheckPermission(PagePermission.ActionName.Edit + PagePermission.Page.Folder)]
     public IActionResult Edit(int id, [FromBody] FolderLogModel model)
     {
         var item = _folderLogService.GetById(id);
@@ -211,7 +205,6 @@ public class FolderLogController : ControllerBase
     /// <returns></returns>
     [HttpDelete]
     [Route(Constants.Route.ApiFolderLogsId)]
-    [CheckPermission(PagePermission.ActionName.Delete + PagePermission.Page.Folder)]
     public IActionResult Delete(int id)
     {
         var item = _folderLogService.GetById(id);

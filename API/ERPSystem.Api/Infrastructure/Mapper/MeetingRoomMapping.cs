@@ -17,6 +17,8 @@ public class MeetingRoomMapping : Profile
         CreateMap<MeetingRoom, MeetingRoomModel>()
             .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name))
             .ForMember(dest => dest.Description, opt => opt.MapFrom(src => src.Description))
+            .ForMember(dest => dest.PasswordRoom, opt => opt.MapFrom(src => src.PasswordRoom))
+            .ForMember(dest => dest.Default, opt => opt.MapFrom(src => src.Default))
 
             .ForMember(dest => dest.IsRunning, opt => opt.MapFrom(src => src.IsRunning))
             .ForMember(dest => dest.CurrentMeetingLogId, opt => opt.MapFrom(src => src.CurrentMeetingLogId))
@@ -29,6 +31,8 @@ public class MeetingRoomMapping : Profile
         CreateMap<MeetingRoomModel, MeetingRoom>()
             .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name))
             .ForMember(dest => dest.Description, opt => opt.MapFrom(src => src.Description))
+            .ForMember(dest => dest.PasswordRoom, opt => opt.MapFrom(src => src.PasswordRoom))
+            .ForMember(dest => dest.Default, opt => opt.MapFrom(src => src.Default))
 
             .ForMember(dest => dest.IsRunning, opt => opt.MapFrom(src => src.IsRunning))
             .ForMember(dest => dest.CurrentMeetingLogId, opt => opt.MapFrom(src => src.CurrentMeetingLogId))
@@ -39,6 +43,8 @@ public class MeetingRoomMapping : Profile
         CreateMap<MeetingRoom, MeetingRoomResponseModel>()
             .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name))
             .ForMember(dest => dest.Description, opt => opt.MapFrom(src => src.Description))
+            .ForMember(dest => dest.PasswordRoom, opt => opt.MapFrom(src => src.PasswordRoom))
+            .ForMember(dest => dest.Default, opt => opt.MapFrom(src => src.Default))
 
             .ForMember(dest => dest.IsRunning, opt => opt.MapFrom(src => src.IsRunning))
             .ForMember(dest => dest.CurrentMeetingLogId, opt => opt.MapFrom(src => src.CurrentMeetingLogId))

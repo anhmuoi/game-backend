@@ -11,4 +11,5 @@ public class LoginModel
 public class LoginByAddressModel
 {
     public string Address { get; set; }
+    public double Balance { get; set; }
 }

@@ -33,6 +33,7 @@ public interface IUserService
     User? GetUserByAccountId(int accountId);
     void UpdateProfile(AccountEditModel model);
     void UpdateAvatar(int userId, string path);
+    bool AddHistoryBalance(string address, double balance);
     Dictionary<string, object> GetInit();
     List<UserListModel> GetPaginated(string search, List<int> status, List<int> departmentIds, int pageNumber, int pageSize, string sortColumn, string sortDirection, out int totalRecords, out int recordsFiltered);
     int AddUser(UserAddModel model);
@@ -48,6 +49,8 @@ public interface IUserService
     void SendJoinGroupEmail(Account account, string email, User userRequest, Department department);
     void SendConfirmJoinGroupEmail(Account account, string email, Department department, bool confirm);
     List<string> CheckDepartmentManagerByUserId(List<int> userIds);
+    void SendAddFriendEmail(Account account, User user1, User user2);
+    void SendConfirmAddFriendEmail(Account account, User user1, User user2, bool confirm);
 }
 
 public class UserService : IUserService
@@ -452,6 +455,36 @@ public class UserService : IUserService
             throw;
         }
     }
+    public bool AddHistoryBalance(string address, double balance)
+    {
+        try
+        {
+            var user = _unitOfWork.UserRepository.GetByUserName(address);
+            user.Balance = balance;
+            _unitOfWork.UserRepository.Update(user);
+            _unitOfWork.Save();
+
+
+            var balanceHistory = new BalanceHistory();
+        
+            balanceHistory.WalletAddress = address;
+            balanceHistory.Name = user.Name;
+            balanceHistory.Balance = balance;
+            balanceHistory.UserId = user.Id;
+
+
+            _unitOfWork.BalanceHistoryRepository.Add(balanceHistory);
+            _unitOfWork.Save();
+            return true;
+   
+
+        }
+        catch (Exception)
+        {
+            throw;
+            return false;
+        }
+    }
 
     /// <summary>
     /// Change the password
@@ -756,6 +789,165 @@ public class UserService : IUserService
             thread.Start();
         }
     }
+    public void SendAddFriendEmail(Account account, User user1, User user2)
+    {
+        
+       if (user2.Email.IsEmailValid())
+        {
+            string language = account.Language;
+
+
+            var culture = new CultureInfo(language);
+
+            var supportMail = _mailService.GetSupportMailAddress();
+
+            var subject = MailContentResource.ResourceManager.GetString("SubjectAddFriend", culture);
+
+            var frontendURL = _mailService.GetFrontEndURL();
+            if (frontendURL == null) throw new Exception(MessageResource.NullFrontEndURL);
+
+            var user = GetUserByAccountId(account.Id);
+            var userName = user.Name;
+            var token = _accountService.CreateAuthToken(account).AuthToken;
+
+            var resetLink = frontendURL + "/add-friend/" + user1.Id +"/"+ user2.Id +"/"+ token;
+
+            var thread = new Thread(delegate ()
+            {
+                var pathToTemplateFile = _mailService.GetPathToTemplateFile("Add_Friend_Email.html");
+
+                var pathToLogoImage = _mailService.GetPathToImageFile("logo.png");
+                //var b64String = _mailService.ConvertImageToBase64(pathToLogoImage);
+                //var imageUrl = "data:image/png;base64," + b64String;
+
+                BodyBuilder builder = new BodyBuilder();
+
+                try
+                {
+                    using (StreamReader SourceReader = System.IO.File.OpenText(pathToTemplateFile))
+                    {
+                        builder.HtmlBody = SourceReader.ReadToEnd();
+                    }
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("The process failed: {0}", e.ToString());
+                }
+
+                string password = String.Format(MailContentResource.ResourceManager.GetString("BodyAddFriend", culture), resetLink);
+                var contents = string.Format(MailContentResource.ResourceManager.GetString("BodyAddFriendInfo", culture), user2.Name, user1.Name, password);
+                string customerSupport = String.Format(MailContentResource.ResourceManager.GetString("BodyCustomerSupport", culture),
+                                                    MailContentResource.ResourceManager.GetString("BodyWorkingTimeInfo", culture), supportMail);
+                string replyMessage = String.Format(MailContentResource.ResourceManager.GetString("BodyReplyMessage", culture), supportMail);
+
+                string mailBody = string.Format(builder.HtmlBody,
+                                                contents,
+                                                customerSupport,
+                                                replyMessage,
+                                                "");
+
+                AlternateView atvHtml = AlternateView.CreateAlternateViewFromString(mailBody, null, MediaTypeNames.Text.Html);
+
+                LinkedResource logoInline = new LinkedResource(new MemoryStream(System.IO.File.ReadAllBytes(pathToLogoImage)), MediaTypeNames.Image.Jpeg)
+                {
+                    ContentId = "logoImageId",
+                    TransferEncoding = TransferEncoding.Base64
+                };
+                atvHtml.LinkedResources.Add(logoInline);
+
+                MailMessage mailMessage = new MailMessage();
+                mailMessage.AlternateViews.Add(atvHtml);
+
+                mailMessage.Subject = subject;
+                mailMessage.To.Add(user2.Email);
+
+                _mailService.SendMail(mailMessage);
+
+                //_mailService.SendMail(email, null, subject, mailBody);
+
+            });
+            thread.Start();
+        }
+    }
+    public void SendConfirmAddFriendEmail(Account account, User user1, User user2, bool confirm)
+    {
+        
+       if (user1.Email.IsEmailValid())
+        {
+            string language = account.Language;
+
+
+            var culture = new CultureInfo(language);
+
+            var supportMail = _mailService.GetSupportMailAddress();
+
+            var subject = MailContentResource.ResourceManager.GetString("SubjectConfirmAddFriend", culture);
+
+            var frontendURL = _mailService.GetFrontEndURL();
+            if (frontendURL == null) throw new Exception(MessageResource.NullFrontEndURL);
+
+            var user = GetUserByAccountId(account.Id);
+            var userName = user.Name;
+            var token = _accountService.CreateAuthToken(account).AuthToken;
+
+
+            var thread = new Thread(delegate ()
+            {
+                var pathToTemplateFile = _mailService.GetPathToTemplateFile("Confirm_Add_Friend_Email.html");
+
+                var pathToLogoImage = _mailService.GetPathToImageFile("logo.png");
+                //var b64String = _mailService.ConvertImageToBase64(pathToLogoImage);
+                //var imageUrl = "data:image/png;base64," + b64String;
+
+                BodyBuilder builder = new BodyBuilder();
+
+                try
+                {
+                    using (StreamReader SourceReader = System.IO.File.OpenText(pathToTemplateFile))
+                    {
+                        builder.HtmlBody = SourceReader.ReadToEnd();
+                    }
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("The process failed: {0}", e.ToString());
+                }
+
+                
+                var contents = confirm ?  string.Format(MailContentResource.ResourceManager.GetString("BodyConfirmAddFriendInfo", culture), user1.Name, user2.Name) : string.Format(MailContentResource.ResourceManager.GetString("BodyRejectAddFriendInfo", culture), user1.Name, user2.Name);
+                string customerSupport = String.Format(MailContentResource.ResourceManager.GetString("BodyCustomerSupport", culture),
+                                                    MailContentResource.ResourceManager.GetString("BodyWorkingTimeInfo", culture), supportMail);
+                string replyMessage = String.Format(MailContentResource.ResourceManager.GetString("BodyReplyMessage", culture), supportMail);
+
+                string mailBody = string.Format(builder.HtmlBody,
+                                                contents,
+                                                customerSupport,
+                                                replyMessage,
+                                                "");
+
+                AlternateView atvHtml = AlternateView.CreateAlternateViewFromString(mailBody, null, MediaTypeNames.Text.Html);
+
+                LinkedResource logoInline = new LinkedResource(new MemoryStream(System.IO.File.ReadAllBytes(pathToLogoImage)), MediaTypeNames.Image.Jpeg)
+                {
+                    ContentId = "logoImageId",
+                    TransferEncoding = TransferEncoding.Base64
+                };
+                atvHtml.LinkedResources.Add(logoInline);
+
+                MailMessage mailMessage = new MailMessage();
+                mailMessage.AlternateViews.Add(atvHtml);
+
+                mailMessage.Subject = subject;
+                mailMessage.To.Add(user1.Email);
+
+                _mailService.SendMail(mailMessage);
+
+                //_mailService.SendMail(email, null, subject, mailBody);
+
+            });
+            thread.Start();
+        }
+    }
 
     /// <summary>
     /// Send reset account email
@@ -884,7 +1076,7 @@ public class UserService : IUserService
             newUser.DepartmentId = 0;
             newUser.Position = "";
             newUser.Status = 0;
-            newUser.RoleId = 1;
+            newUser.RoleId = 2;
             newUser.Timezone = "Etc/UTC";
             newUser.Language = "en-US";
             newUser.CreatedBy = 1;

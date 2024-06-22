@@ -8,13 +8,15 @@ using ERPSystem.Repository;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using System.Linq.Dynamic.Core;
+using Newtonsoft.Json;
+
 
 namespace ERPSystem.Service.Services;
 
 public interface IMeetingLogService
 {
     List<DashboardDataModel> GetWorkLogDashboards(DateTime date);
-    List<MeetingLogResponseModel> GetPaginated(string search, List<int> meetingRoomIds, List<int> folderLogs, int pageNumber, int pageSize, string sortColumn,
+    List<MeetingLogResponseModel> GetPaginated(int userId, List<int> meetingRoomIds, List<int> folderLogs, int pageNumber, int pageSize, string sortColumn,
         string sortDirection, out int totalRecords, out int recordsFiltered);
     bool Add(MeetingLogModel model);
     bool Update(MeetingLogModel model);
@@ -49,28 +51,42 @@ public class MeetingLogService : IMeetingLogService
             .OrderBy(x => x.StartDate)
             .ToList();
     }
-    public List<MeetingLogResponseModel> GetPaginated(string search, List<int> meetingRoomIds, List<int> folderLogs, int pageNumber, int pageSize, string sortColumn,
+    public List<MeetingLogResponseModel> GetPaginated(int userId, List<int> meetingRoomIds, List<int> folderLogs, int pageNumber, int pageSize, string sortColumn,
         string sortDirection, out int totalRecords, out int recordsFiltered)
     {
         List<MeetingLogResponseModel> result = new List<MeetingLogResponseModel>();
         var currentUser = _httpContext.User.GetAccountId();
         var data = _unitOfWork.MeetingLogRepository.GetAll().AsQueryable();
+
+        List<int> idFilter = new List<int>();
+        foreach (var item in data)
+        {
+            var userList = string.IsNullOrEmpty(item.UserList) || item.UserList == "null"
+                                    ? new List<UserData>()
+                                    : JsonConvert
+                                        .DeserializeObject<List<UserData>>(item
+                                            .UserList).ToList();
+            if(userList != null && userList.Count() >0)
+            {
+                if(userList.Where(m=>m.Id == userId).FirstOrDefault() != null)
+                {
+                    idFilter.Add(item.Id);
+                }
+            }
+        }
+
+        if (idFilter is { Count: > 0 })
+        {
+            data = data.Where(m => idFilter.Contains(m.Id));
+        }
         
         totalRecords = data.Count();
 
-        if (!string.IsNullOrEmpty(search))
-        {
-            data = data.Where(x => x.Title.ToLower().Contains(search.ToLower()));
-        }
-        if (meetingRoomIds is { Count: > 0 })
-        {
-            data = data.Where(m => meetingRoomIds.Contains(m.MeetingRoomId.Value));
-        }
-    
+       
 
-        recordsFiltered = data.Count();
         data = data.OrderBy($"{sortColumn} {sortDirection}");
         data = data.Skip((pageNumber - 1) * pageSize).Take(pageSize);
+        recordsFiltered = data.Count();
         
         foreach (var item in data)
         {

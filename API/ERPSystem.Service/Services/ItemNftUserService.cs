@@ -30,8 +30,9 @@ public interface IItemNftUserService
     Dictionary<string, object> GetInit();
     List<ItemNftUserListModel> GetPaginated(string search, List<int> status, int userId, bool getAll, int pageNumber, int pageSize, string sortColumn, string sortDirection, out int totalRecords, out int recordsFiltered);
     int AddItemNftUser(ItemNftUserAddModel model);
-    bool AssignItemNftForUser(int idItemNftId, int userId);
+    bool AssignItemNftForUser(List<int> idItemNftId, int userId);
     bool UpdateItemNftUser(ItemNftUserEditModel model);
+    bool UseItem(List<int> idItemList);
     bool DeleteMultiItemNftUsers(List<int> ids);
    
 }
@@ -195,7 +196,46 @@ public class ItemNftUserService : IItemNftUserService
         
         return result;
     }
-    public bool AssignItemNftForUser(int idItemNftId, int userId)
+    public bool UseItem(List<int> idItemList)
+    {
+        bool result = false;
+        _unitOfWork.AppDbContext.Database.CreateExecutionStrategy().Execute(() =>
+        {
+            using (var transaction = _unitOfWork.AppDbContext.Database.BeginTransaction())
+            {
+                try
+                {
+                    foreach(var itemId in idItemList)
+                    {
+
+                        // edit itemNftUser information
+                        var itemNftUser = _unitOfWork.ItemNftUserRepository.GetById(itemId);
+                        if (itemNftUser == null)
+                            throw new Exception($"Can not get itemNftUser by id = {itemId}");
+                        itemNftUser.Status = 2;
+                
+                        _unitOfWork.ItemNftUserRepository.Update(itemNftUser);
+                        _unitOfWork.Save();
+                    }
+
+
+                
+                    
+                    transaction.Commit();
+                    result = true;
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogError(ex.Message + ex.StackTrace);
+                    transaction.Rollback();
+                    result = false;
+                }
+            }
+        });
+        
+        return result;
+    }
+    public bool AssignItemNftForUser(List<int> idItemNftId, int userId)
     {
         bool result = false;
         _unitOfWork.AppDbContext.Database.CreateExecutionStrategy().Execute(() =>
@@ -205,8 +245,11 @@ public class ItemNftUserService : IItemNftUserService
                 try
                 {
                  
-                    _unitOfWork.ItemNftUserRepository.AddItemNftUser(idItemNftId, userId, 0);
-                    _unitOfWork.Save();
+                    foreach(var idNft in idItemNftId)
+                    {
+                        _unitOfWork.ItemNftUserRepository.AddItemNftUser(idNft, userId, 0);
+                        _unitOfWork.Save();
+                    }
 
 
                 
@@ -260,6 +303,8 @@ public class ItemNftUserService : IItemNftUserService
 
         return result;
     }
+    
+
     
     
    

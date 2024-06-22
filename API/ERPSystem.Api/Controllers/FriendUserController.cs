@@ -13,12 +13,13 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ERPSystem.Api.Controllers;
 
-[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+
 public class FriendUserController : ControllerBase
 {
     private readonly HttpContext _httpContext;
     private readonly IConfiguration _configuration;
     private readonly IFriendUserService _friendUserService;
+    private readonly IJwtHandler _jwtHandler;
     private readonly IMapper _mapper;
 
     public FriendUserController(IHttpContextAccessor httpContextAccessor, IConfiguration configuration,
@@ -29,6 +30,7 @@ public class FriendUserController : ControllerBase
         _configuration = configuration;
         _friendUserService = friendUserService;
         _mapper = mapper;
+        _jwtHandler = jwtHandler;
     }
 
     /// <summary>
@@ -42,8 +44,8 @@ public class FriendUserController : ControllerBase
     /// <returns></returns>
     [HttpGet]
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [Route(Constants.Route.ApiFriendUsers)]
-    [CheckPermission(PagePermission.ActionName.View + PagePermission.Page.Meeting)]
     public IActionResult Gets(int userId, int pageNumber = 1, int pageSize = 10,
         string sortColumn = "CreatedOn",
         string sortDirection = "asc")
@@ -66,8 +68,8 @@ public class FriendUserController : ControllerBase
     /// <param name="model"></param>
     /// <returns></returns>
     [HttpPost]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [Route(Constants.Route.ApiFriendUsers)]
-    [CheckPermission(PagePermission.ActionName.Add + PagePermission.Page.Meeting)]
     public IActionResult Add([FromBody] FriendUserAddModel model)
     {
         if (!ModelState.IsValid)
@@ -91,8 +93,8 @@ public class FriendUserController : ControllerBase
     /// <param name="ids"></param>
     /// <returns></returns>
     [HttpDelete]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [Route(Constants.Route.ApiFriendUsers)]
-    [CheckPermission(PagePermission.ActionName.Delete + PagePermission.Page.Meeting)]
     public IActionResult DeleteMulti(List<int> ids)
     {
         if (ids is not { Count: > 0 })
@@ -116,8 +118,8 @@ public class FriendUserController : ControllerBase
     /// <param name="id"></param>
     /// <returns></returns>
     [HttpGet]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [Route(Constants.Route.ApiFriendUsersId)]
-    [CheckPermission(PagePermission.ActionName.View + PagePermission.Page.Meeting)]
     public IActionResult GetById(int id)
     {
         var item = _friendUserService.GetById(id);
@@ -136,8 +138,8 @@ public class FriendUserController : ControllerBase
     /// <param name="model"></param>
     /// <returns></returns>
     [HttpPut]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [Route(Constants.Route.ApiFriendUsersId)]
-    [CheckPermission(PagePermission.ActionName.Edit + PagePermission.Page.Meeting)]
     public IActionResult Edit(int id, [FromBody] FriendUserEditModel model)
     {
         var item = _friendUserService.GetById(id);
@@ -170,8 +172,8 @@ public class FriendUserController : ControllerBase
     /// <param name="id"></param>
     /// <returns></returns>
     [HttpDelete]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [Route(Constants.Route.ApiFriendUsersId)]
-    [CheckPermission(PagePermission.ActionName.Delete + PagePermission.Page.Meeting)]
     public IActionResult Delete(int id)
     {
         var item = _friendUserService.GetById(id);
@@ -187,5 +189,58 @@ public class FriendUserController : ControllerBase
         }
 
         return new ApiSuccessResult(StatusCodes.Status200OK, MessageResource.msgDeleteSuccess);
+    }
+
+
+    /// <summary>
+    /// send request add friend 
+    /// </summary>
+    /// <param name="userId1"></param>
+    /// <param name="userId2"></param>
+    /// <returns></returns>
+    [HttpPost]
+    [Route(Constants.Route.ApiFriendsIdAddFriend)]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+    public IActionResult RequestAddFriend(int userId1, int userId2)
+    {
+        
+        bool result = _friendUserService.RequestAddFriend(userId1, userId2);
+        if (!result)
+        {
+            return new ApiErrorResult(StatusCodes.Status422UnprocessableEntity, MessageResource.msgUpdateFailed);
+        }
+
+        return new ApiSuccessResult(StatusCodes.Status200OK, MessageResource.msgUpdateSuccess);
+    }
+
+
+    /// <summary>
+    /// confirm request add friend 
+    /// </summary>
+    /// <param name="userId1"></param>
+    /// <param name="userId2"></param>
+    /// <param name="token"></param>
+    /// <param name="confirm"></param>
+    /// <returns></returns>
+    [HttpPost]
+    [AllowAnonymous]
+    [Route(Constants.Route.ApiFriendsIdConfirmAddFriend)]
+    public IActionResult ConfirmAddFriend(int userId1, int userId2, bool confirm, string token)
+    {
+
+        var clAcc = _jwtHandler.GetPrincipalFromExpiredToken(token);
+        if (clAcc == null)
+        {
+            return new ApiErrorResult(StatusCodes.Status400BadRequest, MessageResource.InvalidInformation);
+        }
+       
+
+        bool result = _friendUserService.ConfirmAddFriend(userId1, userId2, confirm);
+        if (!result)
+        {
+            return new ApiErrorResult(StatusCodes.Status422UnprocessableEntity, MessageResource.msgUpdateFailed);
+        }
+
+        return new ApiSuccessResult(StatusCodes.Status200OK, MessageResource.msgUpdateSuccess);
     }
 }

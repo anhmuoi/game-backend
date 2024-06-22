@@ -40,7 +40,7 @@ public class MeetingRoomService : IMeetingRoomService
     {
         List<MeetingRoomResponseModel> result = new List<MeetingRoomResponseModel>();
         var currentUser = _httpContext.User.GetAccountId();
-        var data = _unitOfWork.MeetingRoomRepository.GetAll().AsQueryable();
+        var data = _unitOfWork.MeetingRoomRepository.GetAll().AsQueryable().Where(m => m.IsDelete == false);
         
         totalRecords = data.Count();
 

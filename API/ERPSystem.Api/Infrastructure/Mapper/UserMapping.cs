@@ -24,6 +24,8 @@ public class UserMapping : Profile
             .ForMember(dest => dest.Status, opt => opt.MapFrom(src => src.Status))
             .ForMember(dest => dest.WalletAddress, opt => opt.MapFrom(src => src.WalletAddress))
             .ForMember(dest => dest.Balance, opt => opt.MapFrom(src => src.Balance))
+            .ForMember(dest => dest.TotalWin, opt => opt.MapFrom(src => src.TotalWin))
+            .ForMember(dest => dest.TotalLose, opt => opt.MapFrom(src => src.TotalLose))
             .ForMember(dest => dest.AccountId, opt => opt.MapFrom(src => src.AccountId));
 
         CreateMap<User, UserModel>()
@@ -45,6 +47,8 @@ public class UserMapping : Profile
             .ForMember(dest => dest.CreatedOn, opt => opt.MapFrom(src => src.CreatedOn.ConvertDefaultDateTimeToString(Constants.Settings.DateTimeFormatDefault)))
             .ForMember(dest => dest.Avatar, opt => opt.MapFrom(src => src.Avatar))
             .ForMember(dest => dest.Balance, opt => opt.MapFrom(src => src.Balance))
+            .ForMember(dest => dest.TotalWin, opt => opt.MapFrom(src => src.TotalWin))
+            .ForMember(dest => dest.TotalLose, opt => opt.MapFrom(src => src.TotalLose))
             .ForMember(dest => dest.AccountId, opt => opt.MapFrom(src => src.AccountId));
 
 
@@ -60,6 +64,8 @@ public class UserMapping : Profile
             .ForMember(dest => dest.OwnerRoom, opt => opt.MapFrom(src => src.OwnerRoom))
             .ForMember(dest => dest.WalletAddress, opt => opt.MapFrom(src => src.WalletAddress))
             .ForMember(dest => dest.Balance, opt => opt.MapFrom(src => src.Balance))
+            .ForMember(dest => dest.TotalWin, opt => opt.MapFrom(src => src.TotalWin))
+            .ForMember(dest => dest.TotalLose, opt => opt.MapFrom(src => src.TotalLose))
             .ForMember(dest => dest.DepartmentId, opt => opt.MapFrom(src => src.DepartmentId))
             .ForMember(dest => dest.CreatedOn, opt => opt.MapFrom(src => src.CreatedOn.ConvertDefaultDateTimeToString(Constants.Settings.DateTimeFormatDefault)))
             .ForMember(dest => dest.UpdatedOn, opt => opt.MapFrom(src => src.UpdatedOn.ConvertDefaultDateTimeToString(Constants.Settings.DateTimeFormatDefault)))

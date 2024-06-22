@@ -160,6 +160,7 @@ public class Constants
         public const string ApiUsersInit = "/users/init";
         public const string ApiUsers = "/users";
         public const string ApiUsersId = "/users/{id}";
+        public const string ApiUsersBalance = "/users/update-balance";
         public const string ApiUsersOutGroup = "/users/{id}/out-group";
         public const string ApiAccountProfile = "/accounts-profile";
         public const string ApiAccountsAvatar = "/accounts/avatar";
@@ -170,12 +171,16 @@ public class Constants
         public const string ApiItemNftsId = "/item-nfts/{id}";
         public const string ApiFriendUsers = "/friends";
         public const string ApiFriendUsersId = "/friends/{id}";
+        public const string ApiFriendsIdAddFriend = "/friends/add-friend";
+        public const string ApiFriendsIdConfirmAddFriend = "/friends/confirm-add";
 
         public const string ApiBalanceHistorys = "/balances";
+        public const string ApiBalanceHistorysChart = "/balances/chart";
         public const string ApiBalanceHistorysId = "/balances/{id}";
 
         public const string ApiItemNftUsers = "/item-nft-users";
         public const string ApiItemNftUsersId = "/item-nft-users/{id}";
+        public const string ApiItemNftUsersUse = "/item-nft-users/use";
         public const string ApiAssignItemNftUsers = "/item-nft-users/assign";
     }
     /// <summary>
