@@ -55,6 +55,7 @@ public class UserController : ControllerBase
     /// Get list of users
     /// </summary>
     /// <param name="search"></param>
+    /// <param name="userId"></param>
     /// <param name="status"></param>
     /// <param name="departmentIds"></param>
     /// <param name="pageNumber"></param>
@@ -66,11 +67,11 @@ public class UserController : ControllerBase
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     [Route(Constants.Route.ApiUsers)]
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-    public IActionResult Gets(string search, List<int> status, List<int> departmentIds, int pageNumber = 1, int pageSize = 10, string sortColumn = "Name",
+    public IActionResult Gets(int userId, string search, List<int> status, List<int> departmentIds, int pageNumber = 1, int pageSize = 10, string sortColumn = "Name",
         string sortDirection = "desc")
     {
 
-        var users = _userService.GetPaginated(search, status, departmentIds, pageNumber, pageSize, sortColumn.UserColumn(), sortDirection, out var recordsTotal,
+        var users = _userService.GetPaginated(userId, search, status, departmentIds, pageNumber, pageSize, sortColumn.UserColumn(), sortDirection, out var recordsTotal,
             out var recordsFiltered);
 
         var pagingData = new PagingData<UserListModel>

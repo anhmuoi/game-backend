@@ -35,7 +35,7 @@ public interface IUserService
     void UpdateAvatar(int userId, string path);
     bool AddHistoryBalance(string address, double balance);
     Dictionary<string, object> GetInit();
-    List<UserListModel> GetPaginated(string search, List<int> status, List<int> departmentIds, int pageNumber, int pageSize, string sortColumn, string sortDirection, out int totalRecords, out int recordsFiltered);
+    List<UserListModel> GetPaginated(int userId, string search, List<int> status, List<int> departmentIds, int pageNumber, int pageSize, string sortColumn, string sortDirection, out int totalRecords, out int recordsFiltered);
     int AddUser(UserAddModel model);
     bool UpdateUser(UserEditModel model);
     bool UserOutGroup(int id, int groupId);
@@ -167,15 +167,17 @@ public class UserService : IUserService
         return result;
     }
 
-    public List<UserListModel> GetPaginated(string search, List<int> status, List<int> departmentIds, int pageNumber, int pageSize, string sortColumn, string sortDirection, out int totalRecords, out int recordsFiltered)
+    public List<UserListModel> GetPaginated(int userId, string search, List<int> status, List<int> departmentIds, int pageNumber, int pageSize, string sortColumn, string sortDirection, out int totalRecords, out int recordsFiltered)
     {
         var data = _unitOfWork.UserRepository.Gets();
         totalRecords = data.Count();
 
         if (!string.IsNullOrEmpty(search))
         {
-            data = data.Where(m => m.Name.ToLower().Contains(search.ToLower()));
+
+            data = data.Where(m => m.Name.ToLower().Contains(search.ToLower()) || m.Id == userId);
         }
+       
         if (departmentIds is { Count: > 0 })
         {
             data = data.Where(m => departmentIds.Contains(m.DepartmentId.Value));

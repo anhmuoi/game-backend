@@ -960,11 +960,12 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:ERPSystem.Api.Controllers.UserController.Gets(System.String,System.Collections.Generic.List{System.Int32},System.Collections.Generic.List{System.Int32},System.Int32,System.Int32,System.String,System.String)">
+        <member name="M:ERPSystem.Api.Controllers.UserController.Gets(System.Int32,System.String,System.Collections.Generic.List{System.Int32},System.Collections.Generic.List{System.Int32},System.Int32,System.Int32,System.String,System.String)">
             <summary>
             Get list of users
             </summary>
             <param name="search"></param>
+            <param name="userId"></param>
             <param name="status"></param>
             <param name="departmentIds"></param>
             <param name="pageNumber"></param>
