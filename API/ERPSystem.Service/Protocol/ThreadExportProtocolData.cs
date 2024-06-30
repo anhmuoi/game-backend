@@ -42,6 +42,8 @@ namespace ERPSystem.Service.Protocol
         public int UserId2 { get; set; }
         public string UserId1Name { get; set; }
         public string UserId2Name { get; set; }
+        public int UserIdIsKick { get; set; }
+
   
     }
     public class GamePlay

@@ -505,6 +505,67 @@ namespace ERPSystem.Service.RabbitMq
             else if (data.Action.Id == (int) ActionType.AgreeAddFriend)
             {
             }
+            else if (data.Action.Id == (int) ActionType.Kick)
+            {
+                var userIdList = new List<int>();
+
+                if (!string.IsNullOrEmpty(meetingRoom.UserListId))
+                {
+                    var currentUser =
+                        JsonConvert
+                            .DeserializeObject<List<int>>(meetingRoom
+                                .UserListId);
+                    if (currentUser != null)
+                    {
+                        foreach (var userId in currentUser)
+                        {
+                            if (userId != data.Action.UserIdIsKick)
+                            {
+                                userIdList.Add (userId);
+                            }
+                        }
+                    }
+                }
+
+                var user = _unitOfWork.UserRepository.GetById(data.Action.UserIdIsKick);
+
+              
+                user.InGame = 0;
+                user.OwnerRoom = 0;
+                user.IndexPlayer = 0;
+                
+                _unitOfWork.UserRepository.Update (user);
+                _unitOfWork.Save();
+
+                // update index user in room
+                if (userIdList.Count > 0)
+                {
+                    var userListTemp =
+                        _unitOfWork
+                            .UserRepository
+                            .GetAll()
+                            .Where(m => m.InGame == meetingRoom.Id)
+                            .OrderBy(m => m.IndexPlayer)
+                            .ToList();
+                    var i = 0;
+                    foreach (var userTmp in userListTemp)
+                    {
+                        
+                        userTmp.IndexPlayer = i + 1;
+                        _unitOfWork.UserRepository.Update (userTmp);
+                        _unitOfWork.Save();
+                        i = i + 1;
+                    }
+                }
+
+                meetingRoom.UserListId =
+                    JsonConvert.SerializeObject(userIdList);
+                meetingRoom.CurrentPeople = userIdList.Count;
+
+                _unitOfWork.MeetingRoomRepository.Update(meetingRoom);
+                _unitOfWork.Save();
+
+            }
             else if (data.Action.Id == (int) ActionType.UpdateSettingRoom)
             {
                 var room =

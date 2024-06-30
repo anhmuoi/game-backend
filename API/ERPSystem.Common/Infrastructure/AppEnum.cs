@@ -70,6 +70,7 @@ public enum ActionType
     AgreeAddFriend = 11,
     UpdateSettingRoom = 12,
     CreateCustomRoom = 13,
+    Kick = 14,
 }
 public enum ReactType
 {

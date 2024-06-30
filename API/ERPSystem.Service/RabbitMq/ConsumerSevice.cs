@@ -42,7 +42,7 @@ public class ConsumerService : IConsumerService
     public void Register()
     {
         // Register general consumer
-        HandleThreadExportDataToFile(Common.Infrastructure.Constants.RabbitMqConfig.TopicExportMember);
+        HandleThreadExportData(Common.Infrastructure.Constants.RabbitMqConfig.TopicExportMember);
     }
 
 
@@ -50,7 +50,7 @@ public class ConsumerService : IConsumerService
     /// Handler status for door
     /// </summary>
     /// <param name="routingKey"></param>
-    private void HandleThreadExportDataToFile(string routingKey)
+    private void HandleThreadExportData(string routingKey)
     {
         var factory = QueueHelper.GetConnectionFactory(_configuration);
         var _connection = factory.CreateConnection("queue_service_connection");
