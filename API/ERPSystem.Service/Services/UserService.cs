@@ -85,14 +85,8 @@ public class UserService : IUserService
     }
     public bool IsExistedEmail(string email, int ignoredId)
     {
-        var account = _unitOfWork.AccountRepository.Gets().FirstOrDefault(m=> m.UserName == email);
-        if (account != null)
-        {
-
-            var user = _unitOfWork.UserRepository.GetUserByAccountId(account.Id);
+            var user = _unitOfWork.UserRepository.Gets().FirstOrDefault(m=> m.Email == email);
             return user != null && user.Id != ignoredId;
-        }
-        return false;
     }
     public bool IsExistedUserPhone(string phone, int ignoredId)
     {

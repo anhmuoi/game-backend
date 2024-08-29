@@ -14,7 +14,7 @@ public class UserModelValidation : AbstractValidator<UserAddModel>
             .NotEmpty()
             .Must((reg, m) => !userService.IsExistedUserName(m, reg.Id))
             .WithMessage(UserResource.msgUserNameExisted);
-        RuleFor(reg => reg.UserName)
+        RuleFor(reg => reg.Email)
             .NotEmpty()
             .Must((reg, m) => !userService.IsExistedEmail(m, reg.Id))
             .WithMessage(UserResource.msgUserEmailExisted);
@@ -34,7 +34,7 @@ public class AddUserModelValidation : AbstractValidator<UserEditModel>
             .NotEmpty()
             .Must((reg, m) => !userService.IsExistedUserName(m, reg.Id))
             .WithMessage(UserResource.msgUserNameExisted);
-        RuleFor(reg => reg.UserName)
+        RuleFor(reg => reg.Email)
             .NotEmpty()
             .Must((reg, m) => !userService.IsExistedEmail(m, reg.Id))
             .WithMessage(UserResource.msgUserEmailExisted);
